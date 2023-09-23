@@ -2,7 +2,7 @@ vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
     vim.opt.nu = true
-    vim.opt.relativenumber= true
+    vim.opt.relativenumber = true
 
     vim.opt.tabstop = 4
     vim.opt.softtabstop = 4

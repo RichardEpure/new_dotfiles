@@ -57,6 +57,8 @@ require 'nvim-treesitter.configs'.setup {
 
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
@@ -87,7 +89,7 @@ require 'nvim-treesitter.configs'.setup {
             -- * query_string: eg '@function.inner'
             -- * selection_mode: eg 'v'
             -- and should return true of false
-            include_surrounding_whitespace = true,
+            include_surrounding_whitespace = false,
         },
         move = {
             enable = true,

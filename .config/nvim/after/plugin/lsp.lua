@@ -1,23 +1,37 @@
-local lsp = require('lsp-zero').preset({})
+local lsp_zero = require('lsp-zero').preset({})
 
-lsp.on_attach(function(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
+lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
-lsp.setup_servers({
+lsp_zero.setup_servers({
     'tsserver', 'volar', 'cssls', 'eslint', 'lua_ls', 'rust_analyzer', 'eslint', 'html', 'jsonls',
     'pylsp'
 })
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_keymaps({ buffer = bufnr })
+    local opts = { buffer = bufnr }
 
-require('lspconfig').volar.setup {
+    vim.keymap.set({ 'n', 'x' }, '<leader>j', function()
+        vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+    end, opts)
+end)
+
+local lsp_config = require('lspconfig')
+
+lsp_config.lua_ls.setup(lsp_zero.nvim_lua_ls())
+
+lsp_config.volar.setup {
     root_dir = require('lspconfig/util').root_pattern('package.json', '.git')
 }
 
-require('lspconfig').rust_analyzer.setup {
+lsp_config.tsserver.setup {
+    root_dir = require('lspconfig/util').root_pattern('package.json', '.git')
+}
+
+lsp_config.rust_analyzer.setup {
     root_dir = require('lspconfig/util').root_pattern('cargo.toml', '.git')
 }
 
-lsp.setup()
+lsp_zero.setup()

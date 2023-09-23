@@ -15,30 +15,30 @@ return require('packer').startup(function(use)
     use "ggandor/flit.nvim"
 
     use {
-    	'VonHeikemen/lsp-zero.nvim',
-    	branch = 'v2.x',
-    	requires = {
-    	    -- LSP Support
-    	    {'neovim/nvim-lspconfig'},             -- Required
-    	    {                                      -- Optional
-	    	'williamboman/mason.nvim',
-	    	run = function()
-		    	pcall(vim.cmd, 'MasonUpdate')
-	    	end,
-    	    },
-    	    {'williamboman/mason-lspconfig.nvim'}, -- Optional
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v2.x',
+        requires = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' }, -- Required
+            {                            -- Optional
+                'williamboman/mason.nvim',
+                run = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-    	    -- Autocompletion
-    	    {'hrsh7th/nvim-cmp'},     -- Required
-    	    {'hrsh7th/cmp-nvim-lsp'}, -- Required
-    	    {'L3MON4D3/LuaSnip'},     -- Required
-    	},
-    	cond = neovim
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
+        },
+        cond = neovim
     }
     use {
-	    'nvim-telescope/telescope.nvim', tag = '0.1.3',
-	    requires = { {'nvim-lua/plenary.nvim'} },
-	    cond = neovim
+        'nvim-telescope/telescope.nvim', tag = '0.1.3',
+        requires = { { 'nvim-lua/plenary.nvim' } },
+        cond = neovim
     }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', cond = neovim }
     use { 'sainnhe/gruvbox-material', cond = neovim }
@@ -62,7 +62,7 @@ return require('packer').startup(function(use)
         requires = 'nvim-tree/nvim-web-devicons',
         cond = neovim
     }
-    use {'shortcuts/no-neck-pain.nvim', tag = "*", cond = neovim }
+    use { 'shortcuts/no-neck-pain.nvim', tag = "*", cond = neovim }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true },
@@ -76,4 +76,3 @@ return require('packer').startup(function(use)
     }
     use { 'github/copilot.vim', cond = neovim }
 end)
-
