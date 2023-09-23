@@ -11,7 +11,7 @@ return {
         end
     },
 
-    { 'sainnhe/gruvbox-material', lazy = true,     enabled = neovim },
+    { 'sainnhe/gruvbox-material', enabled = neovim },
     {
         'lewis6991/gitsigns.nvim',
         enabled = neovim,
