@@ -1,4 +1,4 @@
-require('lazy_setup')
-require('remap')
-require('set')
-require('colors')
+require('config.lazy')
+require('config.remap')
+require('config.set')
+require('config.colors')
