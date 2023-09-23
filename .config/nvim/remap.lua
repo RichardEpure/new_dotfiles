@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<leader>h", [[:sort<CR>]])
@@ -134,6 +132,7 @@ if vim.g.vscode then
         end
     }
 
+    vim.g.mapleader = " "
     vim.keymap.set({ "n", "v" }, "<leader>/", comment.selected)
 
     vim.keymap.set({ "n", "v" }, "<leader>w", file.save)
@@ -170,7 +169,7 @@ else
     -- ordinary Neovim
     -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
     vim.keymap.set("n", "<leader>w", vim.cmd.w)
-    vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]])
+    vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
     vim.keymap.set("n", "<C-h>", "<C-w>h")
     vim.keymap.set("n", "<C-j>", "<C-w>j")
     vim.keymap.set("n", "<C-k>", "<C-w>k")

@@ -1,6 +1,7 @@
 vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
+    vim.opt.termguicolors = true
     vim.opt.nu = true
     vim.opt.relativenumber = true
 
