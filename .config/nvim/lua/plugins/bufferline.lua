@@ -10,7 +10,10 @@ return {
                 diagnostics_indicator = function(count, level)
                     local icon = level:match("error") and " " or ""
                     return " " .. icon .. count
-                end
+                end,
+                numbers = function(opts)
+                    return string.format('%s', opts.ordinal)
+                end,
             }
         }
 
@@ -22,9 +25,9 @@ return {
                 options)
         end
 
-        vim.keymap.set({ 'n', 'v' }, 'gt', [[:BufferLineCycleNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, 'gT', [[:BufferLineCyclePrev<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<leader>t', [[:BufferLineMoveNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<leader>T', [[:BufferLineMovePrev<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<C-up>', [[:BufferLineCycleNext<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<C-down>', [[:BufferLineCyclePrev<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<C-right>', [[:BufferLineMoveNext<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<C-left>', [[:BufferLineMovePrev<cr>]], options)
     end
 }

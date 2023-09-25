@@ -3,6 +3,7 @@ return {
     build = ':TSUpdate',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'windwp/nvim-ts-autotag',
     },
     enabled = neovim,
     config = function()
@@ -104,7 +105,8 @@ return {
                     set_jumps = true, -- whether to set jumps in the jumplist
                     goto_next_start = {
                         ["]m"] = "@function.outer",
-                        ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]c"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]a"] = "@parameter.outer",
                         --
                         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
                         ["]o"] = "@loop.*",
@@ -117,15 +119,20 @@ return {
                     },
                     goto_next_end = {
                         ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
+                        ["]C"] = "@class.outer",
+                        ["]A"] = "@parameter.outer",
                     },
                     goto_previous_start = {
                         ["[m"] = "@function.outer",
-                        ["[["] = "@class.outer",
+                        ["[c"] = "@class.outer",
+                        ["[a"] = "@parameter.outer",
+                        ["[["] = "@attribute.outer",
+                        --
                     },
                     goto_previous_end = {
                         ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
+                        ["[C"] = "@class.outer",
+                        ["[A"] = "@parameter.outer",
                     },
                     -- Below will go to either the start or the end, whichever is closer.
                     -- Use if you want more granular movements

@@ -10,8 +10,7 @@ return {
             require("nvim-surround").setup()
         end
     },
-
-    { 'sainnhe/gruvbox-material', enabled = neovim },
+    { 'sainnhe/gruvbox-material',    enabled = neovim },
     {
         'lewis6991/gitsigns.nvim',
         enabled = neovim,
@@ -19,7 +18,6 @@ return {
             require('gitsigns').setup()
         end
     },
-    { 'm4xshen/autoclose.nvim',   enabled = neovim },
     {
         'numToStr/Comment.nvim',
         enabled = neovim,
@@ -35,9 +33,7 @@ return {
             require('scrollbar').setup()
         end
     },
-    { 'posva/vim-vue',               enabled = neovim },
-    { 'windwp/nvim-ts-autotag',      version = '*',   enabled = neovim },
-    { 'Bekaboo/deadcolumn.nvim',     enabled = neovim },
+    { 'Bekaboo/deadcolumn.nvim', enabled = neovim },
     {
         'folke/todo-comments.nvim',
         dependencies =
