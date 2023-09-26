@@ -25,9 +25,9 @@ return {
                 options)
         end
 
-        vim.keymap.set({ 'n', 'v' }, '<C-up>', [[:BufferLineCycleNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<C-down>', [[:BufferLineCyclePrev<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<C-right>', [[:BufferLineMoveNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<C-left>', [[:BufferLineMovePrev<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<up>', [[:BufferLineCycleNext<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<down>', [[:BufferLineCyclePrev<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<right>', [[:BufferLineMoveNext<cr>]], options)
+        vim.keymap.set({ 'n', 'v' }, '<left>', [[:BufferLineMovePrev<cr>]], options)
     end
 }

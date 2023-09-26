@@ -45,5 +45,13 @@ return {
             require('todo-comments').setup()
         end
     },
-    { 'github/copilot.vim', enabled = neovim }
+    { 'github/copilot.vim',      enabled = neovim },
+    { 'kevinhwang91/nvim-bqf',   ft = 'qf',       enabled = neovim },
+    {
+        'junegunn/fzf',
+        build = function()
+            vim.fn['fzf#install']()
+        end,
+        enabled = neovim
+    }
 }
