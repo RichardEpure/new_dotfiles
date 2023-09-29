@@ -170,6 +170,7 @@ else
     -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
     vim.keymap.set("n", "<leader>w", vim.cmd.w)
     vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
+    vim.keymap.set("n", "<leader>Q", [[:b# | bd!#<CR>]], { silent = true })
     vim.keymap.set("n", "<C-h>", "<C-w>h")
     vim.keymap.set("n", "<C-j>", "<C-w>j")
     vim.keymap.set("n", "<C-k>", "<C-w>k")
@@ -181,4 +182,9 @@ else
     vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+    vim.api.nvim_create_user_command("Redir",
+        [[:redir @" | silent <args> | redir END | enew | put"]],
+        { nargs = 1, }
+    )
 end

@@ -11,7 +11,7 @@ return {
             debug = false,
             -- The width of the focused window that will be centered. When the terminal width is less than the `width` option, the side buffers won't be created.
             --- @type integer|"textwidth"|"colorcolumn"
-            width = 200,
+            width = 150,
             -- Represents the lowest width value a side buffer should be.
             -- This option can be useful when switching window size frequently, example:
             -- in full screen screen, width is 210, you define an NNP `width` of 100, which creates each side buffer with a width of 50. If you resize your terminal to the half of the screen, each side buffer would be of width 5 and thereforce might not be useful and/or add "noise" to your workflow.
