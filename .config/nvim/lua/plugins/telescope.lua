@@ -1,4 +1,4 @@
-local is_neovim = require('../config/functions').is_neovim
+local is_neovim = require('config.utils').is_neovim
 
 return {
     'nvim-telescope/telescope.nvim',

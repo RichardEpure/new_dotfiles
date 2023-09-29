@@ -1,4 +1,4 @@
-local is_neovim = require("functions").is_neovim
+local is_neovim = require("config.utils").is_neovim
 
 function SetColor(color)
     vim.cmd.colorscheme(color)
