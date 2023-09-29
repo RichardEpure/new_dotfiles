@@ -1,6 +1,4 @@
-local neovim = function()
-    return vim.g.vscode == nil
-end
+local is_neovim = require('../config/functions').is_neovim
 
 return {
     'tpope/vim-repeat',
@@ -10,48 +8,48 @@ return {
             require("nvim-surround").setup()
         end
     },
-    { 'sainnhe/gruvbox-material',    enabled = neovim },
+    { 'sainnhe/gruvbox-material',    enabled = is_neovim },
     {
         'lewis6991/gitsigns.nvim',
-        enabled = neovim,
+        enabled = is_neovim,
         config = function()
             require('gitsigns').setup()
         end
     },
     {
         'numToStr/Comment.nvim',
-        enabled = neovim,
+        enabled = is_neovim,
         config = function()
             require('Comment').setup()
         end
     },
-    { 'nvim-tree/nvim-web-devicons', enabled = neovim },
+    { 'nvim-tree/nvim-web-devicons', enabled = is_neovim },
     {
         'petertriho/nvim-scrollbar',
-        enabled = neovim,
+        enabled = is_neovim,
         config = function()
             require('scrollbar').setup()
         end
     },
-    { 'Bekaboo/deadcolumn.nvim', enabled = neovim },
+    { 'Bekaboo/deadcolumn.nvim', enabled = is_neovim },
     {
         'folke/todo-comments.nvim',
         dependencies =
         {
             'nvim-lua/plenary.nvim'
         },
-        enabled = neovim,
+        enabled = is_neovim,
         config = function()
             require('todo-comments').setup()
         end
     },
-    { 'github/copilot.vim',      enabled = neovim },
-    { 'kevinhwang91/nvim-bqf',   ft = 'qf',       enabled = neovim },
+    { 'github/copilot.vim',      enabled = is_neovim },
+    { 'kevinhwang91/nvim-bqf',   ft = 'qf',       enabled = is_neovim },
     {
         'junegunn/fzf',
         build = function()
             vim.fn['fzf#install']()
         end,
-        enabled = neovim
+        enabled = is_neovim
     }
 }

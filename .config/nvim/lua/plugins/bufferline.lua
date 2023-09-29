@@ -1,8 +1,10 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'akinsho/bufferline.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
     version = '*',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         local buffer_line = require("bufferline")
         buffer_line.setup {

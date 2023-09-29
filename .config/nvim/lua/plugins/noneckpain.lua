@@ -1,7 +1,9 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'shortcuts/no-neck-pain.nvim',
     version = '*',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         local NoNeckPain = require("no-neck-pain")
 

@@ -1,10 +1,12 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
-    enabled = neovim,
+    enabled = is_neovim,
     dependencies = {
         -- LSP Support
-        { 'neovim/nvim-lspconfig' },
+        { 'is_neovim/nvim-lspconfig' },
         { 'williamboman/mason.nvim' },
         { 'williamboman/mason-lspconfig.nvim' },
 

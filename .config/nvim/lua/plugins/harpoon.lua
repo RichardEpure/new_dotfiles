@@ -1,6 +1,8 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'theprimeagen/harpoon',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         require("harpoon").setup {}
         local mark = require("harpoon.mark")

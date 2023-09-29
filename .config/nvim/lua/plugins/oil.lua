@@ -1,6 +1,8 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'stevearc/oil.nvim',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         local oil = require("oil")
 

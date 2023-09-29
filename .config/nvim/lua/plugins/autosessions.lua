@@ -1,6 +1,8 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'rmagatti/auto-session',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         require('auto-session').setup {
             log_level = vim.log.levels.ERROR,

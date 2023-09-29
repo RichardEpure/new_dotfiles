@@ -1,8 +1,10 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     version = '*',
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         local builtin = require('telescope.builtin')
 

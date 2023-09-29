@@ -1,3 +1,5 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -5,7 +7,7 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects',
         'windwp/nvim-ts-autotag',
     },
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         require 'nvim-treesitter.configs'.setup {
             -- A list of parser names, or "all" (the five listed parsers should always be installed)

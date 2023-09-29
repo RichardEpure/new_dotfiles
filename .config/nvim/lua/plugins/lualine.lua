@@ -1,7 +1,9 @@
+local is_neovim = require('../config/functions').is_neovim
+
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-    enabled = neovim,
+    enabled = is_neovim,
     config = function()
         require('lualine').setup {
             options = {
