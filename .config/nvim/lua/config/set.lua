@@ -16,7 +16,13 @@ if vim.g.vscode == nil then
 
     vim.opt.swapfile = false
     vim.opt.backup = false
-    vim.opt.undodir = os.getenv("HOME") .. "/.vim.undodir"
+
+    if vim.fn.has("linux") then
+        vim.opt.undodir = os.getenv("HOME") .. "/.vim.undodir"
+    else
+        vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim.undodir"
+    end
+
     vim.opt.undofile = true
 
     vim.opt.incsearch = true
