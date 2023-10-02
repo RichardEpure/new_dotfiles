@@ -1,5 +1,4 @@
 if vim.g.neovide then
-    -- vim.opt.guifont = { "FantasqueSansMono NF", ":h14" }
     vim.opt.guifont = { "JetBrainsMono NF", ":h11" }
     vim.opt.linespace = 3
     vim.g.neovide_scale_factor = 1.0

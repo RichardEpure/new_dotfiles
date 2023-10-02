@@ -4,6 +4,7 @@ if vim.g.vscode == nil then
     vim.opt.termguicolors = true
     vim.opt.nu = true
     vim.opt.relativenumber = true
+    vim.opt.cursorline = true
 
     vim.opt.tabstop = 4
     vim.opt.softtabstop = 4
