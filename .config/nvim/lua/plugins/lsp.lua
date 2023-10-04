@@ -26,7 +26,8 @@ return {
             ensure_installed = {
                 'tsserver', 'volar', 'cssls',
                 'lua_ls', 'rust_analyzer',
-                'html', 'jsonls', 'pylsp'
+                'html', 'jsonls', 'pylsp',
+                'clangd'
             },
             handlers = {
                 lsp_zero.default_setup,
@@ -82,6 +83,13 @@ return {
 
         lsp_config.rust_analyzer.setup {
             root_dir = require('lspconfig/util').root_pattern('cargo.toml', '.git')
+        }
+
+        lsp_config.clangd.setup {
+            cmd = {
+                "clangd",
+                "--offset-encoding=utf-16"
+            }
         }
 
         require('tabout').setup {
