@@ -50,6 +50,11 @@ return {
                 enable = true,
             },
 
+            matchup = {
+                enable = true,
+                enable_quotes = true
+            },
+
             textobjects = {
                 swap = {
                     enable = true,

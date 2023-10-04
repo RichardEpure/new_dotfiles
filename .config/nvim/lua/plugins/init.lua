@@ -44,12 +44,17 @@ return {
         end
     },
     { 'github/copilot.vim',      enabled = is_neovim },
-    { 'kevinhwang91/nvim-bqf',   ft = 'qf',       enabled = is_neovim },
+    { 'kevinhwang91/nvim-bqf',   ft = 'qf',          enabled = is_neovim },
     {
         'junegunn/fzf',
         build = function()
             vim.fn['fzf#install']()
         end,
         enabled = is_neovim
+    },
+    {
+        'andymass/vim-matchup',
+        opts = { method = 'popup' },
+        enabled = is_neovim,
     }
 }
