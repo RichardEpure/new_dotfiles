@@ -9,11 +9,11 @@ return {
             strategy = {
                 [''] = rainbow.strategy['global'],
                 vim = rainbow.strategy['local'],
-                vue = rainbow.strategy['noop']
             },
             query = {
                 [''] = 'rainbow-delimiters',
                 lua = 'rainbow-blocks',
+                vue = 'rainbow-delimiters-react'
             },
             highlight = {
                 'RainbowDelimiterRed',
