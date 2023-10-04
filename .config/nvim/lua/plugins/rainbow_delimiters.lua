@@ -3,12 +3,13 @@ local is_neovim = require('config.utils').is_neovim
 return {
     'HiPhish/rainbow-delimiters.nvim',
     config = function()
-        local rainbow_delimiters = require 'rainbow-delimiters'
+        local rainbow = require 'rainbow-delimiters'
 
         vim.g.rainbow_delimiters = {
             strategy = {
-                [''] = rainbow_delimiters.strategy['global'],
-                vim = rainbow_delimiters.strategy['local'],
+                [''] = rainbow.strategy['global'],
+                vim = rainbow.strategy['local'],
+                vue = rainbow.strategy['noop']
             },
             query = {
                 [''] = 'rainbow-delimiters',
