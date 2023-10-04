@@ -6,7 +6,7 @@ return {
     enabled = is_neovim,
     dependencies = {
         -- LSP Support
-        { 'is_neovim/nvim-lspconfig' },
+        { 'neovim/nvim-lspconfig' },
         { 'williamboman/mason.nvim' },
         { 'williamboman/mason-lspconfig.nvim' },
 
