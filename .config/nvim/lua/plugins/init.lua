@@ -8,7 +8,8 @@ return {
             require("nvim-surround").setup()
         end
     },
-    { 'sainnhe/gruvbox-material',    enabled = is_neovim },
+    -- { 'sainnhe/gruvbox-material',    enabled = is_neovim },
+    { 'RichardEpure/gruvbox-material',    enabled = is_neovim },
     {
         'lewis6991/gitsigns.nvim',
         enabled = is_neovim,
