@@ -46,6 +46,10 @@ return {
                 additional_vim_regex_highlighting = { "python" },
             },
 
+            indent = {
+                enable = true
+            },
+
             autotag = {
                 enable = true,
             },
