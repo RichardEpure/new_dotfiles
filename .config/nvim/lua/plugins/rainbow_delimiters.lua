@@ -2,6 +2,7 @@ local is_neovim = require('config.utils').is_neovim
 
 return {
     'HiPhish/rainbow-delimiters.nvim',
+    enabled = false,
     config = function()
         local rainbow = require 'rainbow-delimiters'
 
@@ -25,5 +26,4 @@ return {
             },
         }
     end,
-    enabled = is_neovim,
 }
