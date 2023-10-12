@@ -1,6 +1,7 @@
 local is_neovim = require('config.utils').is_neovim
 
 return {
+    -- shared
     'tpope/vim-repeat',
     {
         'kylechui/nvim-surround',
@@ -8,8 +9,9 @@ return {
             require("nvim-surround").setup()
         end
     },
+
+    -- neovim
     { 'sainnhe/gruvbox-material',    enabled = is_neovim },
-    -- { 'RichardEpure/gruvbox-material',    enabled = is_neovim },
     {
         'lewis6991/gitsigns.nvim',
         enabled = is_neovim,
