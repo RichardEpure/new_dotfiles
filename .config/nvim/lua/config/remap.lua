@@ -167,7 +167,6 @@ if vim.g.vscode then
     end
 else
     -- ordinary Neovim
-    -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
     vim.keymap.set("n", "<leader>w", vim.cmd.w)
     vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
     vim.keymap.set("n", "<leader>Q", [[:b# | bd!#<CR>]], { silent = true })
