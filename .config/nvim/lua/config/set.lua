@@ -1,3 +1,5 @@
+local home = require('config.utils').home
+
 vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
@@ -17,12 +19,7 @@ if vim.g.vscode == nil then
 
     vim.opt.swapfile = false
     vim.opt.backup = false
-
-    if vim.fn.has("linux") == 1 then
-        vim.opt.undodir = os.getenv("HOME") .. "/.vim.undodir"
-    else
-        vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim.undodir"
-    end
+    vim.opt.undodir = home .. "/.vim.undodir"
 
     vim.opt.undofile = true
 
