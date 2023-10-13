@@ -119,7 +119,7 @@ return {
             }
         }
 
-        -- For Window: scoop install nmap
+        -- For Windows: scoop install nmap
         -- For WSL: doesn't work
         local cmd = vim.fn.has('linux') == 1 and
             vim.lsp.rpc.connect(vim.fn.hostname() .. '.local') or
