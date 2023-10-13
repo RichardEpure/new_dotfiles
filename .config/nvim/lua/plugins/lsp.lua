@@ -119,6 +119,15 @@ return {
             }
         }
 
+        -- For Window: scoop install nmap
+        local cmd = vim.fn.has('linux') == 1 and vim.lsp.rpc.connect('127.0.0.1', '6005') or { 'ncat', 'localhost', '6005' }
+
+        lsp_config.gdscript.setup {
+            cmd = cmd,
+            filetypes = { 'gd', 'gdscript', 'gdignore' },
+            root_dir = require('lspconfig/util').root_pattern('project.godot', '.git')
+        }
+
         require('tabout').setup {
             tabkey = '<C-Tab>',           -- key to trigger tabout, set to an empty string to disable
             backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
