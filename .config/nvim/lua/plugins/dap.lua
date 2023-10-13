@@ -82,6 +82,16 @@ return {
             port = 6006,
         }
 
+        dap.configurations.gdscript = {
+            {
+                type = "godot",
+                request = "launch",
+                name = "Launch scene",
+                project = "${workspaceFolder}",
+                launch_scene = true,
+            }
+        }
+
         -- PHP
         dap.adapters.php = {
             type = 'executable',
