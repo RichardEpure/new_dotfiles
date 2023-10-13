@@ -120,7 +120,10 @@ return {
         }
 
         -- For Window: scoop install nmap
-        local cmd = vim.fn.has('linux') == 1 and vim.lsp.rpc.connect('127.0.0.1', '6005') or { 'ncat', 'localhost', '6005' }
+        -- For WSL: doesn't work
+        local cmd = vim.fn.has('linux') == 1 and
+            vim.lsp.rpc.connect(vim.fn.hostname() .. '.local') or
+            { 'ncat', 'localhost', '6005' }
 
         lsp_config.gdscript.setup {
             cmd = cmd,
