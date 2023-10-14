@@ -125,10 +125,25 @@ return {
             vim.lsp.rpc.connect(vim.fn.hostname() .. '.local') or
             { 'ncat', 'localhost', '6005' }
 
+        local pipe = vim.fn.has('linux') == 1 and
+            '/tmp/godot.pipe' or
+            [[\\.\pipe\godot.pipe]]
+
         lsp_config.gdscript.setup {
             cmd = cmd,
             filetypes = { 'gd', 'gdscript', 'gdignore' },
-            root_dir = require('lspconfig/util').root_pattern('project.godot', '.git')
+            root_dir = require('lspconfig/util').root_pattern('project.godot', '.git'),
+            on_attach = function(client, buffer)
+                -- Godot external editor settings:
+                -- Exec Path: nvim
+                -- Linux - Exec Flags: --server /tmp/godot.pipe --remote-send "<esc>:n {file}<CR>:call cursor({line},{col})<CR>"
+                -- Windows - Exec Flags: --server "\\\\.\\pipe\\godot.pipe" --remote-send "<C-\><C-N>:n {file}<CR>:call cursor({line},{col})<CR>"
+                if vim.fn.has('linux') == 1 then
+                    vim.api.nvim_command('echo serverstart("' .. pipe .. '")')
+                else
+                    vim.api.nvim_command([[echo serverstart(']] .. pipe .. [[')]])
+                end
+            end
         }
 
         require('tabout').setup {
