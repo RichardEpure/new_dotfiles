@@ -121,15 +121,7 @@ return {
         }
 
         lsp_config.powershell_es.setup {
-            cmd = {
-                'pwsh',
-                '-NoLogo',
-                '-NoProfile',
-                '-Command',
-                mason_registry.get_package("powershell-editor-services"):get_install_path() ..
-                '/PowerShellEditorServices/Start-EditorServices.ps1'
-            },
-            root_dir = require('lspconfig/util').root_pattern('.git'),
+            bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path()
         }
 
         -- For Windows: scoop install nmap
