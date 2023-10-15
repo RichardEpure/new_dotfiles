@@ -161,7 +161,7 @@ if vim.g.vscode then
     vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<;-r><C-w>]])
 
     for i = 1, 9 do
-        vim.keymap.set({ 'n', 'v' }, "<leader>" .. i , function()
+        vim.keymap.set({ 'n', 'v' }, "<leader>" .. i, function()
             action.gotoTab(i)
         end)
     end
@@ -186,4 +186,11 @@ else
         [[:redir @" | silent <args> | redir END | enew | put"]],
         { nargs = 1, }
     )
+
+    if vim.g.neovide then
+        vim.keymap.set({ "n", "v" }, "<C-c>", '"+y', { desc = "Copy to clipboard" })
+        vim.keymap.set({ "n", "v" }, "<C-x>", '"+x', { desc = "Cut to clipboard" })
+        vim.keymap.set({ "n", "v" }, "<C-v>", '"+gP', { desc = "Paste from clipboard" })
+        vim.keymap.set({ "i", 't' }, "<C-v>", '<esc>"+gP', { desc = "Paste from clipboard" })
+    end
 end
