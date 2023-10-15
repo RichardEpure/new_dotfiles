@@ -26,6 +26,7 @@ return {
     },
     config = function()
         local lsp_zero = require('lsp-zero')
+        local mason_registry = require('mason-registry')
 
         require('mason').setup({})
         require('mason-lspconfig').setup({
@@ -117,6 +118,18 @@ return {
                 "clangd",
                 "--offset-encoding=utf-16"
             }
+        }
+
+        lsp_config.powershell_es.setup {
+            cmd = {
+                'pwsh',
+                '-NoLogo',
+                '-NoProfile',
+                '-Command',
+                mason_registry.get_package("powershell-editor-services"):get_install_path() ..
+                '/PowerShellEditorServices/Start-EditorServices.ps1'
+            },
+            root_dir = require('lspconfig/util').root_pattern('.git'),
         }
 
         -- For Windows: scoop install nmap
