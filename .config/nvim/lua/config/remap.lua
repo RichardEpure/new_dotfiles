@@ -191,6 +191,6 @@ else
         vim.keymap.set({ "n", "v" }, "<C-c>", '"+y', { desc = "Copy to clipboard" })
         vim.keymap.set({ "n", "v" }, "<C-x>", '"+x', { desc = "Cut to clipboard" })
         vim.keymap.set({ "n", "v" }, "<C-v>", '"+gP', { desc = "Paste from clipboard" })
-        vim.keymap.set({ "i", 't' }, "<C-v>", '<esc>"+gP', { desc = "Paste from clipboard" })
+        vim.keymap.set({ "i", 't' }, "<C-v>", '<esc>"+gp', { desc = "Paste from clipboard" })
     end
 end
