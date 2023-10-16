@@ -5,16 +5,17 @@ $requiredModules = @()
 
 # Linked Files (Destination => Source)
 $symlinks = @{
-    "$PROFILE" = ".\Profile.ps1"
-    "$HOME\AppData\Local\nvim" = "..\.config\nvim"
-    "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windows_terminal\settings.json"
-    "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\windows_terminal\settings.json"
-    "$HOME\.gitconfig" = "..\.gitconfig"
+    "$PROFILE" = ".\dist\windows\Profile.ps1"
+    "$HOME\AppData\Local\nvim" = ".\nvim"
+    "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\dist\windows\windows_terminal\settings.json"
+    "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\dist\windows\windows_terminal\settings.json"
+    "$HOME\.gitconfig" = ".\.gitconfig"
 }
 
 # Set working directory
-Set-Location $PSScriptRoot
-[Environment]::CurrentDirectory = $PSScriptRoot
+$Root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $Root
+[Environment]::CurrentDirectory = $Root
 
 Write-Host "Installing missing dependencies..."
 
@@ -67,7 +68,7 @@ $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Familie
 
 # Check if JetBrainsMono NF is installed
 if ($fontFamilies -notcontains "JetBrainsMono NF") {
-    # Download and install CaskaydiaCove NF
+    # Download and install JetBrainsMono NF
     $webClient = New-Object System.Net.WebClient
     $webClient.DownloadFile("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip", ".\JetBrainsMono.zip")
 
