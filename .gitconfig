@@ -1,0 +1,13 @@
+[init]
+    defaultBranch = main
+[user]
+    email = 43828146+RichardEpure@users.noreply.github.com
+    name = Richard
+[core]
+    editor = nvim
+[credential]
+    helper = cache
+[pull]
+    rebase = false
+[merge]
+    tool = vimdiff
