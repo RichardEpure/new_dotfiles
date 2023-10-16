@@ -16,5 +16,5 @@ if [ -f ~/.gitconfig ]; then
 fi
 
 echo "Creating symbolic links..."
-ln -sf ~/git/dots/nvim ~/.config/nvim
-ln -sf ~/git/dots/.gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/nvim ~/.config/nvim
+ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
