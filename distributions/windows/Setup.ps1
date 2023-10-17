@@ -20,7 +20,7 @@ $symlinks = @{
     "$HOME\AppData\Local\nvim" = ".\nvim"
     "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
     "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
-    "$HOME\.gitconfig" = ".\.gitconfig"
+    "$HOME\.gitconfig" = ".\distributions\windows\.gitconfig"
 }
 
 # Set working directory
