@@ -119,7 +119,7 @@ return {
             bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path()
         }
 
-        -- For Windows: scoop install nmap
+        -- For Windows: use Nmap
         -- For WSL: doesn't work
         local cmd = vim.fn.has('linux') == 1 and
             vim.lsp.rpc.connect(vim.fn.hostname() .. '.local') or

@@ -1,5 +1,16 @@
 #Requires -RunAsAdministrator
 
+# Utility Functions
+function Add-Path($Path) {
+    $Path = [Environment]::GetEnvironmentVariable("PATH", "Machine") + [IO.Path]::PathSeparator + $Path
+    [Environment]::SetEnvironmentVariable( "Path", $Path, "Machine" )
+}
+
+function Sync-Path() {
+    # Refreshes Path
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+}
+
 # Required PowerShell Modules
 $requiredModules = @()
 
@@ -17,9 +28,15 @@ $Root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $Root
 [Environment]::CurrentDirectory = $Root
 
-Write-Host "Installing missing dependencies..."
+# Set Path
+Write-Host "Updating Path..."
+
+Add-Path "C:\Program Files (x86)\Nmap"
+Sync-Path
 
 # Install dependencies
+Write-Host "Installing missing dependencies..."
+
 if (!(Get-Command "pwsh" -ErrorAction SilentlyContinue)) {
     winget install -e --id=Microsoft.PowerShell
 }
@@ -36,8 +53,7 @@ if (!(Get-Command "choco" -ErrorAction SilentlyContinue)) {
     winget install -e --id=Chocolatey.Chocolatey
 }
 
-# Path Refresh
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+Sync-Path
 
 # Choco Deps
 if (!(Get-Command "zig" -ErrorAction SilentlyContinue)) {
@@ -60,8 +76,13 @@ if (!(Get-Command "nvim" -ErrorAction SilentlyContinue)) {
     choco install -y fzf
 }
 
+if (!(Get-Command "nmap" -ErrorAction SilentlyContinue)) {
+    choco install -y nmap
+}
+
 # Fonts
 Write-Host "Installing Fonts..."
+
 # Get all installed font families
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families
