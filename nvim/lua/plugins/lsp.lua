@@ -30,12 +30,7 @@ return {
 
         require('mason').setup({})
         require('mason-lspconfig').setup({
-            ensure_installed = {
-                'tsserver', 'volar', 'cssls',
-                'lua_ls', 'rust_analyzer',
-                'html', 'jsonls', 'pylsp',
-                'clangd'
-            },
+            ensure_installed = { 'lua_ls' },
             handlers = {
                 lsp_zero.default_setup,
             }
