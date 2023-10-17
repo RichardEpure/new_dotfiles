@@ -5,8 +5,6 @@
     name = Richard
 [core]
     editor = nvim
-[credential]
-    helper = cache
 [pull]
     rebase = false
 [merge]
