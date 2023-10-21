@@ -72,7 +72,7 @@ if (!(Get-Command "nvim" -ErrorAction SilentlyContinue)) {
     choco install -y neovim
 }
 
-if (!(Get-Command "nvim" -ErrorAction SilentlyContinue)) {
+if (!(Get-Command "fzf" -ErrorAction SilentlyContinue)) {
     choco install -y fzf
 }
 
