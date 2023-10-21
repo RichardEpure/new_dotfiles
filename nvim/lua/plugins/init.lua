@@ -59,5 +59,14 @@ return {
         'andymass/vim-matchup',
         opts = { method = 'popup' },
         enabled = is_neovim,
+    },
+    {
+        'kazhala/close-buffers.nvim',
+        opts = true,
+        config = function()
+            vim.keymap.set("n", "<leader>q", [[:BDelete this<CR>]], { silent = true })
+            vim.keymap.set("n", "<leader>Q", [[:BDelete! this<CR>]], { silent = true })
+        end,
+        enabled = is_neovim,
     }
 }

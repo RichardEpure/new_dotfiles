@@ -168,8 +168,8 @@ if vim.g.vscode then
 else
     -- ordinary Neovim
     vim.keymap.set("n", "<leader>w", vim.cmd.w)
-    vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
-    vim.keymap.set("n", "<leader>Q", [[:b# | bd!#<CR>]], { silent = true })
+    -- vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
+    -- vim.keymap.set("n", "<leader>Q", [[:b# | bd!#<CR>]], { silent = true })
     vim.keymap.set("n", "<C-h>", "<C-w>h")
     vim.keymap.set("n", "<C-j>", "<C-w>j")
     vim.keymap.set("n", "<C-k>", "<C-w>k")
