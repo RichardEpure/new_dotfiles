@@ -4,6 +4,7 @@
 function Add-Path($Path) {
     $PathConent = [Environment]::GetEnvironmentVariable("Path", "Machine")
 
+    # Add to PATH if it doesn't exist
     if ($null -ne $Path) {
         if (!($PathConent -split [IO.Path]::PathSeparator -contains $Path)) {
             $NewPathContent = $PathConent + $Path + [IO.Path]::PathSeparator
@@ -17,9 +18,6 @@ function Sync-Path() {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
-# Required PowerShell Modules
-$requiredModules = @()
-
 # Linked Files (Destination => Source)
 $symlinks = @{
     "$PROFILE" = ".\distributions\windows\Profile.ps1"
@@ -28,6 +26,29 @@ $symlinks = @{
     "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
     "$HOME\.gitconfig" = ".\distributions\windows\.gitconfig"
 }
+
+# Winget dependencies
+$wingetDependencies = @{
+    "pwsh" = "Microsoft.PowerShell"
+    "git" = "Git.Git"
+    "starship" = "Starship.Starship"
+    "choco" = "Chocolatey.Chocolatey"
+}
+
+# Choco dependencies
+$chocoDependencies = @{
+    "zig" = "zig"
+    "rg" = "ripgrep"
+    "fd" = "fd"
+    "nvim" = "neovim"
+    "fzf" = "fzf"
+    "nmap" = "nmap"
+}
+
+# Required PowerShell Modules
+$requiredModules = @(
+    "PSFzf"
+)
 
 # Set working directory
 $Root = $PSScriptRoot | Split-Path | Split-Path
@@ -41,49 +62,29 @@ Add-Path "C:\Program Files (x86)\Nmap"
 Sync-Path
 
 # Install dependencies
-Write-Host "Installing missing dependencies..."
+Write-Host "Installing dependencies..."
 
-if (!(Get-Command "pwsh" -ErrorAction SilentlyContinue)) {
-    winget install -e --id=Microsoft.PowerShell
-}
-
-if (!(Get-Command "git" -ErrorAction SilentlyContinue)) {
-    winget install -e --id=Git.Git
-}
-
-if (!(Get-Command "starship" -ErrorAction SilentlyContinue)) {
-    winget install -e --id Starship.Starship
-}
-
-if (!(Get-Command "choco" -ErrorAction SilentlyContinue)) {
-    winget install -e --id=Chocolatey.Chocolatey
+# Winget
+foreach ($dependency in $wingetDependencies.GetEnumerator()) {
+    if (!(Get-Command $dependency.Key -ErrorAction SilentlyContinue)) {
+        winget install -e --id $dependency.Value
+    }
 }
 
 Sync-Path
 
-# Choco Deps
-if (!(Get-Command "zig" -ErrorAction SilentlyContinue)) {
-    choco install -y zig
+# Choco
+foreach ($dependency in $chocoDependencies.GetEnumerator()) {
+    if (!(Get-Command $dependency.Key -ErrorAction SilentlyContinue)) {
+        choco install -y $dependency.Value
+    }
 }
 
-if (!(Get-Command "rg" -ErrorAction SilentlyContinue)) {
-    choco install -y ripgrep
-}
-
-if (!(Get-Command "fd" -ErrorAction SilentlyContinue)) {
-    choco install -y fd
-}
-
-if (!(Get-Command "nvim" -ErrorAction SilentlyContinue)) {
-    choco install -y neovim
-}
-
-if (!(Get-Command "fzf" -ErrorAction SilentlyContinue)) {
-    choco install -y fzf
-}
-
-if (!(Get-Command "nmap" -ErrorAction SilentlyContinue)) {
-    choco install -y nmap
+# PowerShell Modules
+foreach ($module in $requiredModules) {
+    if (!(Get-Module -ListAvailable -Name $module)) {
+        Install-Module -Name $module -Force
+    }
 }
 
 # Fonts
