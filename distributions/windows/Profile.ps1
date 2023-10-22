@@ -4,12 +4,12 @@ $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # Aliases
 Set-Alias -Name sa -Value Start-AdminSession
-Set-Alias -Name cdf -Value Set-Directory-Fuzzy
+Set-Alias -Name cdf -Value Set-DirectoryFuzzy
 
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
-function Set-Directory-Fuzzy {
+function Set-DirectoryFuzzy {
     <#
     .SYNOPSIS
         Navigates to a file in the current directory and all subdirectories.
@@ -29,7 +29,7 @@ function Set-Directory-Fuzzy {
 function Start-AdminSession {
     <#
     .SYNOPSIS
-        Starts a new PowerShell session with elevated rights. Alias: su 
+        Starts a new PowerShell session with elevated rights.
     #>
     Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command &{Set-Location $PWD}"
 }
