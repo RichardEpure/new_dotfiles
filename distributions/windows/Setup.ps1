@@ -2,8 +2,14 @@
 
 # Utility Functions
 function Add-Path($Path) {
-    $Path = [Environment]::GetEnvironmentVariable("PATH", "Machine") + [IO.Path]::PathSeparator + $Path
-    [Environment]::SetEnvironmentVariable( "Path", $Path, "Machine" )
+    $PathConent = [Environment]::GetEnvironmentVariable("Path", "Machine")
+
+    if ($null -ne $Path) {
+        if (!($PathConent -split [IO.Path]::PathSeparator -contains $Path)) {
+            $NewPathContent = $PathConent + $Path + [IO.Path]::PathSeparator
+            [Environment]::SetEnvironmentVariable( "Path", $NewPathContent, "Machine" )
+        }
+    }
 }
 
 function Sync-Path() {
