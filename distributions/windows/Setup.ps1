@@ -1,5 +1,8 @@
 #Requires -RunAsAdministrator
 
+$logPath = "$env:USERPROFILE/Setup.log"
+"Old path: $([Environment]::GetEnvironmentVariable("Path", "Machine"))`n" | Out-File -FilePath $logPath -Append
+
 # Utility Functions
 function Add-Path($Path) {
     $PathConent = [Environment]::GetEnvironmentVariable("Path", "Machine")
