@@ -31,22 +31,22 @@ $symlinks = @{
 }
 
 # Winget dependencies
-$wingetDependencies = @{
-    "pwsh" = "Microsoft.PowerShell"
-    "git" = "Git.Git"
-    "starship" = "Starship.Starship"
-    "choco" = "Chocolatey.Chocolatey"
-}
+$wingetDependencies = @(
+    "Chocolatey.Chocolatey"
+    "Microsoft.PowerShell"
+    "Git.Git"
+    "Starship.Starship"
+)
 
 # Choco dependencies
-$chocoDependencies = @{
-    "zig" = "zig"
-    "rg" = "ripgrep"
-    "fd" = "fd"
-    "nvim" = "neovim"
-    "fzf" = "fzf"
-    "nmap" = "nmap"
-}
+$chocoDependencies = @(
+    "zig"
+    "ripgrep"
+    "fd"
+    "neovim"
+    "fzf"
+    "nmap"
+)
 
 # Required PowerShell Modules
 $requiredModules = @(
@@ -68,18 +68,20 @@ Sync-Path
 Write-Host "Installing dependencies..."
 
 # Winget
-foreach ($dependency in $wingetDependencies.GetEnumerator()) {
-    if (!(Get-Command $dependency.Key -ErrorAction SilentlyContinue)) {
-        winget install -e --id $dependency.Value
+$installedWingetDeps = winget list | Out-String
+foreach ($dependency in $wingetDependencies) {
+    if ($installedWingetDeps -notmatch $dependency) {
+        winget install -e --id $dependency
     }
 }
 
 Sync-Path
 
 # Choco
-foreach ($dependency in $chocoDependencies.GetEnumerator()) {
-    if (!(Get-Command $dependency.Key -ErrorAction SilentlyContinue)) {
-        choco install -y $dependency.Value
+$installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
+foreach ($dependency in $chocoDependencies) {
+    if ($installedChocoDeps -notcontains $dependency) {
+        choco install -y $dependency
     }
 }
 
