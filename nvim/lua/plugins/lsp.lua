@@ -85,9 +85,9 @@ return {
             lsp_zero.default_keymaps({ buffer = bufnr })
             local opts = { buffer = bufnr }
 
-            vim.keymap.set({ 'n', 'x' }, '<leader>jl', function()
-                vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-            end, opts)
+            -- vim.keymap.set({ 'n', 'x' }, '<leader>jl', function()
+            --     vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+            -- end, opts)
         end)
 
         lsp_zero.setup()
@@ -168,3 +168,4 @@ return {
         }
     end
 }
+
