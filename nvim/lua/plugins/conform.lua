@@ -58,7 +58,7 @@ return {
             conform.format({ async = true, lsp_fallback = true, range = range })
         end, { range = true })
 
-        vim.keymap.set({ 'n', 'x' }, '<C-f>', [[:Format<CR>]])
+        vim.keymap.set({ 'n', 'x' }, '<C-f>', [[:Format<CR>]], { silent = true })
     end
 }
 
