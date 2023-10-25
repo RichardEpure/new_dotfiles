@@ -50,6 +50,12 @@ return {
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles)
         vim.keymap.set('n', '<leader>fw', builtin.live_grep)
         vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true }) end)
+        vim.keymap.set('n', '<leader>fqq', builtin.quickfix)
+        vim.keymap.set('n', '<leader>fqh', builtin.quickfixhistory)
+        vim.keymap.set('n', '<leader>fd', builtin.diagnostic)
+        vim.keymap.set('n', '<leader>fc', builtin.commands)
+        vim.keymap.set('n', '<leader>fr', builtin.registers)
+        vim.keymap.set('n', '<leader>fm', builtin.marks)
     end
 }
 
