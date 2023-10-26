@@ -56,6 +56,7 @@ return {
         vim.keymap.set('n', '<leader>fc', builtin.commands)
         vim.keymap.set('n', '<leader>fr', builtin.registers)
         vim.keymap.set('n', '<leader>fm', builtin.marks)
+        vim.keymap.set('n', '<leader>fj', builtin.resume)
     end
 }
 
