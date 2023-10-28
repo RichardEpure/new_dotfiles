@@ -43,7 +43,7 @@ return {
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
                 -- Using this option may slow down your editor, and you may see some duplicate highlights.
                 -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = { "python" },
+                additional_vim_regex_highlighting = { "python", "gdscript" },
 
                 disable = function(lang, buf)
                     local max_filesize = 100 * 1024 -- 100 KB
