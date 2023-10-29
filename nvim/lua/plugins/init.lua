@@ -68,5 +68,12 @@ return {
             vim.keymap.set("n", "<leader>Q", [[:BDelete! this<CR>]], { silent = true })
         end,
         enabled = is_neovim,
-    }
+    },
+    {
+        'echasnovski/mini.splitjoin',
+        version = '*',
+        opts = true,
+        enabled = is_neovim
+    },
 }
+
