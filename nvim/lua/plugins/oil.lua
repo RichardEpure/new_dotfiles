@@ -32,7 +32,7 @@ return {
                 concealcursor = "n",
             },
             -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
-            default_file_explorer = true,
+            default_file_explorer = false,
             -- Restore window options to previous values when leaving an oil buffer
             restore_win_options = true,
             -- Skip the confirmation popup for simple operations
@@ -128,9 +128,10 @@ return {
             },
         })
 
-        vim.g.loaded_netrw = 1
+        -- vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
 
         vim.keymap.set("n", "<leader>e", oil.open)
     end
 }
+

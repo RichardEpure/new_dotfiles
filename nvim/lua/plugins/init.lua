@@ -11,7 +11,8 @@ return {
     },
 
     -- neovim
-    { 'sainnhe/gruvbox-material',    enabled = is_neovim },
+    { 'tpope/vim-rhubarb',        enabled = is_neovim },
+    { 'sainnhe/gruvbox-material', enabled = is_neovim },
     {
         'lewis6991/gitsigns.nvim',
         enabled = is_neovim,
@@ -34,7 +35,7 @@ return {
             require('scrollbar').setup()
         end
     },
-    { 'Bekaboo/deadcolumn.nvim', enabled = is_neovim },
+    { 'Bekaboo/deadcolumn.nvim',     enabled = is_neovim },
     {
         'folke/todo-comments.nvim',
         dependencies =
@@ -46,8 +47,8 @@ return {
             require('todo-comments').setup()
         end
     },
-    { 'github/copilot.vim',      enabled = is_neovim },
-    { 'kevinhwang91/nvim-bqf',   ft = 'qf',          enabled = is_neovim },
+    { 'github/copilot.vim',    enabled = is_neovim },
+    { 'kevinhwang91/nvim-bqf', ft = 'qf',          enabled = is_neovim },
     {
         'junegunn/fzf',
         build = function()
