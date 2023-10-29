@@ -38,6 +38,7 @@ function Start-AdminSession {
 
 # Promp Setup
 Invoke-Expression (&starship init powershell)
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 $stopwatch.Stop()
 "$($stopwatch.ElapsedMilliseconds)ms`tProfile load complete" | Out-File -FilePath $logPath -Append

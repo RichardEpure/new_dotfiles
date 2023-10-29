@@ -36,6 +36,7 @@ $wingetDependencies = @(
     "Microsoft.PowerShell"
     "Git.Git"
     "Starship.Starship"
+    "ajeetdsouza.zoxide"
 )
 
 # Choco dependencies
