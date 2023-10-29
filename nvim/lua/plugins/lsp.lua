@@ -19,7 +19,10 @@ return {
             }
         },
         { 'hrsh7th/cmp-nvim-lsp' },
-        { 'L3MON4D3/LuaSnip' },
+        {
+            'L3MON4D3/LuaSnip',
+            dependencies = { "rafamadriz/friendly-snippets" },
+        },
 
         -- Other
         { 'abecodes/tabout.nvim' }
@@ -36,18 +39,57 @@ return {
             }
         })
 
+        -- LuaSnip
+        local luasnip = require('luasnip')
+        require('luasnip.loaders.from_vscode').lazy_load()
+        luasnip.config.setup()
+
+        -- cmp
         local cmp = require('cmp')
         local cmp_format = require('lsp-zero').cmp_format()
 
         cmp.setup({
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end
+            },
             formatting = cmp_format,
             mapping = cmp.mapping.preset.insert({
-                -- scroll up and down the documentation window
+                ['<C-n>'] = cmp.mapping.select_next_item(),
+                ['<C-p>'] = cmp.mapping.select_prev_item(),
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                ['<CR>'] = cmp.mapping.confirm {
+                    behaviour = cmp.ConfirmBehavior.Replace,
+                    select = true,
+                },
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_locally_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
             }),
+            sources = {
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+            }
         })
 
+        -- Auto completion for / search
         cmp.setup.cmdline('/', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
@@ -55,6 +97,7 @@ return {
             }
         })
 
+        -- Auto completion of ex-commands
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
@@ -75,6 +118,7 @@ return {
             cmp_autopairs.on_confirm_done()
         )
 
+        -- Lsp Zero
         lsp_zero.setup_servers({
             'tsserver', 'volar', 'cssls',
             'lua_ls', 'rust_analyzer', 'html',
@@ -146,6 +190,7 @@ return {
             end
         }
 
+        -- Tabout
         require('tabout').setup {
             tabkey = '<C-Tab>',           -- key to trigger tabout, set to an empty string to disable
             backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
