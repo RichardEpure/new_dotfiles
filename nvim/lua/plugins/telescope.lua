@@ -29,6 +29,9 @@ return {
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown {}
+                },
+                ["frecency"] = {
+                    show_unindexed = false
                 }
             }
         })
