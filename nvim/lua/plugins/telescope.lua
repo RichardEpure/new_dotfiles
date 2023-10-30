@@ -5,7 +5,8 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-frecency.nvim',
-        'nvim-telescope/telescope-ui-select.nvim'
+        'nvim-telescope/telescope-ui-select.nvim',
+        'nvim-telescope/telescope-live-grep-args.nvim',
     },
     version = '*',
     enabled = is_neovim,
@@ -38,6 +39,7 @@ return {
 
         require('telescope').load_extension('frecency')
         require('telescope').load_extension('ui-select')
+        require("telescope").load_extension("live_grep_args")
 
         local builtin = require('telescope.builtin')
 
@@ -64,7 +66,7 @@ return {
         vim.keymap.set('n', '<leader>ff', project_files)
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles)
         vim.keymap.set('n', '<leader>fj', [[:Telescope frecency workspace=CWD<CR>]])
-        vim.keymap.set('n', '<leader>fw', builtin.live_grep)
+        vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]])
         vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true }) end)
         vim.keymap.set('n', '<leader>fqq', builtin.quickfix)
         vim.keymap.set('n', '<leader>fqh', builtin.quickfixhistory)
