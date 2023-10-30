@@ -5,6 +5,8 @@ return {
     'mfussenegger/nvim-dap',
     dependencies = {
         'rcarriga/nvim-dap-ui',
+        'nvim-telescope/telescope-dap.nvim',
+        'theHamsta/nvim-dap-virtual-text',
         'mxsdev/nvim-dap-vscode-js',
         {
             'microsoft/vscode-js-debug',
@@ -13,6 +15,9 @@ return {
         },
     },
     config = function()
+        require('telescope').load_extension('dap')
+        require("nvim-dap-virtual-text").setup()
+
         local dap = require('dap')
         local dapui = require('dapui')
 
@@ -163,3 +168,4 @@ return {
     end,
     enabled = is_neovim,
 }
+
