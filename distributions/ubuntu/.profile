@@ -27,10 +27,3 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 . "$HOME/.cargo/env"
 
-# Prompt setup
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-
-# Get rid of notification bell
-bind 'set bell-style none'
-
