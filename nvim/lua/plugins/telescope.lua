@@ -11,6 +11,8 @@ return {
     version = '*',
     enabled = is_neovim,
     config = function()
+        local lga_actions = require("telescope-live-grep-args.actions")
+
         require('telescope').setup({
             pickers = {
                 find_files = {
@@ -31,8 +33,17 @@ return {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown {}
                 },
-                ["frecency"] = {
+                frecency = {
                     show_unindexed = false
+                },
+                live_grep_args = {
+                    auto_quoting = true,
+                    mappings = {
+                        i = {
+                            ["<C-k>"] = lga_actions.quote_prompt(),
+                            ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                        },
+                    },
                 }
             }
         })
@@ -62,11 +73,14 @@ return {
             end
         end
 
+        local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+
         vim.keymap.set('n', '<leader>fa', builtin.find_files)
         vim.keymap.set('n', '<leader>ff', project_files)
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles)
         vim.keymap.set('n', '<leader>fj', [[:Telescope frecency workspace=CWD<CR>]])
         vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]])
+        vim.keymap.set("n", "<leader>f<C-w>", live_grep_args_shortcuts.grep_word_under_cursor)
         vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true }) end)
         vim.keymap.set('n', '<leader>fqq', builtin.quickfix)
         vim.keymap.set('n', '<leader>fqh', builtin.quickfixhistory)
