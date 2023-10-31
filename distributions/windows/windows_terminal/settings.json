@@ -20,14 +20,6 @@
             "keys": "ctrl+c"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -35,6 +27,14 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": "paste",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -64,6 +64,7 @@
     {
         "defaults": 
         {
+            "colorScheme": "Campbell",
             "cursorShape": "filledBox",
             "font": 
             {
@@ -71,7 +72,7 @@
                 "face": "JetBrainsMono NF",
                 "size": 11.0
             },
-            "padding": "0"
+            "padding": "8, 4, 8, 4"
         },
         "list": 
         [
@@ -79,7 +80,7 @@
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -88,6 +89,7 @@
                 "name": "Command Prompt"
             },
             {
+                "colorScheme": "Gruvbox Dark",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
@@ -124,7 +126,7 @@
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
             },
             {
-                "colorScheme": "Campbell",
+                "colorScheme": "Gruvbox Dark",
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu",
@@ -180,6 +182,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#CCCCCC",
             "yellow": "#C19C00"
+        },
+        {
+            "background": "#282828",
+            "black": "#282828",
+            "blue": "#458588",
+            "brightBlack": "#928374",
+            "brightBlue": "#83A598",
+            "brightCyan": "#8EC07C",
+            "brightGreen": "#B8BB26",
+            "brightPurple": "#D3869B",
+            "brightRed": "#FB4934",
+            "brightWhite": "#EBDBB2",
+            "brightYellow": "#FABD2F",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#689D6A",
+            "foreground": "#EBDBB2",
+            "green": "#98971A",
+            "name": "Gruvbox Dark",
+            "purple": "#B16286",
+            "red": "#CC241D",
+            "selectionBackground": "#FFFFFF",
+            "white": "#A89984",
+            "yellow": "#D79921"
         },
         {
             "background": "#282C34",
