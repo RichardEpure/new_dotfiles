@@ -76,5 +76,6 @@ return {
         opts = true,
         enabled = is_neovim
     },
+    { "folke/twilight.nvim", opts = true, enabled = is_neovim }
 }
 
