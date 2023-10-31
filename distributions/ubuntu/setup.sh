@@ -15,9 +15,15 @@ if [ -f ~/.gitconfig ]; then
   rm ~/.gitconfig
 fi
 
+if [ -f ~/.bashrc ]; then
+  echo "Removing ~/.bashrc"
+  rm ~/.bashrc
+fi
+
 echo "Creating symbolic links..."
 ln -sf ~/dotfiles/nvim ~/.config/nvim
 ln -sf ~/dotfiles/distributions/ubuntu/.gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/distributions/ubuntu/.bashrc ~/.bashrc
 
 # Install starship
 if ! command -v starship &> /dev/null
