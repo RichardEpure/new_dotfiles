@@ -187,6 +187,8 @@ else
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
     vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "open wt in this file's directory" })
     vim.keymap.set("n", "<leader>oe", [[:!explorer.exe "%:p:h"<CR>]], { desc = "open explorer in this file's directory" })
+    vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "open wt at cwd" })
+    vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "open explorer at cwd" })
 
     vim.api.nvim_create_user_command("Redir",
         [[:redir @" | silent <args> | redir END | enew | put"]],
