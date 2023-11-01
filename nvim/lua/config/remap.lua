@@ -185,6 +185,8 @@ else
     vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+    vim.keymap.set("n", "<leader>ot", [[:!wt -d "%:p:h"<CR>]], { desc = "open wt in this file's directory" })
+    vim.keymap.set("n", "<leader>oe", [[:!explorer "%:p:h"<CR>]], { desc = "open explorer in this file's directory" })
 
     vim.api.nvim_create_user_command("Redir",
         [[:redir @" | silent <args> | redir END | enew | put"]],
@@ -198,3 +200,4 @@ else
         vim.keymap.set({ "i", 't' }, "<C-v>", '<esc>"+gp', { desc = "Paste from clipboard" })
     end
 end
+
