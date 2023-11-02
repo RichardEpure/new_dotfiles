@@ -88,13 +88,6 @@ foreach ($dependency in $chocoDependencies) {
     }
 }
 
-# PowerShell Modules
-foreach ($module in $requiredModules) {
-    if (!(Get-Module -ListAvailable -Name $module)) {
-        Install-Module -Name $module -Force
-    }
-}
-
 # Fonts
 Write-Host "Installing Fonts..."
 
