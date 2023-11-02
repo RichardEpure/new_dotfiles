@@ -87,6 +87,21 @@ return {
         },
         enabled = is_neovim
     },
+    {
+        'echasnovski/mini.indentscope',
+        version = false,
+        config = function()
+            local indentscope = require('mini.indentscope')
+            indentscope.setup({
+                draw = {
+                    delay = 0,
+                    animation = indentscope.gen_animation.none()
+                },
+                symbol = '┆'
+            })
+        end,
+        enabled = is_neovim
+    },
     { "folke/twilight.nvim", opts = true, enabled = is_neovim }
 }
 
