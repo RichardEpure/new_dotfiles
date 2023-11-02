@@ -30,10 +30,20 @@ return {
         local options = { noremap = true, silent = true }
 
         for i = 1, 9 do
-            vim.keymap.set({ 'n', 'v' }, "<leader>" .. i,
+            vim.keymap.set(
+                { 'n', 'v' },
+                "<leader>" .. i,
                 '<cmd>lua require("bufferline").go_to_buffer(' .. i .. ', false)<cr>',
-                options)
+                options
+            )
         end
+
+        vim.keymap.set(
+            { 'n', 'v' },
+            "<leader>$",
+            '<cmd>lua require("bufferline").go_to_buffer(-1, false)<cr>',
+            options
+        )
 
         vim.keymap.set({ 'n', 'v' }, '<up>', [[:BufferLineCycleNext<cr>]], options)
         vim.keymap.set({ 'n', 'v' }, '<down>', [[:BufferLineCyclePrev<cr>]], options)
