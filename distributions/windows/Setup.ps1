@@ -41,6 +41,7 @@ $wingetDependencies = @(
 
 # Choco dependencies
 $chocoDependencies = @(
+    "altsnap"
     "zig"
     "ripgrep"
     "fd"
