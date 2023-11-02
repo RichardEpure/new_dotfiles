@@ -76,6 +76,17 @@ return {
         opts = true,
         enabled = is_neovim
     },
+    {
+        'echasnovski/mini.ai',
+        version = false,
+        opts = {
+            mappings = {
+                goto_left = 'gp',
+                goto_right = 'gn'
+            }
+        },
+        enabled = is_neovim
+    },
     { "folke/twilight.nvim", opts = true, enabled = is_neovim }
 }
 
