@@ -10,5 +10,7 @@ if is_neovim() then
     vim.g.gruvbox_material_transparent_background = 0
 
     SetColor("gruvbox-material")
+
+    vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#585858' })
 end
 
