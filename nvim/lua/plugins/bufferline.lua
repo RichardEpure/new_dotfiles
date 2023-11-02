@@ -16,6 +16,14 @@ return {
                 numbers = function(opts)
                     return string.format('%s', opts.ordinal)
                 end,
+            },
+            highlights = {
+                fill = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "BufferLineBuffer"
+                    }
+                },
             }
         }
 
@@ -33,3 +41,4 @@ return {
         vim.keymap.set({ 'n', 'v' }, '<left>', [[:BufferLineMovePrev<cr>]], options)
     end
 }
+
