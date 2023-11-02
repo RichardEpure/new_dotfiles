@@ -97,7 +97,7 @@ return {
                     delay = 0,
                     animation = indentscope.gen_animation.none()
                 },
-                symbol = '┆'
+                symbol = '│'
             })
         end,
         enabled = is_neovim
