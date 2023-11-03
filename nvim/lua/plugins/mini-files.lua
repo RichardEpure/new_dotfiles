@@ -69,7 +69,7 @@ return {
 
         vim.keymap.set(
             'n',
-            '<leader><C-e>',
+            '<leader>E',
             function() minifiles_toggle() end,
             {
                 desc = "Open file explorer at root of cwd",

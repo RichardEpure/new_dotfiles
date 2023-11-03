@@ -80,7 +80,7 @@ return {
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles)
         vim.keymap.set('n', '<leader>fj', [[:Telescope frecency workspace=CWD<CR>]])
         vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]])
-        vim.keymap.set('n', "<leader>f<C-w>", live_grep_args_shortcuts.grep_word_under_cursor)
+        vim.keymap.set('n', "<leader>fW", live_grep_args_shortcuts.grep_word_under_cursor)
         vim.keymap.set('v', '<leader>fw', live_grep_args_shortcuts.grep_visual_selection)
         vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true }) end)
         vim.keymap.set('n', '<leader>fqq', builtin.quickfix)
