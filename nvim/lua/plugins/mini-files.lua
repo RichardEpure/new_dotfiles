@@ -61,7 +61,20 @@ return {
             'n',
             '<leader>e',
             function() minifiles_toggle(vim.fn.expand("%:.")) end,
-            { silent = true }
+            {
+                desc = "Open file explorer at current buffer path",
+                silent = true
+            }
+        )
+
+        vim.keymap.set(
+            'n',
+            '<leader><C-e>',
+            function() minifiles_toggle() end,
+            {
+                desc = "Open file explorer at root of cwd",
+                silent = true
+            }
         )
 
         vim.g.loaded_netrwPlugin = 1
