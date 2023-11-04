@@ -167,9 +167,8 @@ if vim.g.vscode then
     end
 else
     -- ordinary Neovim
-    vim.keymap.set("n", "<leader>w", vim.cmd.w)
-    -- vim.keymap.set("n", "<leader>q", [[:b# | bd#<CR>]], { silent = true })
-    -- vim.keymap.set("n", "<leader>Q", [[:b# | bd!#<CR>]], { silent = true })
+    vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Save current buffer" })
+    vim.keymap.set("n", "<leader><C-q>", [[:tabclose<CR>]], { desc = "Close current tab" })
     vim.keymap.set("n", "<C-h>", "<C-w>h")
     vim.keymap.set("n", "<C-j>", "<C-w>j")
     vim.keymap.set("n", "<C-k>", "<C-w>k")
@@ -185,10 +184,11 @@ else
     vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-    vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "open wt in this file's directory" })
-    vim.keymap.set("n", "<leader>oe", [[:!explorer.exe "%:p:h"<CR>]], { desc = "open explorer in this file's directory" })
-    vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "open wt at cwd" })
-    vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "open explorer at cwd" })
+    vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "Open wt in this file's directory" })
+    vim.keymap.set("n", "<leader>oe", [[:!explorer.exe "%:p:h"<CR>]], { desc = "Open explorer in this file's directory" })
+    vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "Open wt at cwd" })
+    vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "Open explorer at cwd" })
+    vim.keymap.set("n", "<C-w>t", [[:tabe %<CR>]], { desc = "Open current buffer in a new tab" })
 
     vim.api.nvim_create_user_command("Redir",
         [[:redir @" | silent <args> | redir END | enew | put"]],

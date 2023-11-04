@@ -64,8 +64,8 @@ return {
         'kazhala/close-buffers.nvim',
         opts = true,
         config = function()
-            vim.keymap.set("n", "<leader>q", [[:BDelete this<CR>]], { silent = true })
-            vim.keymap.set("n", "<leader>Q", [[:BDelete! this<CR>]], { silent = true })
+            vim.keymap.set("n", "<leader>q", [[:BDelete this<CR>]], { silent = true, desc = "Close buffer" })
+            vim.keymap.set("n", "<leader>Q", [[:BDelete! this<CR>]], { silent = true, desc = "Force close buffer" })
         end,
         enabled = is_neovim,
     },
