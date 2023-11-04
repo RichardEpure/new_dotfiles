@@ -1,9 +1,9 @@
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to clipboard" })
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("v", "<leader>h", [[:sort<CR>]])
-vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("v", "<leader>h", [[:sort<CR>]], { desc = "Sort lines" })
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without overwriting register" })
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole register" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
 vim.keymap.set({ "n", "v" }, "&", "g_")
 vim.keymap.set({ "n", "v" }, "£", "0")
 
@@ -181,7 +181,12 @@ else
     vim.keymap.set("n", "<C-u>", "<C-u>zz")
     vim.keymap.set("n", "n", "nzzzv")
     vim.keymap.set("n", "N", "Nzzzv")
-    vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+    vim.keymap.set(
+        "n",
+        "<leader>s",
+        [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+        { desc = "Replace word under cursor" }
+    )
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
     vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "Open wt in this file's directory" })

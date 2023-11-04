@@ -75,21 +75,41 @@ return {
 
         local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
-        vim.keymap.set('n', '<leader>fa', builtin.find_files)
-        vim.keymap.set('n', '<leader>ff', project_files)
-        vim.keymap.set('n', '<leader>fo', builtin.oldfiles)
-        vim.keymap.set('n', '<leader>fj', [[:Telescope frecency workspace=CWD<CR>]])
-        vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]])
-        vim.keymap.set('n', "<leader>fW", live_grep_args_shortcuts.grep_word_under_cursor)
-        vim.keymap.set('v', '<leader>fw', live_grep_args_shortcuts.grep_visual_selection)
-        vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true }) end)
-        vim.keymap.set('n', '<leader>fqq', builtin.quickfix)
-        vim.keymap.set('n', '<leader>fqh', builtin.quickfixhistory)
-        vim.keymap.set('n', '<leader>fd', builtin.diagnostics)
-        vim.keymap.set('n', '<leader>fc', builtin.commands)
-        vim.keymap.set('n', '<leader>fr', builtin.registers)
-        vim.keymap.set('n', '<leader>fm', builtin.marks)
-        vim.keymap.set('n', '<leader>fu', builtin.resume)
+        vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = "Find files" })
+        vim.keymap.set('n', '<leader>ff', project_files, { desc = "Find git tracked files" })
+        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Find old files" })
+        vim.keymap.set(
+            'n',
+            '<leader>fj',
+            [[:Telescope frecency workspace=CWD<CR>]],
+            { desc = "Find files based on frecency" }
+        )
+        vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]], { desc = "Find word via grep" })
+        vim.keymap.set(
+            'n',
+            "<leader>fW",
+            live_grep_args_shortcuts.grep_word_under_cursor,
+            { desc = "Find word under cursor" }
+        )
+        vim.keymap.set(
+            'v',
+            '<leader>fw',
+            live_grep_args_shortcuts.grep_visual_selection,
+            { desc = "Find visual selection" }
+        )
+        vim.keymap.set(
+            'n',
+            '<leader>fh',
+            function() builtin.find_files({ hidden = true }) end,
+            { desc = "Find hidden files" }
+        )
+        vim.keymap.set('n', '<leader>fqq', builtin.quickfix, { desc = "Find in quickfix list" })
+        vim.keymap.set('n', '<leader>fqh', builtin.quickfixhistory, { desc = "Find quickfix history" })
+        vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "Find diagnostics" })
+        vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = "Find commands" })
+        vim.keymap.set('n', '<leader>fr', builtin.registers, { desc = "Find registers" })
+        vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Find marks" })
+        vim.keymap.set('n', '<leader>fu', builtin.resume, { desc = "Resume last telescope search" })
     end
 }
 

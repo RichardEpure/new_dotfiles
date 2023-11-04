@@ -24,7 +24,8 @@ return {
             "n",
             "<Leader>fs",
             require("auto-session.session-lens").search_session,
-            { noremap = true }
+            { noremap = true, desc = "Find session" }
         )
     end
 }
+

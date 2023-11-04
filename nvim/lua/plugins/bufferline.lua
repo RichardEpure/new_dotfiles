@@ -27,14 +27,12 @@ return {
             }
         }
 
-        local options = { noremap = true, silent = true }
-
         for i = 1, 9 do
             vim.keymap.set(
                 { 'n', 'v' },
                 "<leader>" .. i,
                 '<cmd>lua require("bufferline").go_to_buffer(' .. i .. ', false)<cr>',
-                options
+                { noremap = true, silent = true, desc = "Go to buffer " .. i }
             )
         end
 
@@ -42,13 +40,33 @@ return {
             { 'n', 'v' },
             "<leader>$",
             '<cmd>lua require("bufferline").go_to_buffer(-1, false)<cr>',
-            options
+            { noremap = true, silent = true, desc = "Go to last buffer" }
         )
 
-        vim.keymap.set({ 'n', 'v' }, '<up>', [[:BufferLineCycleNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<down>', [[:BufferLineCyclePrev<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<right>', [[:BufferLineMoveNext<cr>]], options)
-        vim.keymap.set({ 'n', 'v' }, '<left>', [[:BufferLineMovePrev<cr>]], options)
+        vim.keymap.set(
+            { 'n', 'v' },
+            '<up>',
+            [[:BufferLineCycleNext<cr>]],
+            { noremap = true, silent = true, desc = "Go to next buffer" }
+        )
+        vim.keymap.set(
+            { 'n', 'v' },
+            '<down>',
+            [[:BufferLineCyclePrev<cr>]],
+            { noremap = true, silent = true, desc = "Go to previous buffer" }
+        )
+        vim.keymap.set(
+            { 'n', 'v' },
+            '<right>',
+            [[:BufferLineMoveNext<cr>]],
+            { noremap = true, silent = true, desc = "Move buffer to next position" }
+        )
+        vim.keymap.set(
+            { 'n', 'v' },
+            '<left>',
+            [[:BufferLineMovePrev<cr>]],
+            { noremap = true, silent = true, desc = "Move buffer to previous position" }
+        )
     end
 }
 
