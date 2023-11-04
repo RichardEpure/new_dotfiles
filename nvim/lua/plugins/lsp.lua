@@ -65,15 +65,17 @@ return {
                     behaviour = cmp.ConfirmBehavior.Replace,
                     select = true,
                 },
-                ['<Tab>'] = cmp.mapping(function(fallback)
+                ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
+                    elseif require("copilot.suggestion").is_visible() then
+                        require("copilot.suggestion").accept()
                     else
                         fallback()
                     end
-                end, { 'i', 's' }),
+                end, { "i", "s" }),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()

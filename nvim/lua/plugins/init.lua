@@ -47,8 +47,7 @@ return {
             require('todo-comments').setup()
         end
     },
-    { 'github/copilot.vim',    enabled = is_neovim },
-    { 'kevinhwang91/nvim-bqf', ft = 'qf',          enabled = is_neovim },
+    { 'kevinhwang91/nvim-bqf', ft = 'qf',   enabled = is_neovim },
     {
         'junegunn/fzf',
         build = function()
@@ -105,6 +104,6 @@ return {
         end,
         enabled = is_neovim
     },
-    { "folke/twilight.nvim", opts = true, enabled = is_neovim }
+    { "folke/twilight.nvim",   opts = true, enabled = is_neovim }
 }
 
