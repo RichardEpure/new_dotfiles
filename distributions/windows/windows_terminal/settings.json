@@ -69,7 +69,7 @@
             "font": 
             {
                 "cellHeight": "1.6",
-                "face": "JetBrainsMono NF",
+                "face": "JetBrainsMono Nerd Font",
                 "size": 11.0
             },
             "padding": "8, 4, 8, 4"
@@ -80,7 +80,7 @@
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell",
+                "name": "Windows PowerShell"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
