@@ -123,9 +123,7 @@ return {
 
         -- Lsp Zero
         lsp_zero.setup_servers({
-            'tsserver', 'volar', 'cssls',
-            'lua_ls', 'rust_analyzer', 'html',
-            'jsonls', 'pylsp'
+            'cssls', 'lua_ls', 'html', 'jsonls'
         })
 
         lsp_zero.on_attach(function(client, bufnr)
