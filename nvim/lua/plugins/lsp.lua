@@ -127,7 +127,7 @@ return {
         })
 
         lsp_zero.on_attach(function(client, bufnr)
-            lsp_zero.default_keymaps({ buffer = bufnr })
+            lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
             local opts = { buffer = bufnr }
 
             -- vim.keymap.set({ 'n', 'x' }, '<leader>jl', function()
