@@ -194,6 +194,7 @@ else
     vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "Open wt at cwd" })
     vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "Open explorer at cwd" })
     vim.keymap.set("n", "<C-w>t", [[:tabe %<CR>]], { desc = "Open current buffer in a new tab" })
+    vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
 
     vim.api.nvim_create_user_command("Redir",
         [[:redir @" | silent <args> | redir END | enew | put"]],
