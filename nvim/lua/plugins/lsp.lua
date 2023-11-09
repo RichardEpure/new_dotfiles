@@ -164,18 +164,6 @@ return {
             bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path()
         }
 
-        -- Folding
-        lsp_zero.set_server_config({
-            capabilities = {
-                textDocument = {
-                    foldingRange = {
-                        dynamicRegistration = false,
-                        lineFoldingOnly = true
-                    }
-                }
-            }
-        })
-
         -- For Windows: use Nmap
         -- For WSL: doesn't work
         local cmd = vim.fn.has('linux') == 1 and
