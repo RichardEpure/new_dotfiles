@@ -9,13 +9,13 @@ return {
             foldfunc = "builtin",
             segments = {
                 {
+                    text = { "%s" },
+                    click = "v:lua.ScSa"
+                },
+                {
                     text = { builtin.lnumfunc, " " },
                     condition = { true, builtin.not_empty },
                     click = "v:lua.ScLa",
-                },
-                {
-                    text = { "%s" },
-                    click = "v:lua.ScSa"
                 },
                 {
                     text = { builtin.foldfunc, " " },
