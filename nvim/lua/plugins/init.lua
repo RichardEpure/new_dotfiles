@@ -56,11 +56,6 @@ return {
         enabled = is_neovim
     },
     {
-        'andymass/vim-matchup',
-        opts = { method = 'popup' },
-        enabled = is_neovim,
-    },
-    {
         'kazhala/close-buffers.nvim',
         opts = true,
         config = function()
