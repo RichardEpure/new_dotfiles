@@ -1,4 +1,6 @@
 local is_neovim = require('config.utils').is_neovim
+local get_hex = require('config.utils').get_hex
+local palette = require('config.palette')
 
 return {
     'akinsho/bufferline.nvim',
@@ -21,7 +23,87 @@ return {
                 fill = {
                     bg = {
                         attribute = "bg",
-                        highlight = "BufferLineBuffer"
+                        highlight = "Normal"
+                    }
+                },
+                buffer_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
+                background = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                tab = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                tab_selected = {
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Yellow"
+                    },
+                },
+                tab_separator = {
+                    fg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                tab_separator_selected = {
+                    fg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                tab_close = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                close_button = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                close_button_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
+                numbers = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                numbers_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
+                separator = {
+                    fg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
                     }
                 },
             }
