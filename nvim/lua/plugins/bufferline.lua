@@ -1,6 +1,4 @@
 local is_neovim = require('config.utils').is_neovim
-local get_hex = require('config.utils').get_hex
-local palette = require('config.palette')
 
 return {
     'akinsho/bufferline.nvim',
@@ -96,6 +94,24 @@ return {
                         highlight = "Normal"
                     },
                 },
+                duplicate_selected = {
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Normal"
+                    },
+                },
+                duplicate_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
+                duplicate = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
                 separator = {
                     fg = {
                         attribute = "bg",
@@ -151,4 +167,3 @@ return {
         )
     end
 }
-
