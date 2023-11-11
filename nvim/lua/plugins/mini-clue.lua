@@ -52,6 +52,32 @@ return {
                 miniclue.gen_clues.registers(),
                 miniclue.gen_clues.windows(),
                 miniclue.gen_clues.z(),
+
+                -- Telescope
+                { mode = 'n', keys = '<Leader>f',  desc = '+Find' },
+                { mode = 'x', keys = '<Leader>f',  desc = '+Find' },
+                { mode = 'n', keys = '<Leader>fq', desc = '+QuickFix' },
+
+                -- Dap
+                { mode = 'n', keys = '<Leader>l',  desc = '+Dap' },
+                { mode = 'x', keys = '<Leader>l',  desc = '+Dap' },
+
+                -- Refactoring
+                { mode = 'n', keys = '<Leader>r',  desc = '+Refactor' },
+                { mode = 'x', keys = '<Leader>r',  desc = '+Refactor' },
+
+                -- No Neck Pain
+                { mode = 'n', keys = '<Leader>n',  desc = '+NoNeckPain' },
+                -- { mode = 'n', keys = '<Leader>nn', desc = 'Toggle NoNeckPain' },
+                -- { mode = 'n', keys = '<Leader>n-', desc = 'Decrease buffer width' },
+                -- { mode = 'n', keys = '<Leader>n=', desc = 'Increase buffer width' },
+
+                -- Git
+                { mode = 'n', keys = '<Leader>g',  desc = '+Git' },
+
+                -- Other
+                { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
+                { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
             },
         })
     end
