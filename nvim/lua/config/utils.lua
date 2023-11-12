@@ -8,4 +8,16 @@ local is_neovim = function()
 end
 M.is_neovim = is_neovim
 
+local read_exrc_file = function()
+    local result = vim.secure.read(".nvim.lua")
+    if result ~= nil then
+        local should_source = vim.fn.input("Source .nvim.lua? (y/n) ") == "y"
+        if should_source then
+            vim.cmd("source .nvim.lua")
+        end
+    end
+end
+M.read_exrc_file = read_exrc_file
+
 return M
+

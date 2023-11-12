@@ -1,4 +1,5 @@
 local is_neovim = require('config.utils').is_neovim
+local read_exrc_file = require('config.utils').read_exrc_file
 
 return {
     'rmagatti/auto-session',
@@ -16,6 +17,8 @@ return {
                 theme_conf = { border = true },
                 previewer = false,
             },
+
+            post_restore_cmds = { read_exrc_file },
         }
 
         -- Set mapping for searching a session.
