@@ -94,6 +94,12 @@ return {
                         highlight = "Normal"
                     },
                 },
+                modified = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                },
                 duplicate_selected = {
                     fg = {
                         attribute = "fg",
@@ -167,3 +173,4 @@ return {
         )
     end
 }
+
