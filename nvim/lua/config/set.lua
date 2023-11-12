@@ -3,6 +3,8 @@ local home = require('config.utils').home
 vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
+    vim.o.exrc = true
+
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
     vim.o.foldcolumn = "1"
