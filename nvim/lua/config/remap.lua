@@ -183,7 +183,7 @@ else
     vim.keymap.set("n", "N", "Nzzzv")
     vim.keymap.set(
         "n",
-        "<leader>s",
+        "<leader>as",
         [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
         { desc = "Replace word under cursor" }
     )

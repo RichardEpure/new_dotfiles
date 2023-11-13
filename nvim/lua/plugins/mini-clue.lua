@@ -75,9 +75,13 @@ return {
                 -- Git
                 { mode = 'n', keys = '<Leader>g',  desc = '+Git' },
 
+                -- Neogen
+                { mode = 'n', keys = '<Leader>aa', desc = '+Annotate' },
+
                 -- Other
                 { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
                 { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
+                { mode = 'n', keys = '<Leader>a',  desc = '+Actions' },
             },
         })
     end
