@@ -10,6 +10,11 @@ if [ -d ~/.config/nvim ]; then
   rm -rf ~/.config/nvim
 fi
 
+if [ -d ~/.config/yazi ]; then
+  echo "Removing ~/.config/yazi"
+  rm -rf ~/.config/yazi
+fi
+
 if [ -f ~/.gitconfig ]; then
   echo "Removing ~/.gitconfig"
   rm ~/.gitconfig
