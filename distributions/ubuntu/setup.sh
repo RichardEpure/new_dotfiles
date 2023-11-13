@@ -22,6 +22,7 @@ fi
 
 echo "Creating symbolic links..."
 ln -sf ~/dotfiles/nvim ~/.config/nvim
+ln -sf ~/dotfiles/yazi ~/.config/yazi
 ln -sf ~/dotfiles/distributions/ubuntu/.gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/distributions/ubuntu/.bashrc ~/.bashrc
 

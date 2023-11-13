@@ -29,6 +29,7 @@ $symlinks = @{
     "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
     "$HOME\.gitconfig" = ".\distributions\windows\.gitconfig"
     "$HOME\AppData\Roaming\AltSnap\AltSnap.ini" = ".\distributions\windows\AltSnap.ini"
+    "$HOME\AppData\Roaming\yazi\config" = ".\yazi"
 }
 
 # Winget dependencies
@@ -49,6 +50,11 @@ $chocoDependencies = @(
     "neovim"
     "fzf"
     "nmap"
+)
+
+# Scoop dependencies
+$scoopDependencies = @(
+    "yazi"
 )
 
 # Required PowerShell Modules
@@ -85,6 +91,14 @@ $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
 foreach ($dependency in $chocoDependencies) {
     if ($installedChocoDeps -notcontains $dependency) {
         choco install -y $dependency
+    }
+}
+
+# Scoop
+$installedScoopDeps = (scoop list) | Select-Object -ExpandProperty Name
+foreach ($dependency in $scoopDependencies) {
+    if ($installedScoopDeps -notcontains $dependency) {
+        scoop install $dependency
     }
 }
 
