@@ -75,8 +75,8 @@ return {
 
         local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
-        vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = "Find files" })
-        vim.keymap.set('n', '<leader>ff', project_files, { desc = "Find git tracked files" })
+        vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = "Find all files" })
+        vim.keymap.set('n', '<leader>ff', project_files, { desc = "Find files" })
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Find old files" })
         vim.keymap.set(
             'n',
@@ -110,6 +110,7 @@ return {
         vim.keymap.set('n', '<leader>fr', builtin.registers, { desc = "Find registers" })
         vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Find marks" })
         vim.keymap.set('n', '<leader>fu', builtin.resume, { desc = "Resume last telescope search" })
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
+        vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
     end
 }
-
