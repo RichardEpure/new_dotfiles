@@ -30,7 +30,9 @@ return {
         'numToStr/Comment.nvim',
         enabled = is_neovim,
         config = function()
-            require('Comment').setup()
+            require('Comment').setup({
+                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+            })
         end
     },
     { 'nvim-tree/nvim-web-devicons', enabled = is_neovim },

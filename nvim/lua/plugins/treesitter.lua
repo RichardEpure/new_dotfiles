@@ -6,6 +6,7 @@ return {
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
         'windwp/nvim-ts-autotag',
+        'JoosepAlviste/nvim-ts-context-commentstring',
     },
     enabled = is_neovim,
     config = function()
@@ -72,9 +73,8 @@ return {
                 enable = true,
             },
 
-            matchup = {
+            context_commentstring = {
                 enable = true,
-                enable_quotes = true
             },
 
             textobjects = {
@@ -184,3 +184,4 @@ return {
         vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
     end
 }
+
