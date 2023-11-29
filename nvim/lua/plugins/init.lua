@@ -37,13 +37,6 @@ return {
     },
     { 'nvim-tree/nvim-web-devicons', enabled = is_neovim },
     {
-        'petertriho/nvim-scrollbar',
-        enabled = is_neovim,
-        config = function()
-            require('scrollbar').setup()
-        end
-    },
-    {
         'folke/todo-comments.nvim',
         dependencies =
         {
