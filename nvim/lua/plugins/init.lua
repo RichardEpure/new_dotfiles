@@ -99,6 +99,22 @@ return {
         end,
         enabled = is_neovim
     },
-    { "folke/twilight.nvim",   opts = true, enabled = is_neovim }
+    { "folke/twilight.nvim",   opts = true, enabled = is_neovim },
+    {
+        "folke/zen-mode.nvim",
+        keys = {
+            { "<Leader>z", [[:ZenMode<CR>]], desc = "Toggle zen-mode" }
+        },
+        opts = {
+            window = {
+                backdrop = 1,
+            },
+            plugins = {
+                twilight = { enabled = false },
+                gitsigns = { enabled = true },
+            }
+        },
+        enabled = is_neovim
+    }
 }
 
