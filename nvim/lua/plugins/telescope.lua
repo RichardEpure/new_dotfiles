@@ -7,6 +7,7 @@ return {
         'nvim-telescope/telescope-frecency.nvim',
         'nvim-telescope/telescope-ui-select.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
+        'piersolenski/telescope-import.nvim',
     },
     version = '*',
     enabled = is_neovim,
@@ -51,6 +52,7 @@ return {
         require('telescope').load_extension('frecency')
         require('telescope').load_extension('ui-select')
         require("telescope").load_extension("live_grep_args")
+        require("telescope").load_extension("import")
 
         local builtin = require('telescope.builtin')
 
@@ -110,7 +112,9 @@ return {
         vim.keymap.set('n', '<leader>fr', builtin.registers, { desc = "Find registers" })
         vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Find marks" })
         vim.keymap.set('n', '<leader>fu', builtin.resume, { desc = "Resume last telescope search" })
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
+        vim.keymap.set('n', '<leader>fv', builtin.buffers, { desc = "Find buffers" })
         vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
+        vim.keymap.set('n', '<leader>fi', [[:Telescope import<CR>]], { desc = "Find & add import" })
     end
 }
+
