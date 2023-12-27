@@ -114,6 +114,7 @@ return {
         vim.keymap.set('n', '<leader>fu', builtin.resume, { desc = "Resume last telescope search" })
         vim.keymap.set('n', '<leader>fe', builtin.buffers, { desc = "Find buffers" })
         vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
+        vim.keymap.set('n', '<leader>fg', builtin.git_status, { desc = "Find git status files" })
         vim.keymap.set('n', '<leader>fi', [[:Telescope import<CR>]], { desc = "Find & add import" })
     end
 }
