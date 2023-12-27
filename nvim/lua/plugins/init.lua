@@ -20,6 +20,11 @@ return {
         end
     },
     {
+        'p00f/alabaster.nvim',
+        enabled = is_neovim,
+        opts = true,
+    },
+    {
         'lewis6991/gitsigns.nvim',
         enabled = is_neovim,
         config = function()
