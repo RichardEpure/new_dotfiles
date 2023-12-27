@@ -112,7 +112,7 @@ return {
         vim.keymap.set('n', '<leader>fr', builtin.registers, { desc = "Find registers" })
         vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Find marks" })
         vim.keymap.set('n', '<leader>fu', builtin.resume, { desc = "Resume last telescope search" })
-        vim.keymap.set('n', '<leader>fv', builtin.buffers, { desc = "Find buffers" })
+        vim.keymap.set('n', '<leader>fe', builtin.buffers, { desc = "Find buffers" })
         vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
         vim.keymap.set('n', '<leader>fi', [[:Telescope import<CR>]], { desc = "Find & add import" })
     end
