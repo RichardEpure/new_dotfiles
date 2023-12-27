@@ -1,4 +1,6 @@
-local palette = {
+local M = {}
+
+local gruvbox = {
     white = '#d4be98',
     red = '#ea6962',
     orange = '#e78a4e',
@@ -8,5 +10,18 @@ local palette = {
     blue = '#7daea3',
     purple = '#d3869b',
 }
+M.gruvbox = gruvbox
 
-return palette
+local alabaster = {
+    black = '#000000',
+    white = '#CECECE',
+    red = '#D2322D',
+    yellow = '#CD974B',
+    green = '#6ABF40',
+    blue = '#217EBC',
+    purple = '#9B3596',
+}
+M.alabaster = alabaster
+
+return M
+
