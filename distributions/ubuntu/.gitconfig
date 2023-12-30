@@ -5,6 +5,7 @@
     name = Richard
 [core]
     editor = nvim
+    excludesFile = ~/.gitignore
 [credential]
     helper = cache
 [pull]

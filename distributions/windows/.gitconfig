@@ -5,6 +5,7 @@
     name = Richard
 [core]
     editor = nvim
+    excludesFile = ~/.gitignore
 [pull]
     rebase = false
 [merge]
