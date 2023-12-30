@@ -20,6 +20,11 @@ if [ -f ~/.gitconfig ]; then
   rm ~/.gitconfig
 fi
 
+if [ -f ~/.gitignore ]; then
+  echo "Removing ~/.gitignore"
+  rm ~/.gitignore
+fi
+
 if [ -f ~/.bashrc ]; then
   echo "Removing ~/.bashrc"
   rm ~/.bashrc
@@ -29,6 +34,7 @@ echo "Creating symbolic links..."
 ln -sf ~/dotfiles/nvim ~/.config/nvim
 ln -sf ~/dotfiles/yazi ~/.config/yazi
 ln -sf ~/dotfiles/distributions/ubuntu/.gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/.globalignore ~/.gitignore
 ln -sf ~/dotfiles/distributions/ubuntu/.bashrc ~/.bashrc
 
 # Install starship

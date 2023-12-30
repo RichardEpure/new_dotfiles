@@ -1,0 +1,2 @@
+# A global .gitignore file across all repos.
+.nvim.lua
