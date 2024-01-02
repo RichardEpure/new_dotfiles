@@ -55,6 +55,14 @@
         {
             "command": 
             {
+                "action": "adjustFontSize",
+                "delta": 1.0
+            },
+            "keys": "ctrl+alt+shift+numpad_plus"
+        },
+        {
+            "command": 
+            {
                 "action": "nextTab"
             },
             "keys": "ctrl+up"
@@ -65,6 +73,14 @@
                 "action": "prevTab"
             },
             "keys": "ctrl+down"
+        },
+        {
+            "command": 
+            {
+                "action": "adjustFontSize",
+                "delta": -1.0
+            },
+            "keys": "ctrl+alt+shift+numpad_minus"
         }
     ],
     "copyFormatting": "none",
@@ -141,7 +157,6 @@
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
             },
             {
-                "colorScheme": "Gruvbox Dark",
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu",
