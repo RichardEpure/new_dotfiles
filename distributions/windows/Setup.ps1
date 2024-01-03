@@ -56,6 +56,9 @@ $chocoDependencies = @(
 # Scoop dependencies
 $scoopDependencies = @(
     "yazi"
+    "neovide"
+    "ninja"
+    "7zip"
 )
 
 # Required PowerShell Modules
