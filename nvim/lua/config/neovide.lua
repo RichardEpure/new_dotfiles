@@ -7,4 +7,6 @@ if vim.g.neovide then
     vim.g.neovide_refresh_rate = 120
     vim.g.neovide_refresh_rate_idle = 120
     vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_scroll_animation_length = 0.05
 end
+
