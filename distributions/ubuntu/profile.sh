@@ -1,3 +1,5 @@
+export EDITOR=nvim
+
 # Aliases
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
