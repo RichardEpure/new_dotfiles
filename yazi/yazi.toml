@@ -19,6 +19,7 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 [opener]
 edit = [
 	{ exec = '$EDITOR "$@"', block = true,  for = "unix" },
+	{ exec = 'neovide "%*"',    orphan = true, for = "windows" },
 	{ exec = 'code "%*"',    orphan = true, for = "windows" },
 ]
 open = [
