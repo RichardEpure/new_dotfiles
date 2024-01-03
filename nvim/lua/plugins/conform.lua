@@ -16,7 +16,8 @@ return {
                 -- Use a sub-list to run only the first available formatter
                 -- javascript = { { "prettierd", "prettier" } },
 
-                gdscript = { 'gdformat' }
+                gdscript = { 'gdformat' },
+                sh = { 'shfmt' },
             },
             format_on_save = function(bufnr)
                 -- Disable with a global or buffer-local variable
@@ -61,4 +62,3 @@ return {
         vim.keymap.set({ 'n', 'x' }, '<C-f>', [[:Format<CR>]], { silent = true })
     end
 }
-
