@@ -49,14 +49,15 @@ $chocoDependencies = @(
     "ripgrep"
     "fd"
     "neovim"
+    "neovide"
     "fzf"
     "nmap"
+    "nvm"
 )
 
 # Scoop dependencies
 $scoopDependencies = @(
     "yazi"
-    "neovide"
     "ninja"
     "7zip"
 )
