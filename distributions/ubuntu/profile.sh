@@ -8,7 +8,11 @@ alias fd="fdfind"
 
 # Navigates to a file in the current directory and all subdirectories.
 function cdf {
-	cd $(find . -type d -print | fzf)
+	# define variable dir to store the directory
+	dir=$(fd -td -tl -u | fzf)
+	if [ -n "$dir" ]; then
+		cd "$dir"
+	fi
 }
 
 # Opens yazi at your current directory. cd into the last directory in yazi when you exit.
