@@ -10,7 +10,7 @@ if vim.g.vscode == nil then
     vim.o.foldcolumn = "1"
     vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
-    vim.o.foldenable = false
+    vim.o.foldenable = true
 
     vim.opt.termguicolors = true
     vim.opt.nu = true
