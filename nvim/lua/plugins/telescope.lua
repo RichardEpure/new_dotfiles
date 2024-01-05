@@ -4,7 +4,6 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope-frecency.nvim',
         'nvim-telescope/telescope-ui-select.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
         'piersolenski/telescope-import.nvim',
@@ -37,9 +36,6 @@ return {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown {}
                 },
-                frecency = {
-                    show_unindexed = false
-                },
                 live_grep_args = {
                     auto_quoting = true,
                     mappings = {
@@ -52,7 +48,6 @@ return {
             }
         })
 
-        require('telescope').load_extension('frecency')
         require('telescope').load_extension('ui-select')
         require("telescope").load_extension("live_grep_args")
         require("telescope").load_extension("import")
@@ -83,12 +78,6 @@ return {
         vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = "Find all files" })
         vim.keymap.set('n', '<leader>ff', project_files, { desc = "Find files" })
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Find old files" })
-        vim.keymap.set(
-            'n',
-            '<leader>fj',
-            [[:Telescope frecency workspace=CWD<CR>]],
-            { desc = "Find files based on frecency" }
-        )
         vim.keymap.set('n', '<leader>fw', [[:Telescope live_grep_args<CR>]], { desc = "Find word via grep" })
         vim.keymap.set(
             'n',
