@@ -7,9 +7,11 @@ local setColour = function(color)
     vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#585858' })
 
     if vim.g.colors_name == "gruvbox-material" then
-        vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
-        vim.api.nvim_set_hl(0, 'FloatTitle', { link = 'Orange' })
-        vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'TelescopeBorder' })
+        local lualine_c_normal = vim.api.nvim_get_hl(0, { name = 'lualine_c_normal' })
+        local orange = vim.api.nvim_get_hl(0, { name = 'Orange' })
+        vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'lualine_c_normal' })
+        vim.api.nvim_set_hl(0, 'FloatTitle', { fg = orange.fg, bg = lualine_c_normal.bg })
+        vim.api.nvim_set_hl(0, 'FloatBorder', { fg = lualine_c_normal.bg, bg = lualine_c_normal.bg })
     end
 
     if (vim.g.colors_name == "gruvbox-material" and vim.g.gruvbox_material_background == "hard") or
