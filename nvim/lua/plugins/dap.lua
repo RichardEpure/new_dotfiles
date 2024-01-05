@@ -3,6 +3,7 @@ local home = require('config.utils').home
 
 return {
     'mfussenegger/nvim-dap',
+    enabled = is_neovim,
     dependencies = {
         'rcarriga/nvim-dap-ui',
         'nvim-telescope/telescope-dap.nvim',
@@ -14,6 +15,70 @@ return {
             version = '1.x',
             build = 'npm i && npm run compile vsDebugServerBundle && mv dist out',
         },
+    },
+    keys = {
+        { "<F5>",  function() require("dap").continue() end },
+        { "<F10>", function() require("dap").step_over() end },
+        { "<F11>", function() require("dap").step_into() end },
+        { "<F12>", function() require("dap").step_out() end },
+        {
+            "<leader>lb",
+            function() require("dap").toggle_breakpoint() end,
+            desc = "Toggle breakpoint"
+        },
+        {
+            "<leader>lB",
+            function() require("dap").set_breakpoint() end,
+            desc = "Set breakpoint"
+        },
+        {
+            "<leader>lg",
+            function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+            desc = "Set breakpoint with log"
+        },
+        {
+            "<leader>lr",
+            function() require("dap").repl.open() end,
+            desc = "Repl open"
+        },
+        {
+            "<leader>ll",
+            function() require("dap").run_last() end,
+            desc = "Run last"
+        },
+        {
+            '<Leader>lh',
+            function() require('dap.ui.widgets').hover() end,
+            mode = { 'n', 'v' },
+            desc = "Dap ui hover"
+        },
+        {
+            '<Leader>lp',
+            function() require('dap.ui.widgets').preview() end,
+            mode = { 'n', 'v' },
+            desc = "Dap ui preview"
+        },
+        {
+            '<Leader>lf',
+            function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.frames)
+            end,
+            desc = "Dap ui float"
+        },
+        {
+            '<Leader>ls',
+            function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.scopes)
+            end,
+            desc = "Dap ui scopes"
+        },
+        {
+            '<Leader>lu',
+            function() require('dapui').toggle() end,
+            desc = "Dap ui toggle"
+        }
     },
     config = function()
         require('telescope').load_extension('dap')
@@ -176,79 +241,5 @@ return {
             dapui.close()
         end
         dapui.setup()
-
-        -- mappings
-        vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-        vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-        vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-        vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
-        vim.keymap.set(
-            'n',
-            '<Leader>lb',
-            function() require('dap').toggle_breakpoint() end,
-            { desc = 'Toggle breakpoint' }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>lB',
-            function() require('dap').set_breakpoint() end,
-            { desc = "Set breakpoint" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>lg',
-            function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
-            { desc = "Set breakpoint with log" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>lr',
-            function() require('dap').repl.open() end,
-            { desc = "Repl open" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>ll',
-            function() require('dap').run_last() end,
-            { desc = "Dap run last" }
-        )
-        vim.keymap.set(
-            { 'n', 'v' },
-            '<Leader>lh',
-            function() require('dap.ui.widgets').hover() end,
-            { desc = "Dap ui hover" }
-        )
-        vim.keymap.set(
-            { 'n', 'v' },
-            '<Leader>lp',
-            function() require('dap.ui.widgets').preview() end,
-            { desc = "Dap ui preview" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>lf',
-            function()
-                local widgets = require('dap.ui.widgets')
-                widgets.centered_float(widgets.frames)
-            end,
-            { desc = "Dap ui float" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>ls',
-            function()
-                local widgets = require('dap.ui.widgets')
-                widgets.centered_float(widgets.scopes)
-            end,
-            { desc = "Dap ui scopes" }
-        )
-        vim.keymap.set(
-            'n',
-            '<Leader>lu',
-            function() dapui.toggle() end,
-            { desc = "Dap ui toggle" }
-        )
     end,
-    enabled = is_neovim,
 }
-
