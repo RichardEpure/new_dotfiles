@@ -15,6 +15,9 @@ return {
         local lga_actions = require("telescope-live-grep-args.actions")
 
         require('telescope').setup({
+            defaults = {
+                timeout = 1000,
+            },
             pickers = {
                 find_files = {
                     mappings = {
@@ -141,4 +144,3 @@ return {
         )
     end
 }
-
