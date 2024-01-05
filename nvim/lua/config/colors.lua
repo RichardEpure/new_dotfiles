@@ -1,6 +1,4 @@
 local is_neovim = require("config.utils").is_neovim
-local actions = require("telescope.actions")
-local actions_state = require("telescope.actions.state")
 
 local setColour = function(color)
     vim.cmd.colorscheme(color)
@@ -21,6 +19,8 @@ local setColour = function(color)
 end
 
 local setColourTelescope = function(prompt_bufnr)
+    local actions = require("telescope.actions")
+    local actions_state = require("telescope.actions.state")
     local selected = actions_state.get_selected_entry()
     setColour(selected.value)
     actions.close(prompt_bufnr)
