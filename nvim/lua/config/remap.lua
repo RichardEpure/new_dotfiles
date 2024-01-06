@@ -195,6 +195,12 @@ else
     vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "Open explorer at cwd" })
     vim.keymap.set("n", "<C-w>t", [[:tabe %<CR>]], { silent = true, desc = "Open current buffer in a new tab" })
     vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
+    vim.keymap.set(
+        "n",
+        "<leader>af",
+        [[:let @" = expand("%")<CR>]],
+        { desc = "Copy current buffer path to anonymous register", silent = true }
+    )
 
     vim.api.nvim_create_user_command("Redir",
         [[:redir @" | silent <args> | redir END | enew | put"]],
@@ -208,4 +214,3 @@ else
         vim.keymap.set({ "i", 't' }, "<C-v>", '<esc>"+gp', { desc = "Paste from clipboard" })
     end
 end
-
