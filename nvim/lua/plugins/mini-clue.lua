@@ -76,13 +76,16 @@ return {
                 { mode = 'n', keys = '<Leader>g',  desc = '+Git' },
 
                 -- Neogen
-                { mode = 'n', keys = '<Leader>aa', desc = '+Annotate' },
+                { mode = 'n', keys = '<Leader>ja', desc = '+Annotate' },
 
                 -- Other
                 { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
                 { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
-                { mode = 'n', keys = '<Leader>a',  desc = '+Actions' },
-                { mode = 'n', keys = '<Leader>ac', desc = '+Copy stuff' },
+                { mode = 'n', keys = '<Leader>j',  desc = '+More Mappings' },
+                { mode = 'x', keys = '<Leader>j',  desc = '+More Mappings' },
+                { mode = 'n', keys = '<Leader>jc', desc = '+Copy stuff' },
+                { mode = 'n', keys = '<Leader>js', desc = '+String manipulation' },
+                { mode = 'x', keys = '<Leader>js', desc = '+String manipulation' },
             },
         })
     end

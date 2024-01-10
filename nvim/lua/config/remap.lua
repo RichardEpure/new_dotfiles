@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to clipboard" })
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("v", "<leader>h", [[:sort<CR>]], { desc = "Sort lines" })
+vim.keymap.set("x", "<leader>h", [[:sort<CR>]], { desc = "Sort lines" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without overwriting register" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole register" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
@@ -133,31 +133,31 @@ if vim.g.vscode then
     }
 
     vim.g.mapleader = " "
-    vim.keymap.set({ "n", "v" }, "<leader>/", comment.selected)
+    vim.keymap.set({ "n", "x" }, "<leader>/", comment.selected)
 
-    vim.keymap.set({ "n", "v" }, "<leader>w", file.save)
-    vim.keymap.set({ "n", "v" }, "<leader>q", file.close)
-    vim.keymap.set({ "n", "v" }, "<leader>ea", file.showInExplorer)
+    vim.keymap.set({ "n", "x" }, "<leader>w", file.save)
+    vim.keymap.set({ "n", "x" }, "<leader>q", file.close)
+    vim.keymap.set({ "n", "x" }, "<leader>ea", file.showInExplorer)
 
-    vim.keymap.set({ "n", "v" }, "<leader>ff", action.quickOpen)
-    vim.keymap.set({ "n", "v" }, "<leader>fc", action.showCommands)
-    vim.keymap.set({ "n", "v" }, "<leader>eq", action.toggleSidebarVisibility)
-    vim.keymap.set({ "n", "v" }, "<leader>nn", action.toggleCenteredLayout)
-    vim.keymap.set({ "n", "v" }, "<C-h>", action.navigateLeft)
-    vim.keymap.set({ "n", "v" }, "<C-j>", action.navigateBelow)
-    vim.keymap.set({ "n", "v" }, "<C-k>", action.navigateAbove)
-    vim.keymap.set({ "n", "v" }, "<C-l>", action.navigateRight)
+    vim.keymap.set({ "n", "x" }, "<leader>ff", action.quickOpen)
+    vim.keymap.set({ "n", "x" }, "<leader>fc", action.showCommands)
+    vim.keymap.set({ "n", "x" }, "<leader>eq", action.toggleSidebarVisibility)
+    vim.keymap.set({ "n", "x" }, "<leader>nn", action.toggleCenteredLayout)
+    vim.keymap.set({ "n", "x" }, "<C-h>", action.navigateLeft)
+    vim.keymap.set({ "n", "x" }, "<C-j>", action.navigateBelow)
+    vim.keymap.set({ "n", "x" }, "<C-k>", action.navigateAbove)
+    vim.keymap.set({ "n", "x" }, "<C-l>", action.navigateRight)
 
-    vim.keymap.set({ "n", "v" }, "<leader>ee", view.explorer)
+    vim.keymap.set({ "n", "x" }, "<leader>ee", view.explorer)
 
-    vim.keymap.set({ "n", "v" }, "<leader>t", action.moveEditorRightInGroup)
-    vim.keymap.set({ "n", "v" }, "<leader>T", action.moveEditorLeftInGroup)
+    vim.keymap.set({ "n", "x" }, "<leader>t", action.moveEditorRightInGroup)
+    vim.keymap.set({ "n", "x" }, "<leader>T", action.moveEditorLeftInGroup)
 
-    vim.keymap.set({ "n", "v" }, "<leader>mm", markdown.preview)
-    vim.keymap.set({ "n", "v" }, "<leader>mv", markdown.showPreviewToSide)
+    vim.keymap.set({ "n", "x" }, "<leader>mm", markdown.preview)
+    vim.keymap.set({ "n", "x" }, "<leader>mv", markdown.showPreviewToSide)
 
-    vim.keymap.set({ "n", "v" }, "<leader>o", action.navigatePreviousInEditLocations)
-    vim.keymap.set({ "n", "v" }, "<leader>i", action.navigateForwardInEditLocations)
+    vim.keymap.set({ "n", "x" }, "<leader>o", action.navigatePreviousInEditLocations)
+    vim.keymap.set({ "n", "x" }, "<leader>i", action.navigateForwardInEditLocations)
     vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<;-r><C-w>]])
 
     for i = 1, 9 do
@@ -183,9 +183,21 @@ else
     vim.keymap.set("n", "N", "Nzzzv")
     vim.keymap.set(
         "n",
-        "<leader>as",
+        "<leader>jss",
         [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
         { desc = "Replace word under cursor" }
+    )
+    vim.keymap.set(
+        "x",
+        "<leader>jsi",
+        [[:g/\S/norm I]],
+        { desc = "Prepend to lines" }
+    )
+    vim.keymap.set(
+        "x",
+        "<leader>jsa",
+        [[:g/\S/norm A]],
+        { desc = "Append to lines" }
     )
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -197,7 +209,7 @@ else
     vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
     vim.keymap.set(
         "n",
-        "<leader>acf",
+        "<leader>jcf",
         function()
             local path = vim.fn.expand("%")
             vim.fn.setreg('"', path)

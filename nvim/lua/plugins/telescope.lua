@@ -127,7 +127,7 @@ return {
                 end,
             })
         end
-        vim.keymap.set('n', '<leader>acr', copy_register_to_clipboard_telescope, { desc = "Copy register to clipboard" })
+        vim.keymap.set('n', '<leader>jcr', copy_register_to_clipboard_telescope, { desc = "Copy register to clipboard" })
     end
 }
 

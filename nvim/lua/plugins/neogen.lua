@@ -13,7 +13,7 @@ return {
 
         vim.keymap.set(
             "n",
-            "<Leader>aan",
+            "<Leader>jan",
             neogen.generate,
             {
                 noremap = true,
@@ -23,7 +23,7 @@ return {
         )
         vim.keymap.set(
             "n",
-            "<Leader>aaf",
+            "<Leader>jaf",
             neogen.generate,
             {
                 noremap = true,
@@ -33,7 +33,7 @@ return {
         )
         vim.keymap.set(
             "n",
-            "<Leader>aam",
+            "<Leader>jam",
             neogen.generate,
             {
                 noremap = true,
@@ -43,7 +43,7 @@ return {
         )
         vim.keymap.set(
             "n",
-            "<Leader>aac",
+            "<Leader>jac",
             neogen.generate,
             {
                 noremap = true,
@@ -53,7 +53,7 @@ return {
         )
         vim.keymap.set(
             "n",
-            "<Leader>aat",
+            "<Leader>jat",
             neogen.generate,
             {
                 noremap = true,
@@ -63,4 +63,3 @@ return {
         )
     end,
 }
-
