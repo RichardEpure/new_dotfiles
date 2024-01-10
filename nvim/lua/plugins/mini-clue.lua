@@ -82,6 +82,7 @@ return {
                 { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
                 { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
                 { mode = 'n', keys = '<Leader>a',  desc = '+Actions' },
+                { mode = 'n', keys = '<Leader>ac', desc = '+Copy stuff' },
             },
         })
     end

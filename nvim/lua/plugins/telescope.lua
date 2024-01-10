@@ -108,6 +108,26 @@ return {
         vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
         vim.keymap.set('n', '<leader>fg', builtin.git_status, { desc = "Find git status files" })
         vim.keymap.set('n', '<leader>fi', [[:Telescope import<CR>]], { desc = "Find & add import" })
+
+        -- Custom functions
+        local copy_register_to_clipboard_telescope = function()
+            local copy = function(promp_bufnr)
+                local actions = require("telescope.actions")
+                local actions_state = require("telescope.actions.state")
+                local selected = actions_state.get_selected_entry()
+                vim.fn.setreg("+", vim.fn.getreg(selected.value))
+                actions.close(promp_bufnr)
+            end
+
+            require("telescope.builtin").registers({
+                attach_mappings = function(_, map)
+                    map("i", "<CR>", copy)
+                    map("n", "<CR>", copy)
+                    return true
+                end,
+            })
+        end
+        vim.keymap.set('n', '<leader>acr', copy_register_to_clipboard_telescope, { desc = "Copy register to clipboard" })
     end
 }
 
