@@ -1,6 +1,6 @@
 local is_neovim = require("config.utils").is_neovim
 
-local setColour = function(color)
+local set_colour = function(color)
     vim.cmd.colorscheme(color)
     vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#585858' })
 
@@ -18,11 +18,11 @@ local setColour = function(color)
     end
 end
 
-local setColourTelescope = function(prompt_bufnr)
+local set_colour_telescope = function(prompt_bufnr)
     local actions = require("telescope.actions")
     local actions_state = require("telescope.actions.state")
     local selected = actions_state.get_selected_entry()
-    setColour(selected.value)
+    set_colour(selected.value)
     actions.close(prompt_bufnr)
 end
 
@@ -31,8 +31,8 @@ if is_neovim() then
         function()
             require("telescope.builtin").colorscheme({
                 attach_mappings = function(_, map)
-                    map("i", "<CR>", setColourTelescope)
-                    map("n", "<CR>", setColourTelescope)
+                    map("i", "<CR>", set_colour_telescope)
+                    map("n", "<CR>", set_colour_telescope)
                     return true
                 end,
             })
@@ -44,5 +44,5 @@ if is_neovim() then
     vim.g.gruvbox_material_foreground = "material"
     vim.g.gruvbox_material_transparent_background = 0
 
-    setColour("gruvbox-material")
+    set_colour("gruvbox-material")
 end
