@@ -197,9 +197,13 @@ else
     vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
     vim.keymap.set(
         "n",
-        "<leader>af",
-        [[:let @" = expand("%")<CR>]],
-        { desc = "Copy current buffer path to anonymous register", silent = true }
+        "<leader>acf",
+        function()
+            local path = vim.fn.expand("%")
+            vim.fn.setreg('"', path)
+            print('Copied ' .. path .. ' to register "')
+        end,
+        { desc = "Copy current buffer path to anonymous register" }
     )
 
     vim.api.nvim_create_user_command("Redir",
