@@ -190,13 +190,13 @@ else
     vim.keymap.set(
         "x",
         "<leader>jsi",
-        [[:s/\(^\s*\)\(\S\)/\1\2<Left><Left>]],
+        [[:s/^\s*\zs\ze\S/]],
         { desc = "Prepend to lines" }
     )
     vim.keymap.set(
         "x",
         "<leader>jsa",
-        [[:s/\(\S$\)/\1]],
+        [[:s/\S\zs$/]],
         { desc = "Append to lines" }
     )
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
