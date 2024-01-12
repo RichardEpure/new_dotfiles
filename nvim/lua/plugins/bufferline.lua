@@ -105,6 +105,10 @@ return {
                         attribute = "fg",
                         highlight = "Normal"
                     },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
                 },
                 duplicate_visible = {
                     bg = {
@@ -123,6 +127,62 @@ return {
                         attribute = "bg",
                         highlight = "Normal"
                     },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                separator_visible = {
+                    fg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                separator_selected = {
+                    fg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    },
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                indicator_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                indicator_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                pick_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                pick_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                pick = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "Normal"
+                    }
+                },
+                offset_separator = {
                     bg = {
                         attribute = "bg",
                         highlight = "Normal"
