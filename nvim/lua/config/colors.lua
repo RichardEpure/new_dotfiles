@@ -2,14 +2,20 @@ local is_neovim = require("config.utils").is_neovim
 
 local set_colour = function(color)
     vim.cmd.colorscheme(color)
+
+    local lualine_c = vim.api.nvim_get_hl(0, { name = 'lualine_c_normal' })
+    local orange = vim.api.nvim_get_hl(0, { name = 'Orange' })
     vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#585858' })
+    vim.api.nvim_set_hl(0, 'lualine_c_normal', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'lualine_c_insert', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'lualine_c_visual', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'lualine_c_inactive', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'lualine_c_command', { link = 'Normal' })
 
     if vim.g.colors_name == "gruvbox-material" then
-        local lualine_c_normal = vim.api.nvim_get_hl(0, { name = 'lualine_c_normal' })
-        local orange = vim.api.nvim_get_hl(0, { name = 'Orange' })
-        vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'lualine_c_normal' })
-        vim.api.nvim_set_hl(0, 'FloatTitle', { fg = orange.fg, bg = lualine_c_normal.bg })
-        vim.api.nvim_set_hl(0, 'FloatBorder', { fg = lualine_c_normal.bg, bg = lualine_c_normal.bg })
+        vim.api.nvim_set_hl(0, 'NormalFloat', { fg = lualine_c.fg, bg = lualine_c.bg })
+        vim.api.nvim_set_hl(0, 'FloatTitle', { fg = orange.fg, bg = lualine_c.bg })
+        vim.api.nvim_set_hl(0, 'FloatBorder', { fg = lualine_c.bg, bg = lualine_c.bg })
     end
 
     if (vim.g.colors_name == "gruvbox-material" and vim.g.gruvbox_material_background == "hard") or

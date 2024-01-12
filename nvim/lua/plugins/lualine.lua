@@ -29,16 +29,31 @@ return {
             sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = { 'branch', 'diff', 'diagnostics', { 'filename', path = 1 } },
-                lualine_x = { 'encoding', 'fileformat', 'filetype', 'progress', 'location' },
+                lualine_c = {
+                    { 'branch',      color = "Normal" },
+                    { 'diff',        color = "Normal" },
+                    { 'diagnostics', color = "Normal" },
+                    { 'filename',    color = "Normal", path = 1 }
+                },
+                lualine_x = {
+                    { 'encoding',   color = "Normal" },
+                    { 'fileformat', color = "Normal" },
+                    { 'filetype',   color = "Normal" },
+                    { 'progress',   color = "Normal" },
+                    { 'location',   color = "Normal" }
+                },
                 lualine_y = {},
                 lualine_z = {}
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = { 'filename' },
-                lualine_x = { 'location' },
+                lualine_c = {
+                    { 'filename', color = "Normal" }
+                },
+                lualine_x = {
+                    { 'location', color = "Normal" }
+                },
                 lualine_y = {},
                 lualine_z = {}
             },
