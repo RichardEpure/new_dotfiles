@@ -11,6 +11,7 @@ local set_colour = function(color)
     vim.api.nvim_set_hl(0, 'lualine_c_visual', { link = 'Normal' })
     vim.api.nvim_set_hl(0, 'lualine_c_inactive', { link = 'Normal' })
     vim.api.nvim_set_hl(0, 'lualine_c_command', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'lualine_c_termial', { link = 'Normal' })
 
     if vim.g.colors_name == "gruvbox-material" then
         vim.api.nvim_set_hl(0, 'NormalFloat', { fg = lualine_c.fg, bg = lualine_c.bg })

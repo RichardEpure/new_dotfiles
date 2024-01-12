@@ -15,9 +15,7 @@ return {
     {
         'sainnhe/gruvbox-material',
         enabled = is_neovim,
-        config = function()
-            vim.g.gruvbox_material_enable_italic = 1
-        end
+        opts = true,
     },
     {
         'p00f/alabaster.nvim',
