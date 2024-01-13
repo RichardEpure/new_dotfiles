@@ -54,6 +54,7 @@ $chocoDependencies = @(
     "nmap"
     "nvm"
     "nerd-fonts-jetbrainsmono"
+    "lazygit"
 )
 
 # Scoop dependencies

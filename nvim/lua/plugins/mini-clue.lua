@@ -78,6 +78,9 @@ return {
                 -- Neogen
                 { mode = 'n', keys = '<Leader>ja', desc = '+Annotate' },
 
+                -- ToggleTerm
+                { mode = 'n', keys = '<Leader>t',  desc = '+Terminal' },
+
                 -- Other
                 { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
                 { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
