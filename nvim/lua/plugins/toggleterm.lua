@@ -41,6 +41,22 @@ return {
             lazygit:toggle()
         end
 
+        local lazydocker = Terminal:new({
+            cmd = "lazydocker",
+            direction = "float",
+            hidden = true,
+            on_open = function(term)
+                vim.cmd("startinsert!")
+                vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+            end,
+            on_close = function(term)
+                vim.cmd("startinsert!")
+            end,
+        })
+        function _lazydocker_toggle()
+            lazydocker:toggle()
+        end
+
         local yazi = Terminal:new({
             cmd = "yazi",
             direction = "float",
@@ -62,6 +78,12 @@ return {
             "<leader>tl",
             "<cmd>lua _lazygit_toggle()<CR>",
             { noremap = true, silent = true, desc = "Lazygit" }
+        )
+        vim.api.nvim_set_keymap(
+            "n",
+            "<leader>td",
+            "<cmd>lua _lazydocker_toggle()<CR>",
+            { noremap = true, silent = true, desc = "Lazydocker" }
         )
         vim.api.nvim_set_keymap(
             "n",
