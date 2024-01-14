@@ -73,15 +73,6 @@ return {
             },
 
             textobjects = {
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["<BS>a"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["<BS>A"] = "@parameter.inner",
-                    },
-                },
                 select = {
                     enable = true,
 
@@ -184,3 +175,4 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
     end
 }
+

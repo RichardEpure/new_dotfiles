@@ -81,6 +81,10 @@ return {
                 -- ToggleTerm
                 { mode = 'n', keys = '<Leader>t',  desc = '+Terminal' },
 
+                -- ISwap
+                { mode = 'n', keys = '<Leader>i',  desc = '+ISwap' },
+                { mode = 'n', keys = '<Leader>in', desc = '+Swap node' },
+
                 -- Other
                 { mode = 'n', keys = '<Leader>o',  desc = '+Open' },
                 { mode = 'n', keys = '<Leader>op', desc = '+Open at cwd' },
@@ -93,3 +97,4 @@ return {
         })
     end
 }
+
