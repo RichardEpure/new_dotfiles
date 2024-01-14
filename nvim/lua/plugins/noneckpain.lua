@@ -70,7 +70,7 @@ return {
             buffers = {
                 -- When `true`, the side buffers will be named `no-neck-pain-left` and `no-neck-pain-right` respectively.
                 --- @type boolean
-                setNames = false,
+                setNames = true,
                 -- Leverages the side buffers as notepads, which work like any Neovim buffer and automatically saves its content at the given `location`.
                 -- note: quitting an unsaved scratchpad buffer is non-blocking, and the content is still saved.
                 --- see |NoNeckPain.bufferOptionsScratchpad|

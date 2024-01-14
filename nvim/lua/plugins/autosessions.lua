@@ -18,7 +18,15 @@ return {
                 previewer = false,
             },
 
-            post_restore_cmds = { read_exrc_file },
+            post_restore_cmds = {
+                read_exrc_file,
+                function()
+                    local nnp_enabled = vim.fn.bufname("no-neck-pain-left") ~= ""
+                    if nnp_enabled then
+                        vim.api.nvim_exec2("NoNeckPain", {})
+                    end
+                end,
+            },
         }
 
         -- Set mapping for searching a session.
