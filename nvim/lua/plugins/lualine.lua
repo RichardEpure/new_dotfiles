@@ -60,7 +60,7 @@ return {
             tabline = {},
             winbar = {},
             inactive_winbar = {},
-            extensions = { 'ToggleTerm' }
+            extensions = { 'toggleterm' }
         }
     end
 }
