@@ -5,6 +5,11 @@ return {
         highlight = {
             backdrop = false,
         },
+        modes = {
+            char = {
+                jump_labels = true,
+            }
+        }
     },
     keys = {
         {
