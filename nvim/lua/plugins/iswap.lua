@@ -14,7 +14,7 @@ return {
         { "<leader>inw", [[:ISwapNodeWith<CR>]],      desc = "Swap node with" },
     },
     opts = {
-        flash_style = true,
+        flash_style = false,
     }
 }
 
