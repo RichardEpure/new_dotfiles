@@ -150,7 +150,14 @@ return {
         }
 
         lsp_config.rust_analyzer.setup {
-            root_dir = require('lspconfig/util').root_pattern('cargo.toml', '.git')
+            root_dir = require('lspconfig/util').root_pattern('cargo.toml', '.git'),
+            settings = {
+                ['rust-analyzer'] = {
+                    diagnostics = {
+                        disabled = { "inactive-code" },
+                    }
+                }
+            },
         }
 
         lsp_config.clangd.setup {
@@ -214,3 +221,4 @@ return {
         }
     end
 }
+
