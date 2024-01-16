@@ -6,8 +6,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hol
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
 vim.keymap.set({ "n", "v" }, "&", "g_")
 vim.keymap.set({ "n", "v" }, "£", "0")
-vim.keymap.set({ "n", "v" }, "<leader>/", "/\\c")
-vim.keymap.set({ "n", "v" }, "<leader>?", "?\\c")
+vim.keymap.set({ "n", "v" }, "<leader>/", "/\\c", { desc = "Forwards search case insensitive" })
+vim.keymap.set({ "n", "v" }, "<leader>?", "?\\c", { desc = "Backwards search case insensitive" })
 
 if vim.g.vscode then
     local comment = {
