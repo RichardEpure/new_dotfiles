@@ -18,6 +18,7 @@ return {
 
                 gdscript = { 'gdformat' },
                 sh = { 'shfmt' },
+                lua = { 'stylua' },
             },
             format_on_save = function(bufnr)
                 -- Disable with a global or buffer-local variable
@@ -65,4 +66,3 @@ return {
         vim.keymap.set({ 'n', 'x' }, '<C-f>', [[:Format<CR>]], { silent = true })
     end
 }
-
