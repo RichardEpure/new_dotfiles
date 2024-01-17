@@ -24,12 +24,6 @@ return {
 						highlight = "Normal",
 					},
 				},
-				buffer_visible = {
-					bg = {
-						attribute = "bg",
-						highlight = "Normal",
-					},
-				},
 				background = {
 					bg = {
 						attribute = "bg",
@@ -47,6 +41,10 @@ return {
 						attribute = "fg",
 						highlight = "Yellow",
 					},
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
 				},
 				tab_separator = {
 					fg = {
@@ -60,6 +58,10 @@ return {
 				},
 				tab_separator_selected = {
 					fg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+					bg = {
 						attribute = "bg",
 						highlight = "Normal",
 					},
@@ -82,6 +84,24 @@ return {
 						highlight = "Normal",
 					},
 				},
+				close_button_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				buffer_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				buffer_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
 				numbers = {
 					bg = {
 						attribute = "bg",
@@ -94,7 +114,187 @@ return {
 						highlight = "Normal",
 					},
 				},
+				numbers_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				diagnostic = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				diagnostic_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				diagnostic_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint_diagnostic = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint_diagnostic_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				hint_diagnostic_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info_diagnostic = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info_diagnostic_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				info_diagnostic_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning_diagnostic = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning_diagnostic_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				warning_diagnostic_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error_diagnostic = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error_diagnostic_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				error_diagnostic_selected = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
 				modified = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				modified_visible = {
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				modified_selected = {
 					bg = {
 						attribute = "bg",
 						highlight = "Normal",
@@ -122,7 +322,7 @@ return {
 						highlight = "Normal",
 					},
 				},
-				separator = {
+				separator_selected = {
 					fg = {
 						attribute = "bg",
 						highlight = "Normal",
@@ -142,7 +342,7 @@ return {
 						highlight = "Normal",
 					},
 				},
-				separator_selected = {
+				separator = {
 					fg = {
 						attribute = "bg",
 						highlight = "Normal",
@@ -183,6 +383,20 @@ return {
 					},
 				},
 				offset_separator = {
+					fg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+					bg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
+				},
+				trunc_marker = {
+					fg = {
+						attribute = "bg",
+						highlight = "Normal",
+					},
 					bg = {
 						attribute = "bg",
 						highlight = "Normal",
