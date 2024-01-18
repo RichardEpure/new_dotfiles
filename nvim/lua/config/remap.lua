@@ -8,6 +8,7 @@ vim.keymap.set({ "n", "v" }, "&", "g_")
 vim.keymap.set({ "n", "v" }, "£", "0")
 vim.keymap.set({ "n", "v" }, "<leader>/", "/\\c", { desc = "Forwards search case insensitive" })
 vim.keymap.set({ "n", "v" }, "<leader>?", "?\\c", { desc = "Backwards search case insensitive" })
+vim.keymap.set({ "n", "v" }, "<leader>#", [[:b#<CR>]], { silent = true, desc = "Switch to alternate buffer" })
 
 if vim.g.vscode then
 	local comment = {
