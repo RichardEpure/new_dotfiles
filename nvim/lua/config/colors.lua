@@ -26,6 +26,10 @@ local set_colour = function(color)
 	then
 		vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#444444" })
 	end
+
+	if vim.g.colors_name == "rose-pine" then
+		vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#3c3757" })
+	end
 end
 
 local set_colour_telescope = function(prompt_bufnr)

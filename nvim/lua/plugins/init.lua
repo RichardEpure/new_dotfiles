@@ -23,6 +23,12 @@ return {
 		opts = true,
 	},
 	{
+		"rose-pine/neovim",
+		enabled = is_neovim,
+		name = "rose-pine",
+		opts = true,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		enabled = is_neovim,
 		config = function()
