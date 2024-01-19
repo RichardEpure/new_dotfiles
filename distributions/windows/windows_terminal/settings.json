@@ -1,11 +1,9 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [
         {
-            "command": 
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             },
@@ -36,8 +34,7 @@
             "keys": "ctrl+plus"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -53,30 +50,26 @@
             "keys": "ctrl+v"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "nextTab"
             },
             "keys": "ctrl+up"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "adjustFontSize",
                 "delta": 1.0
             },
             "keys": "ctrl+alt+shift+numpad_plus"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "prevTab"
             },
             "keys": "ctrl+down"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "adjustFontSize",
                 "delta": -1.0
             },
@@ -86,28 +79,23 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "newTabMenu": 
-    [
+    "newTabMenu": [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "profiles": {
+        "defaults": {
             "colorScheme": "rose-pine",
             "cursorShape": "filledBox",
-            "font": 
-            {
+            "font": {
                 "cellHeight": "1.6",
                 "face": "JetBrainsMono Nerd Font",
                 "size": 11.0
             },
             "padding": "8, 4, 8, 4"
         },
-        "list": 
-        [
+        "list": [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -165,8 +153,7 @@
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0E1415",
             "black": "#000000",
@@ -513,27 +500,23 @@
             "yellow": "#F6C177"
         }
     ],
-    "themes": 
-    [
+    "themes": [
         {
             "name": "rose-pine",
-            "tab": 
-            {
+            "tab": {
                 "background": "#191724FF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
-            {
+            "tabRow": {
                 "background": "#26233AFF",
-                "unfocusedBackground": "#908CAAFF"
+                "unfocusedBackground": "#2C2943"
             },
-            "window": 
-            {
+            "window": {
                 "applicationTheme": "dark",
                 "useMica": false
             }
         }
     ],
-	"theme": "rose-pine"
+    "theme": "rose-pine"
 }
