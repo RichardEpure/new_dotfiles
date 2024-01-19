@@ -55,5 +55,5 @@ if is_neovim() then
 	vim.g.gruvbox_material_foreground = "material"
 	vim.g.gruvbox_material_transparent_background = 0
 
-	set_colour("gruvbox-material")
+	set_colour("rose-pine")
 end
