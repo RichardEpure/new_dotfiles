@@ -26,6 +26,7 @@ return {
 		},
 
 		-- Other
+		{ "folke/neodev.nvim" },
 		{ "abecodes/tabout.nvim" },
 	},
 	config = function()
@@ -44,6 +45,9 @@ return {
 		local luasnip = require("luasnip")
 		require("luasnip.loaders.from_vscode").lazy_load()
 		luasnip.config.setup()
+
+		-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+		require("neodev").setup()
 
 		-- cmp
 		local cmp = require("cmp")
@@ -139,7 +143,15 @@ return {
 
 		local lsp_config = require("lspconfig")
 
-		lsp_config.lua_ls.setup(lsp_zero.nvim_lua_ls())
+		lsp_config.lua_ls.setup({
+			settings = {
+				Lua = {
+					completion = {
+						callSnippet = "Replace",
+					},
+				},
+			},
+		})
 
 		lsp_config.volar.setup({
 			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
@@ -173,7 +185,7 @@ return {
 
 		-- For Windows: use Nmap
 		-- For WSL: doesn't work
-		local cmd = vim.fn.has("linux") == 1 and vim.lsp.rpc.connect(vim.fn.hostname() .. ".local")
+		local cmd = vim.fn.has("linux") == 1 and vim.lsp.rpc.connect(vim.fn.hostname() .. ".local", 6005)
 			or { "ncat", "localhost", "6005" }
 
 		local pipe = vim.fn.has("linux") == 1 and "/tmp/godot.pipe" or [[\\.\pipe\godot.pipe]]
