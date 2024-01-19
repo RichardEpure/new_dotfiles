@@ -128,6 +128,7 @@ return {
 		vim.keymap.set("n", "<leader>fz", builtin.current_buffer_fuzzy_find, { desc = "Find fuzzy in current buffer" })
 		vim.keymap.set("n", "<leader>fg", builtin.git_status, { desc = "Find git status files" })
 		vim.keymap.set("n", "<leader>fi", [[:Telescope import<CR>]], { desc = "Find & add import" })
+		vim.keymap.set("n", "<leader>fx", builtin.command_history, { desc = "Find in command history" })
 
 		-- Custom functions
 		local copy_register_to_clipboard_telescope = function()
