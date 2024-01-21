@@ -2,9 +2,7 @@ local is_neovim = require("config.utils").is_neovim
 
 return {
 	"stevearc/conform.nvim",
-	enabled = function()
-		return is_neovim
-	end,
+    enabled = is_neovim,
 	config = function()
 		local conform = require("conform")
 

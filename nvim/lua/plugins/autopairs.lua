@@ -1,6 +1,9 @@
+local is_neovim = require("config.utils").is_neovim
+
 return {
 	"windwp/nvim-autopairs",
 	event = "InsertEnter",
+	enabled = is_neovim,
 	config = function()
 		local npairs = require("nvim-autopairs")
 		local Rule = require("nvim-autopairs.rule")
