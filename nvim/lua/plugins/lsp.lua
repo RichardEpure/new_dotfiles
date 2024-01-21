@@ -165,6 +165,9 @@ return {
 			root_dir = require("lspconfig/util").root_pattern("cargo.toml", ".git"),
 			settings = {
 				["rust-analyzer"] = {
+					checkOnSave = {
+						command = "clippy",
+					},
 					diagnostics = {
 						disabled = { "inactive-code" },
 					},
