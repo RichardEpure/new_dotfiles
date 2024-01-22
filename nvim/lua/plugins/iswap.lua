@@ -1,7 +1,5 @@
-local is_neovim = require("config.utils").is_neovim
 return {
 	"mizlan/iswap.nvim",
-	enabled = is_neovim,
 	event = "VeryLazy",
 	keys = {
 		{ "<leader>is", [[:ISwap<CR>]], desc = "Swap" },

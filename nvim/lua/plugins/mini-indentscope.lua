@@ -1,9 +1,6 @@
-local is_neovim = require("config.utils").is_neovim
-
 return {
 	"echasnovski/mini.indentscope",
 	version = false,
-	enabled = is_neovim,
 	config = function()
 		local indentscope = require("mini.indentscope")
 
@@ -15,7 +12,7 @@ return {
 			options = {
 				try_as_border = true,
 			},
-			symbol = "│",
+			symbol = vim.g.vscode == nil and "│" or "",
 		})
 
 		-- Disable for certain filetypes

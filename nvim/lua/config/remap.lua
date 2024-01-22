@@ -9,8 +9,21 @@ vim.keymap.set({ "n", "v" }, "£", "0")
 vim.keymap.set({ "n", "v" }, "<leader>/", "/\\c", { desc = "Forwards search case insensitive" })
 vim.keymap.set({ "n", "v" }, "<leader>?", "?\\c", { desc = "Backwards search case insensitive" })
 vim.keymap.set({ "n", "v" }, "<leader>#", [[:b#<CR>]], { silent = true, desc = "Switch to alternate buffer" })
+vim.keymap.set("n", "<leader>jcf", function()
+	local path = vim.fn.expand("%")
+	vim.fn.setreg('"', path)
+	print("Copied " .. path .. ' to register "')
+end, { desc = "Copy current buffer path to anonymous register" })
+vim.keymap.set("x", "<leader>jsi", [[:s/^\s*\zs\ze\S/]], { desc = "Prepend to lines" })
+vim.keymap.set("x", "<leader>jsa", [[:s/\S\zs$/]], { desc = "Append to lines" })
+vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "Open wt at this file's directory" })
+vim.keymap.set("n", "<leader>oe", [[:!explorer.exe "%:p:h"<CR>]], { desc = "Open explorer at this file's directory" })
+vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "Open wt at cwd" })
+vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "Open explorer at cwd" })
 
 if vim.g.vscode then
+	local vscode = require("vscode-neovim")
+
 	local comment = {
 		selected = function()
 			vim.fn.VSCodeNotify("editor.action.commentLine")
@@ -64,22 +77,6 @@ if vim.g.vscode then
 
 		toggleCenteredLayout = function()
 			vim.fn.VSCodeNotify("workbench.action.toggleCenteredLayout")
-		end,
-
-		focusLeftGroup = function()
-			vim.fn.VSCodeNotify("workbench.action.focusLeftGroup")
-		end,
-
-		focusRightGroup = function()
-			vim.fn.VSCodeNotify("workbench.action.focusRightGroup")
-		end,
-
-		focusAboveGoup = function()
-			vim.fn.VSCodeNotify("workbench.action.focusAboveGroup")
-		end,
-
-		focusBelowGroup = function()
-			vim.fn.VSCodeNotify("workbench.action.focusBelowGroup")
 		end,
 
 		navigateLeft = function()
@@ -136,7 +133,7 @@ if vim.g.vscode then
 	}
 
 	vim.g.mapleader = " "
-	vim.keymap.set({ "n", "x" }, "<leader>/", comment.selected)
+	vim.keymap.set({ "n", "x" }, "gc", comment.selected)
 
 	vim.keymap.set({ "n", "x" }, "<leader>w", file.save)
 	vim.keymap.set({ "n", "x" }, "<leader>q", file.close)
@@ -153,8 +150,8 @@ if vim.g.vscode then
 
 	vim.keymap.set({ "n", "x" }, "<leader>ee", view.explorer)
 
-	vim.keymap.set({ "n", "x" }, "<leader>t", action.moveEditorRightInGroup)
-	vim.keymap.set({ "n", "x" }, "<leader>T", action.moveEditorLeftInGroup)
+	vim.keymap.set({ "n", "x" }, "<right>", action.moveEditorRightInGroup)
+	vim.keymap.set({ "n", "x" }, "<left>", action.moveEditorLeftInGroup)
 
 	vim.keymap.set({ "n", "x" }, "<leader>mm", markdown.preview)
 	vim.keymap.set({ "n", "x" }, "<leader>mv", markdown.showPreviewToSide)
@@ -190,26 +187,10 @@ else
 		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 		{ desc = "Replace word under cursor" }
 	)
-	vim.keymap.set("x", "<leader>jsi", [[:s/^\s*\zs\ze\S/]], { desc = "Prepend to lines" })
-	vim.keymap.set("x", "<leader>jsa", [[:s/\S\zs$/]], { desc = "Append to lines" })
 	vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 	vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-	vim.keymap.set("n", "<leader>ot", [[:!wt.exe -d "%:p:h"<CR>]], { desc = "Open wt at this file's directory" })
-	vim.keymap.set(
-		"n",
-		"<leader>oe",
-		[[:!explorer.exe "%:p:h"<CR>]],
-		{ desc = "Open explorer at this file's directory" }
-	)
-	vim.keymap.set("n", "<leader>opt", [[:!wt.exe -d .<CR>]], { desc = "Open wt at cwd" })
-	vim.keymap.set("n", "<leader>ope", [[:!explorer.exe .<CR>]], { desc = "Open explorer at cwd" })
 	vim.keymap.set("n", "<C-w>t", [[:tabe %<CR>]], { silent = true, desc = "Open current buffer in a new tab" })
 	vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
-	vim.keymap.set("n", "<leader>jcf", function()
-		local path = vim.fn.expand("%")
-		vim.fn.setreg('"', path)
-		print("Copied " .. path .. ' to register "')
-	end, { desc = "Copy current buffer path to anonymous register" })
 
 	vim.api.nvim_create_user_command("Redir", [[:redir @" | silent <args> | redir END | enew | put"]], { nargs = 1 })
 

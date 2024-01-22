@@ -1,12 +1,9 @@
-local is_neovim = require("config.utils").is_neovim
-
 return {
 	"ThePrimeagen/refactoring.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
-	enabled = is_neovim,
 	config = function()
 		require("refactoring").setup()
 
@@ -38,10 +35,12 @@ return {
 		end, { desc = "Extract block to file" })
 		-- Extract block supports only normal mode
 
-		require("telescope").load_extension("refactoring")
-		vim.keymap.set({ "n", "x" }, "<leader>rr", function()
-			require("telescope").extensions.refactoring.refactors()
-		end, { desc = "Refactor" })
+		if vim.g.vscode == nil then
+			require("telescope").load_extension("refactoring")
+			vim.keymap.set({ "n", "x" }, "<leader>rr", function()
+				require("telescope").extensions.refactoring.refactors()
+			end, { desc = "Refactor" })
+		end
 
 		-- You can also use below = true here to to change the position of the printf
 		-- statement (or set two remaps for either one). This remap must be made in normal mode.

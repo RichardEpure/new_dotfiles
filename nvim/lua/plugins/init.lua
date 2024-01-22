@@ -76,7 +76,6 @@ return {
 		"echasnovski/mini.splitjoin",
 		version = "*",
 		opts = true,
-		enabled = is_neovim,
 	},
 	{
 		"echasnovski/mini.ai",
@@ -87,7 +86,6 @@ return {
 				goto_right = "gn",
 			},
 		},
-		enabled = is_neovim,
 	},
 	{ "folke/twilight.nvim", opts = true, enabled = is_neovim },
 	{
@@ -108,6 +106,7 @@ return {
 	},
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
+		enabled = is_neovim,
 		config = function()
 			require("ts_context_commentstring").setup({})
 			vim.g.skip_ts_context_commentstring_module = true
