@@ -152,6 +152,8 @@ if vim.g.vscode then
 
 	vim.keymap.set({ "n", "x" }, "<right>", action.moveEditorRightInGroup)
 	vim.keymap.set({ "n", "x" }, "<left>", action.moveEditorLeftInGroup)
+	vim.keymap.set({ "n", "x" }, "<up>", [[:norm gt<CR>]])
+	vim.keymap.set({ "n", "x" }, "<down>", [[:norm gT<CR>]])
 
 	vim.keymap.set({ "n", "x" }, "<leader>mm", markdown.preview)
 	vim.keymap.set({ "n", "x" }, "<leader>mv", markdown.showPreviewToSide)
