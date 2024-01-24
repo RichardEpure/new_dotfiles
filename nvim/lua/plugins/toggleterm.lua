@@ -83,6 +83,21 @@ return {
 			yazi:toggle()
 		end
 
+		local float_term = Terminal:new({
+			direction = "float",
+			hidden = true,
+			on_open = function(term)
+				vim.cmd("startinsert!")
+				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+			end,
+			on_close = function(term)
+				vim.cmd("startinsert!")
+			end,
+		})
+		function _float_term_toggle()
+			float_term:toggle()
+		end
+
 		vim.api.nvim_set_keymap(
 			"n",
 			"<leader>tl",
@@ -100,6 +115,12 @@ return {
 			"<leader>te",
 			"<cmd>lua _yazi_toggle()<CR>",
 			{ noremap = true, silent = true, desc = "Yazi" }
+		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>tt",
+			"<cmd>lua _float_term_toggle()<CR>",
+			{ noremap = true, silent = true, desc = "Floating terminal" }
 		)
 	end,
 }
