@@ -69,6 +69,13 @@ return {
 			require("close_buffers").setup()
 			vim.keymap.set("n", "<leader>q", [[:BDelete this<CR>]], { silent = true, desc = "Close buffer" })
 			vim.keymap.set("n", "<leader>Q", [[:BDelete! this<CR>]], { silent = true, desc = "Force close buffer" })
+			vim.keymap.set("n", "<leader>C", "<CMD>BDelete this<CR><C-w>c", { desc = "Close window & buffer" })
+			vim.keymap.set(
+				"n",
+				"<leader><C-c>",
+				"<CMD>BDelete! this<CR><C-w>c",
+				{ desc = "Force close window & buffer" }
+			)
 		end,
 		enabled = is_neovim,
 	},
