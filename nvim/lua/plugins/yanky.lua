@@ -13,5 +13,8 @@ return {
 			on_put = false,
 			on_yank = false,
 		},
+		system_clipboard = {
+			sync_with_ring = false,
+		},
 	},
 }
