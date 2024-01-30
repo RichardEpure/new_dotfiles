@@ -73,6 +73,47 @@ return {
 			silent = true,
 		})
 
+
+		local function get_path(obj, path)
+			local current = obj
+			for _, key in ipairs(path) do
+				if current[key] == nil then
+					return nil
+				end
+				current = current[key]
+			end
+			return current
+		end
+
+		local handle_lsp_rename = function(client, args)
+			if get_path(client, { "server_capabilities", "workspace", "fileOperations", "willRename" }) == nil then
+				return
+			end
+
+			local success, resp = pcall(client.request_sync, "workspace/willRenameFiles", {
+				files = {
+					{
+						oldUri = vim.uri_from_fname(args.data.from),
+						newUri = vim.uri_from_fname(args.data.to),
+					},
+				},
+			}, 10000)
+
+			if success and resp and resp.result ~= nil then
+				vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
+			end
+		end
+
+		-- Integrate with LSP
+		vim.api.nvim_create_autocmd("User", {
+			pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
+			callback = function(args)
+				for _, client in ipairs(vim.lsp.get_active_clients()) do
+					handle_lsp_rename(client, args)
+				end
+			end,
+		})
+
 		vim.g.loaded_netrwPlugin = 1
 	end,
 	enabled = is_neovim,
