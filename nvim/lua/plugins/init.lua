@@ -16,6 +16,11 @@ return {
 		"sainnhe/gruvbox-material",
 		enabled = is_neovim,
 		opts = true,
+		config = function()
+			vim.g.gruvbox_material_background = "hard"
+			vim.g.gruvbox_material_foreground = "material"
+			vim.g.gruvbox_material_transparent_background = 0
+		end,
 	},
 	{
 		"p00f/alabaster.nvim",
@@ -26,7 +31,12 @@ return {
 		"rose-pine/neovim",
 		enabled = is_neovim,
 		name = "rose-pine",
-		opts = true,
+		opts = {
+			styles = {
+				italic = false,
+				transparency = false,
+			},
+		},
 	},
 	{
 		"lewis6991/gitsigns.nvim",
