@@ -73,6 +73,9 @@ return {
 			silent = true,
 		})
 
+		vim.keymap.set("n", "<leader><C-e>", function()
+			MiniFiles.open(MiniFiles.get_latest_path())
+		end, { desc = "Open file explorer at the last path" })
 
 		local function get_path(obj, path)
 			local current = obj
