@@ -55,17 +55,17 @@
         {
             "command": 
             {
-                "action": "adjustFontSize",
-                "delta": 1.0
+                "action": "nextTab"
             },
-            "keys": "ctrl+alt+shift+numpad_plus"
+            "keys": "ctrl+up"
         },
         {
             "command": 
             {
-                "action": "nextTab"
+                "action": "adjustFontSize",
+                "delta": 1.0
             },
-            "keys": "ctrl+up"
+            "keys": "ctrl+alt+shift+numpad_plus"
         },
         {
             "command": 
@@ -96,6 +96,7 @@
     {
         "defaults": 
         {
+            "bellStyle": "none",
             "colorScheme": "rose-pine",
             "cursorShape": "filledBox",
             "font": 
