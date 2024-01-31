@@ -26,6 +26,7 @@ $symlinks = @{
     "$PROFILE" = ".\distributions\windows\Profile.ps1"
     "$HOME\.gitignore" = ".\.globalignore"
     "$HOME\AppData\Local\nvim" = ".\nvim"
+    "$HOME\AppData\Local\nvim_minimal" = ".\nvim_minimal"
     "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
     "$HOME\AppData\Local\Microsoft\Windows Terminal\settings.json" = ".\distributions\windows\windows_terminal\settings.json"
     "$HOME\.gitconfig" = ".\distributions\windows\.gitconfig"

@@ -6,10 +6,21 @@ $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 Set-Alias -Name sa -Value Start-AdminSession
 Set-Alias -Name cdf -Value Set-DirectoryFuzzy
 Set-Alias -Name ya -Value Open-Yazi
+Set-Alias -Name minvim -Value Open-NeovimMinimal
 
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
+function Open-NeovimMinimal {
+    <#
+    .SYNOPSIS
+        Opens neovim with a minimal configuration.
+    #>
+    $Env:NVIM_APPNAME = "nvim_minimal"
+    nvim
+    $Env:NVIM_APPNAME = "nvim"
+}
+
 function Set-DirectoryFuzzy {
     <#
     .SYNOPSIS

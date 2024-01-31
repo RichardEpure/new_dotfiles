@@ -1,9 +1,7 @@
 export EDITOR=nvim
 
 # Aliases
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-alias nvim-def="NVIM_APPNAME=NvimDefault nvim"
+alias minvim="NVIM_APPNAME=nvim_minimal nvim"
 alias fd="fdfind"
 
 # Navigates to a file in the current directory and all subdirectories.
