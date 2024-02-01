@@ -85,6 +85,9 @@ return {
 				{ mode = "n", keys = "<Leader>i", desc = "+ISwap" },
 				{ mode = "n", keys = "<Leader>in", desc = "+Swap node" },
 
+				-- Harpoon
+				{ mode = "n", keys = "<Leader>s", desc = "+Harpoon" },
+
 				-- Other
 				{ mode = "n", keys = "<Leader>o", desc = "+Open" },
 				{ mode = "n", keys = "<Leader>op", desc = "+Open at cwd" },
