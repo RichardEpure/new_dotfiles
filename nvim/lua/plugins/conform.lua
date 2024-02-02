@@ -2,7 +2,7 @@ local is_neovim = require("config.utils").is_neovim
 
 return {
 	"stevearc/conform.nvim",
-    enabled = is_neovim,
+	enabled = is_neovim,
 	config = function()
 		local conform = require("conform")
 
@@ -17,6 +17,12 @@ return {
 				gdscript = { "gdformat" },
 				sh = { "shfmt" },
 				lua = { "stylua" },
+				vue = { "prettierd" },
+				ts = { "prettierd" },
+				js = { "prettierd" },
+				scss = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
 			},
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable
