@@ -55,7 +55,6 @@
   "refactoring.nvim": { "branch": "master", "commit": "aff2e21e2f1a19d302adceb4e7d0fafbb3ae59a9" },
   "rose-pine": { "branch": "main", "commit": "14b371fb783a8cfdade04544fb782f0bb6f7c904" },
   "statuscol.nvim": { "branch": "main", "commit": "3b629754420919575a9e5758027d6e1831dbf2aa" },
-  "tabout.nvim": { "branch": "master", "commit": "0d275c8d25f32457e67b5c66d6ae43f26a61bce5" },
   "telescope-dap.nvim": { "branch": "master", "commit": "8c88d9716c91eaef1cdea13cb9390d8ef447dbfe" },
   "telescope-import.nvim": { "branch": "main", "commit": "08e31708451b43d1ef766d370d5ef17e9f0c24ae" },
   "telescope-live-grep-args.nvim": { "branch": "master", "commit": "731a046da7dd3adff9de871a42f9b7fb85f60f47" },
