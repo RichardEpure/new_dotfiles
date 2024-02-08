@@ -57,6 +57,7 @@ $chocoDependencies = @(
     "nerd-fonts-jetbrainsmono"
     "lazygit"
     "lazydocker"
+    "jq"
 )
 
 # Scoop dependencies
@@ -80,6 +81,7 @@ Set-Location $Root
 Write-Host "Updating Path..."
 
 Add-Path "C:\Program Files (x86)\Nmap"
+Add-Path "C:\Program Files\Git\usr\bin" # So yazi has access to 'file'
 Sync-Path
 
 # Install dependencies
