@@ -3,6 +3,7 @@ local is_neovim = require("config.utils").is_neovim
 return {
 	"echasnovski/mini.files",
 	version = false,
+	keys = { "<leader>e", "<leader>E", "<leader><C-e>" },
 	config = function()
 		local MiniFiles = require("mini.files")
 

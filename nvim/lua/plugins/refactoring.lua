@@ -4,60 +4,112 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
+	keys = {
+		{
+			"<leader>re",
+			function()
+				require("refactoring").refactor("Extract Function")
+			end,
+			desc = "Extract Function",
+			mode = "x",
+		},
+		{
+			"<leader>rf",
+			function()
+				require("refactoring").refactor("Extract Function To File")
+			end,
+			desc = "Extract function to file",
+			mode = "x",
+		},
+		-- Extract function supports only visual mode
+		{
+			"<leader>rv",
+			function()
+				require("refactoring").refactor("Extract Variable")
+			end,
+			desc = "Extract variable",
+			mode = "x",
+		},
+		-- Extract variable supports only visual mode
+		{
+			"<leader>rI",
+			function()
+				require("refactoring").refactor("Inline Function")
+			end,
+			desc = "Inline function",
+		},
+		-- Inline func supports only normal
+		{
+			"<leader>ri",
+			function()
+				require("refactoring").refactor("Inline Variable")
+			end,
+			desc = "Inline variable",
+			mode = { "n", "x" },
+		},
+		-- Inline var supports both normal and visual mode
+
+		{
+			"<leader>rb",
+			function()
+				require("refactoring").refactor("Extract Block")
+			end,
+			desc = "Extract block",
+		},
+		{
+			"<leader>rbf",
+			function()
+				require("refactoring").refactor("Extract Block To File")
+			end,
+			desc = "Extract block to file",
+		},
+		{
+			"<leader>rp",
+			function()
+				-- You can also use below = true here to to change the position of the printf
+				-- statement (or set two remaps for either one). This remap must be made in normal mode.
+				require("refactoring").debug.printf({ below = true })
+			end,
+			desc = "Print variable (insert below)",
+		},
+		{
+			"<leader>rP",
+			function()
+				require("refactoring").debug.printf({ below = false })
+			end,
+			desc = "Print variable (insert above)",
+		},
+		{
+			"<leader>rv",
+			function()
+				require("refactoring").debug.print_var()
+			end,
+			desc = "Print variable",
+			mode = { "n", "x" },
+		},
+		{
+			"<leader>rc",
+			function()
+				require("refactoring").debug.cleanup({})
+			end,
+			desc = "Refactor cleanup",
+		},
+		{
+			"<leader>rr",
+			function()
+				if vim.g.vscode == nil then
+					require("telescope").extensions.refactoring.refactors()
+				end
+			end,
+			desc = "Refactor",
+			mode = { "n", "x" },
+		},
+	},
 	config = function()
 		require("refactoring").setup()
 
-		vim.keymap.set("x", "<leader>re", function()
-			require("refactoring").refactor("Extract Function")
-		end, { desc = "Extract Function" })
-		vim.keymap.set("x", "<leader>rf", function()
-			require("refactoring").refactor("Extract Function To File")
-		end, { desc = "Extract function to file" })
-		-- Extract function supports only visual mode
-		vim.keymap.set("x", "<leader>rv", function()
-			require("refactoring").refactor("Extract Variable")
-		end, { desc = "Extract variable" })
-		-- Extract variable supports only visual mode
-		vim.keymap.set("n", "<leader>rI", function()
-			require("refactoring").refactor("Inline Function")
-		end, { desc = "Inline function" })
-		-- Inline func supports only normal
-		vim.keymap.set({ "n", "x" }, "<leader>ri", function()
-			require("refactoring").refactor("Inline Variable")
-		end, { desc = "Inline variable" })
-		-- Inline var supports both normal and visual mode
-
-		vim.keymap.set("n", "<leader>rb", function()
-			require("refactoring").refactor("Extract Block")
-		end, { desc = "Extract block" })
-		vim.keymap.set("n", "<leader>rbf", function()
-			require("refactoring").refactor("Extract Block To File")
-		end, { desc = "Extract block to file" })
-		-- Extract block supports only normal mode
-
 		if vim.g.vscode == nil then
 			require("telescope").load_extension("refactoring")
-			vim.keymap.set({ "n", "x" }, "<leader>rr", function()
-				require("telescope").extensions.refactoring.refactors()
-			end, { desc = "Refactor" })
 		end
-
-		-- You can also use below = true here to to change the position of the printf
-		-- statement (or set two remaps for either one). This remap must be made in normal mode.
-		vim.keymap.set("n", "<leader>rp", function()
-			require("refactoring").debug.printf({ below = false })
-		end, { desc = "Print variable" })
-
-		-- Print var
-
-		vim.keymap.set({ "x", "n" }, "<leader>rv", function()
-			require("refactoring").debug.print_var()
-		end, { desc = "Print variable" })
-		-- Supports both visual and normal mode
-
-		vim.keymap.set("n", "<leader>rc", function()
-			require("refactoring").debug.cleanup({})
-		end, { desc = "Refactor cleanup" })
-		-- Supports only normal mode
 	end,
 }
