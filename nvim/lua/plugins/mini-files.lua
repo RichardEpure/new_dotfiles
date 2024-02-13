@@ -3,7 +3,20 @@ local is_neovim = require("config.utils").is_neovim
 return {
 	"echasnovski/mini.files",
 	version = false,
-	keys = { "<leader>e", "<leader>E", "<leader><C-e>" },
+	keys = {
+		{
+			"<leader>e",
+			desc = "Open file explorer at current buffer path",
+		},
+		{
+			"<leader>E",
+			desc = "Open file explorer at root of cwd",
+		},
+		{
+			"<leader><C-e>",
+			desc = "Open file explorer at the last path",
+		},
+	},
 	config = function()
 		local MiniFiles = require("mini.files")
 
@@ -63,20 +76,18 @@ return {
 		vim.keymap.set("n", "<leader>e", function()
 			minifiles_toggle(vim.fn.expand("%:."))
 		end, {
-			desc = "Open file explorer at current buffer path",
 			silent = true,
 		})
 
 		vim.keymap.set("n", "<leader>E", function()
 			minifiles_toggle()
 		end, {
-			desc = "Open file explorer at root of cwd",
 			silent = true,
 		})
 
 		vim.keymap.set("n", "<leader><C-e>", function()
 			MiniFiles.open(MiniFiles.get_latest_path())
-		end, { desc = "Open file explorer at the last path" })
+		end)
 
 		local function get_path(obj, path)
 			local current = obj
