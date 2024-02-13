@@ -4,6 +4,7 @@ vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
 	vim.o.exrc = true
+	vim.o.confirm = true
 
 	vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
