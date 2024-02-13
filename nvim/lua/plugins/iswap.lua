@@ -1,6 +1,5 @@
 return {
 	"mizlan/iswap.nvim",
-	event = "VeryLazy",
 	keys = {
 		{ "<leader>is", [[:ISwap<CR>]], desc = "Swap" },
 		{ "<leader>il", [[:ISwapWithRight<CR>]], desc = "Swap with right" },
