@@ -55,17 +55,17 @@
         {
             "command": 
             {
-                "action": "nextTab"
-            },
-            "keys": "ctrl+up"
-        },
-        {
-            "command": 
-            {
                 "action": "adjustFontSize",
                 "delta": 1.0
             },
             "keys": "ctrl+alt+shift+numpad_plus"
+        },
+        {
+            "command": 
+            {
+                "action": "nextTab"
+            },
+            "keys": "ctrl+up"
         },
         {
             "command": 
@@ -96,6 +96,7 @@
     {
         "defaults": 
         {
+            "adjustIndistinguishableColors": "never",
             "bellStyle": "none",
             "colorScheme": "rose-pine",
             "cursorShape": "filledBox",
@@ -106,7 +107,8 @@
                 "size": 11.0
             },
             "padding": "4, 4, 4, 4",
-            "scrollbarState": "hidden"
+            "scrollbarState": "hidden",
+            "useAtlasEngine": true
         },
         "list": 
         [
