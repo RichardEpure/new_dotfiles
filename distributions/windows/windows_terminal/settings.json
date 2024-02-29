@@ -55,17 +55,17 @@
         {
             "command": 
             {
-                "action": "adjustFontSize",
-                "delta": 1.0
+                "action": "nextTab"
             },
-            "keys": "ctrl+alt+shift+numpad_plus"
+            "keys": "ctrl+up"
         },
         {
             "command": 
             {
-                "action": "nextTab"
+                "action": "adjustFontSize",
+                "delta": 1.0
             },
-            "keys": "ctrl+up"
+            "keys": "ctrl+alt+shift+numpad_plus"
         },
         {
             "command": 
@@ -106,6 +106,7 @@
                 "face": "JetBrainsMono Nerd Font",
                 "size": 11.0
             },
+            "intenseTextStyle": "all",
             "padding": "4, 4, 4, 4",
             "scrollbarState": "hidden",
             "useAtlasEngine": true
