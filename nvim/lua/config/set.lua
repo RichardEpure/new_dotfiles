@@ -3,6 +3,7 @@ local home = require("config.utils").home
 vim.opt.hlsearch = false
 
 if vim.g.vscode == nil then
+	vim.o.mouse = "nvic"
 	vim.o.exrc = true
 	vim.o.confirm = true
 

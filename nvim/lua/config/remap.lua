@@ -169,6 +169,11 @@ if vim.g.vscode then
 	end
 else
 	-- ordinary Neovim
+	vim.keymap.set("n", "<LeftDrag>", "<Nop>")
+	vim.keymap.set("n", "<LeftRelease>", "<Nop>")
+	vim.keymap.set({ "n", "v", "i" }, "<RightMouse>", "<Nop>")
+	vim.keymap.set("n", "<MiddleMouse>", "<Nop>")
+
 	vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Save current buffer" })
 	vim.keymap.set("n", "<leader><C-q>", [[:tabclose<CR>]], { silent = true, desc = "Close current tab" })
 	vim.keymap.set("n", "<C-h>", "<C-w>h")
