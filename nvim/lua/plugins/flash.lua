@@ -11,6 +11,12 @@ return {
 			},
 			char = {
 				jump_labels = true,
+				label = {
+					exclude = "cdvx",
+				},
+				highlight = {
+					backdrop = false,
+				},
 			},
 		},
 	},
