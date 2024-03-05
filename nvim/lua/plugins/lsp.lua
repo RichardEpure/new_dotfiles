@@ -27,8 +27,12 @@ return {
 
 		-- Other
 		{ "folke/neodev.nvim" },
+		{ "folke/neoconf.nvim" },
 	},
 	config = function()
+		-- Neoconf
+		require("neoconf").setup({})
+
 		local lsp_zero = require("lsp-zero")
 		local mason_registry = require("mason-registry")
 

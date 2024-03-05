@@ -32,6 +32,7 @@
   "mini.files": { "branch": "main", "commit": "eab771c69b787a3f042dc6505d15613c282aa786" },
   "mini.indentscope": { "branch": "main", "commit": "cf07f19e718ebb0bcc5b00999083ce11c37b8d40" },
   "mini.splitjoin": { "branch": "main", "commit": "2b4ade24c1d46ce98801b74fc84241d7b676f9f4" },
+  "neoconf.nvim": { "branch": "main", "commit": "8d7150e9d6113f01421c34c5aeb0f586afa232e0" },
   "neodev.nvim": { "branch": "main", "commit": "3157f2e876fd6223d36cfa76bee4709247d62fa5" },
   "neogen": { "branch": "main", "commit": "70127baaff25611deaf1a29d801fc054ad9d2dc1" },
   "no-neck-pain.nvim": { "branch": "main", "commit": "7ab539aaa083e92ef438d4cdc0261d8661916f1d" },
