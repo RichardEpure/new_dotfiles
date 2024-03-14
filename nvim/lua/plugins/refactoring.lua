@@ -23,7 +23,7 @@ return {
 		},
 		-- Extract function supports only visual mode
 		{
-			"<leader>rv",
+			"<leader>re",
 			function()
 				require("refactoring").refactor("Extract Variable")
 			end,
@@ -82,9 +82,17 @@ return {
 		{
 			"<leader>rv",
 			function()
-				require("refactoring").debug.print_var()
+				require("refactoring").debug.print_var({ below = true })
 			end,
-			desc = "Print variable",
+			desc = "Print variable (insert below)",
+			mode = { "n", "x" },
+		},
+		{
+			"<leader>rV",
+			function()
+				require("refactoring").debug.print_var({ below = false })
+			end,
+			desc = "Print variable (insert above)",
 			mode = { "n", "x" },
 		},
 		{
