@@ -5,6 +5,7 @@ local set_colour = function(color)
 
 	local lualine_c = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" })
 	local orange = vim.api.nvim_get_hl(0, { name = "Orange" })
+	vim.api.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" })
 	vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#585858" })
 	vim.api.nvim_set_hl(0, "lualine_c_normal", { link = "Normal" })
 	vim.api.nvim_set_hl(0, "lualine_c_insert", { link = "Normal" })
@@ -30,6 +31,7 @@ local set_colour = function(color)
 
 	if vim.g.colors_name == "rose-pine" then
 		vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#3c3757" })
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#232037" })
 	end
 end
 
