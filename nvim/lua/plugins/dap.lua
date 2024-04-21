@@ -5,6 +5,7 @@ return {
 	"mfussenegger/nvim-dap",
 	enabled = is_neovim,
 	dependencies = {
+		"nvim-neotest/nvim-nio",
 		"rcarriga/nvim-dap-ui",
 		"nvim-telescope/telescope-dap.nvim",
 		"theHamsta/nvim-dap-virtual-text",
