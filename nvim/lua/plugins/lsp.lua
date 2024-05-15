@@ -152,7 +152,7 @@ return {
 
 			vim.keymap.set({ "n" }, "gW", function()
 				vim.lsp.buf.type_definition()
-			end, { buffer = bufnr, description = "Go to type definition" })
+			end, { buffer = bufnr, desc = "Go to type definition" })
 		end)
 
 		lsp_zero.setup()
