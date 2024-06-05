@@ -30,6 +30,8 @@ return {
 		{ "folke/neoconf.nvim" },
 	},
 	config = function()
+		vim.lsp.inlay_hint.enable(true, nil)
+
 		-- Neoconf
 		require("neoconf").setup({})
 
@@ -165,16 +167,81 @@ return {
 					completion = {
 						callSnippet = "Replace",
 					},
+					hint = {
+						enable = true,
+					},
 				},
 			},
 		})
 
-		lsp_config.volar.setup({
-			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
+		lsp_config.volar.setup({})
+
+		lsp_config.gopls.setup({
+			settings = {
+				gopls = {
+					hints = {
+						rangeVariableTypes = true,
+						parameterNames = true,
+						constantValues = true,
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						functionTypeParameters = true,
+					},
+				},
+			},
 		})
+
+		local vue_typescript_plugin = require("mason-registry").get_package("vue-language-server"):get_install_path()
+			.. "/node_modules/@vue/language-server"
+			.. "/node_modules/@vue/typescript-plugin"
 
 		lsp_config.tsserver.setup({
 			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
+			init_options = {
+				plugins = {
+					{
+						name = "@vue/typescript-plugin",
+						location = vue_typescript_plugin,
+						languages = { "javascript", "typescript", "vue" },
+					},
+				},
+			},
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"javascript.jsx",
+				"typescript",
+				"typescriptreact",
+				"typescript.tsx",
+				"vue",
+			},
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			},
 		})
 
 		lsp_config.rust_analyzer.setup({
@@ -187,6 +254,38 @@ return {
 					diagnostics = {
 						disabled = { "inactive-code" },
 					},
+					inlayHints = {
+						bindingModeHints = {
+							enable = false,
+						},
+						chainingHints = {
+							enable = true,
+						},
+						closingBraceHints = {
+							enable = true,
+							minLines = 25,
+						},
+						closureReturnTypeHints = {
+							enable = "never",
+						},
+						lifetimeElisionHints = {
+							enable = "never",
+							useParameterNames = false,
+						},
+						maxLength = 25,
+						parameterHints = {
+							enable = true,
+						},
+						reborrowHints = {
+							enable = "never",
+						},
+						renderColons = true,
+						typeHints = {
+							enable = true,
+							hideClosureInitialization = false,
+							hideNamedConstructor = false,
+						},
+					},
 				},
 			},
 		})
@@ -195,6 +294,17 @@ return {
 			cmd = {
 				"clangd",
 				"--offset-encoding=utf-16",
+			},
+			settings = {
+				clangd = {
+					InlayHints = {
+						Designators = true,
+						Enabled = true,
+						ParameterNames = true,
+						DeducedTypes = true,
+					},
+					fallbackFlags = { "-std=c++20" },
+				},
 			},
 		})
 
