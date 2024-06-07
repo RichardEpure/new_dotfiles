@@ -30,7 +30,19 @@ return {
 		{ "folke/neoconf.nvim" },
 	},
 	config = function()
-		vim.lsp.inlay_hint.enable(true, nil)
+		if vim.lsp.inlay_hint then
+			vim.lsp.inlay_hint.enable(true, { 0 })
+		end
+
+		if vim.lsp.inlay_hint then
+			vim.keymap.set("n", "<leader>jl", function()
+				if vim.lsp.inlay_hint.is_enabled() then
+					vim.lsp.inlay_hint.enable(false, { bufnr })
+				else
+					vim.lsp.inlay_hint.enable(true, { bufnr })
+				end
+			end, { desc = "Toggle inlay hints" })
+		end
 
 		-- Neoconf
 		require("neoconf").setup({})
