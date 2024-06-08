@@ -134,14 +134,14 @@ return {
 		cmp.setup.cmdline(":", {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
 				{
 					name = "cmdline",
 					option = {
 						ignore_cmds = { "Man", "!" },
 					},
 				},
+			}, {
+				{ name = "path" },
 			}),
 		})
 
@@ -159,6 +159,15 @@ return {
 		lsp_zero.on_attach(function(client, bufnr)
 			lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
 			local opts = { buffer = bufnr }
+
+			-- Lspsaga keymap overrides
+			vim.keymap.set({ "n" }, "<F2>", [[:Lspsaga rename<CR>]], { desc = "Rename", silent = true, buffer = bufnr })
+			vim.keymap.set(
+				{ "n" },
+				"<F4>",
+				[[:Lspsaga code_action<CR>]],
+				{ desc = "Code action", silent = true, buffer = bufnr }
+			)
 
 			-- vim.keymap.set({ 'n', 'x' }, '<leader>jl', function()
 			--     vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
