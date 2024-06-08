@@ -47,6 +47,12 @@ return {
 			desc = "Rename",
 			silent = true,
 		},
+		{
+			"<F4>",
+			[[:Lspsaga code_action<CR>]],
+			desc = "Code action",
+			silent = true,
+		},
 	},
 	opts = {
 		symbol_in_winbar = {
