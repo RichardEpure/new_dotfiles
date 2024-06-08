@@ -7,7 +7,7 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	keys = {
 		{
-			"<leader>a",
+			"<leader>sa",
 			function()
 				require("harpoon"):list():add()
 			end,
