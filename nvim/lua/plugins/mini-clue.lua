@@ -88,6 +88,9 @@ return {
 				-- Harpoon
 				{ mode = "n", keys = "<Leader>s", desc = "+Harpoon" },
 
+				-- Lspsaga
+				{ mode = "n", keys = "<Leader>a", desc = "+Lspsaga" },
+
 				-- Other
 				{ mode = "n", keys = "<Leader>o", desc = "+Open" },
 				{ mode = "n", keys = "<Leader>op", desc = "+Open at cwd" },
