@@ -117,7 +117,14 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = {
-				{ name = "nvim_lsp" },
+				{
+					name = "nvim_lsp",
+					option = {
+						markdown_oxide = {
+							keywords = [[\(\k\| \|\/\|#\)\+]],
+						},
+					},
+				},
 				{ name = "luasnip" },
 			},
 		})
@@ -327,6 +334,28 @@ return {
 
 		lsp_config.powershell_es.setup({
 			bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path(),
+		})
+
+		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+		-- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
+		-- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
+		capabilities.workspace = {
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+			},
+		}
+		lsp_config.markdown_oxide.setup({
+			capabilities = capabilities,
+			on_attach = function(client, buffer)
+				-- setup Markdown Oxide daily note commands
+				if client.name == "markdown_oxide" then
+					vim.api.nvim_create_user_command("Daily", function(args)
+						local input = args.args
+
+						vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
+					end, { desc = "Open daily note", nargs = "*" })
+				end
+			end,
 		})
 
 		-- For Windows: use Nmap
