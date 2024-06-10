@@ -27,7 +27,6 @@ return {
 				end
 			end,
 		},
-		"windwp/nvim-ts-autotag",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -87,10 +86,6 @@ return {
 					node_incremental = "<TAB>",
 					node_decremental = "<S-TAB>",
 				},
-			},
-
-			autotag = {
-				enable = true,
 			},
 
 			textobjects = {
