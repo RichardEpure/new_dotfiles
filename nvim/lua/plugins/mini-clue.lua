@@ -91,6 +91,9 @@ return {
 				-- Lspsaga
 				{ mode = "n", keys = "<Leader>a", desc = "+Lspsaga" },
 
+				-- Gitsigns
+				{ mode = "n", keys = "<Leader>h", desc = "+Gitsigns" },
+
 				-- Other
 				{ mode = "n", keys = "<Leader>o", desc = "+Open" },
 				{ mode = "n", keys = "<Leader>op", desc = "+Open at cwd" },
