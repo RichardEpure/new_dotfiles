@@ -23,11 +23,6 @@ return {
 		end,
 	},
 	{
-		"p00f/alabaster.nvim",
-		enabled = is_neovim,
-		opts = true,
-	},
-	{
 		"rose-pine/neovim",
 		enabled = is_neovim,
 		name = "rose-pine",
