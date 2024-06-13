@@ -74,6 +74,7 @@ return {
 
 				-- Git
 				{ mode = "n", keys = "<Leader>g", desc = "+Git" },
+				{ mode = "n", keys = "<Leader>gd", desc = "+Diff" },
 
 				-- Neogen
 				{ mode = "n", keys = "<Leader>ja", desc = "+Annotate" },
