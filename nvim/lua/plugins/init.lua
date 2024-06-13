@@ -39,13 +39,6 @@ return {
 		},
 	},
 	{
-		"lewis6991/gitsigns.nvim",
-		enabled = is_neovim,
-		config = function()
-			require("gitsigns").setup()
-		end,
-	},
-	{
 		"numToStr/Comment.nvim",
 		enabled = is_neovim,
 		config = function()

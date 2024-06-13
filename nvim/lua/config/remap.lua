@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to clipboard" })
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("x", "<leader>h", [[:sort<CR>]], { desc = "Sort lines" })
+vim.keymap.set("x", "<leader>jk", [[:sort<CR>]], { desc = "Sort lines" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without overwriting register" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole register" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
