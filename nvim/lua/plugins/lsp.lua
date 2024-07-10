@@ -336,6 +336,22 @@ return {
 			bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path(),
 		})
 
+		lsp_config.pylsp.setup({
+			settings = {
+				pylsp = {
+					plugins = {
+						pycodestyle = {
+							enabled = false,
+							ignore = {
+								"E203",
+							},
+						},
+						pylsp_mypy = { enabled = true },
+					},
+				},
+			},
+		})
+
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		-- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
 		-- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
