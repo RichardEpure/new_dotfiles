@@ -29,7 +29,7 @@ return {
 				yaml = { "prettierd" },
 				json = { "prettierd" },
 				markdown = { "prettierd" },
-				python = { "ruff" },
+				python = { "ruff_format" },
 			},
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable
