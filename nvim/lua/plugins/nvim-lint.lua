@@ -5,11 +5,12 @@ return {
 	event = "VeryLazy",
 	enabled = is_neovim,
 	config = function()
-		require("lint").linters_by_ft = {
+		local lint = require("lint")
+		lint.linters_by_ft = {
 			python = { "mypy" },
 		}
 
-		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextChanged", "TextChangedI" }, {
 			callback = function()
 				require("lint").try_lint(nil, { ignore_errors = true })
 			end,
