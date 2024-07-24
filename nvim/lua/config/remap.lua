@@ -212,4 +212,12 @@ else
 		vim.keymap.set({ "n", "v" }, "<C-v>", '"+gP', { desc = "Paste from clipboard" })
 		vim.keymap.set({ "i", "t" }, "<C-v>", '<esc>"+gp', { desc = "Paste from clipboard" })
 	end
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = { "markdown", "typst" },
+		callback = function(event)
+			vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = event.buf })
+			vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = event.buf })
+		end,
+	})
 end
