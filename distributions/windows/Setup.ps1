@@ -41,6 +41,7 @@ $wingetDependencies = @(
     "Git.Git"
     "Starship.Starship"
     "ajeetdsouza.zoxide"
+    "Typst.Typst"
 )
 
 # Choco dependencies
