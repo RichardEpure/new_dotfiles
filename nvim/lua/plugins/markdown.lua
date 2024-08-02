@@ -21,4 +21,9 @@ return {
 		end,
 		ft = { "markdown" },
 	},
+	{
+		"tadmccorkle/markdown.nvim",
+		ft = "markdown",
+		opts = {},
+	},
 }
