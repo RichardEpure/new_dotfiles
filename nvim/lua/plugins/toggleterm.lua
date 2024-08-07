@@ -18,6 +18,7 @@ return {
 		local tt = require("toggleterm")
 		tt.setup({
 			open_mapping = [[<C-\>]],
+			highlights = require("rose-pine.plugins.toggleterm"),
 		})
 
 		function _G.set_terminal_keymaps()
