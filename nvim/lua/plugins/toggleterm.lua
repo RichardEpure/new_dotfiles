@@ -3,7 +3,7 @@ local is_neovim = require("config.utils").is_neovim
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
-	enable = is_neovim,
+	enabled = is_neovim,
 	config = function()
 		if vim.fn.has("win32") == 1 then
 			vim.opt.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
