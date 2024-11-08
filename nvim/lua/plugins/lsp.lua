@@ -220,7 +220,7 @@ return {
 			.. "/node_modules/@vue/language-server"
 			.. "/node_modules/@vue/typescript-plugin"
 
-		lsp_config.tsserver.setup({
+		lsp_config.ts_ls.setup({
 			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
 			init_options = {
 				plugins = {

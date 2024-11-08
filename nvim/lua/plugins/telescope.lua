@@ -7,7 +7,6 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		"piersolenski/telescope-import.nvim",
-		"natecraddock/telescope-zf-native.nvim",
 	},
 	version = "*",
 	enabled = is_neovim,
@@ -72,7 +71,6 @@ return {
 			},
 		})
 
-		require("telescope").load_extension("zf-native")
 		require("telescope").load_extension("ui-select")
 		require("telescope").load_extension("live_grep_args")
 		require("telescope").load_extension("import")
