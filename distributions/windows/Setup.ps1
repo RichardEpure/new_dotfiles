@@ -51,7 +51,6 @@ $chocoDependencies = @(
     "ripgrep"
     "fd"
     "neovim"
-    "neovide"
     "fzf"
     "nmap"
     "nvm"
