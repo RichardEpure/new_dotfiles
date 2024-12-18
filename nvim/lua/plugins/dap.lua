@@ -223,6 +223,7 @@ return {
 			{
 				type = "php",
 				request = "launch",
+				hostname = "0.0.0.0",
 				name = "purplemashweb",
 				port = 9003,
 				pathMappings = {
