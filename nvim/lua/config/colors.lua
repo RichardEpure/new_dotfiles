@@ -14,6 +14,15 @@ local set_colour = function(color)
 	vim.api.nvim_set_hl(0, "lualine_c_command", { link = "Normal" })
 	vim.api.nvim_set_hl(0, "lualine_c_termial", { link = "Normal" })
 
+	vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#353535" })
+	if vim.g.colors_name == "alabaster" then
+		vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#1b2628" })
+	elseif vim.g.colors_name == "gruvbox-material" and vim.g.gruvbox_material_background == "hard" then
+		vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#2a2a2a" })
+	elseif vim.g.colors_name == "rose-pine" then
+		vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#242032" })
+	end
+
 	if vim.g.colors_name == "gruvbox-material" then
 		vim.api.nvim_set_hl(0, "FlashLabel", { link = "Substitute" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { fg = lualine_c.fg, bg = lualine_c.bg })
