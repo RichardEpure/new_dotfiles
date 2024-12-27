@@ -3,6 +3,7 @@ local is_neovim = require("config.utils").is_neovim
 return {
 	"saghen/blink.cmp",
 	enabled = is_neovim,
+	version = "*",
 	dependencies = "rafamadriz/friendly-snippets",
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
