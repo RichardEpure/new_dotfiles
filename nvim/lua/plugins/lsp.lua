@@ -1,31 +1,11 @@
 local is_neovim = require("config.utils").is_neovim
 
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v3.x",
+	"neovim/nvim-lspconfig",
 	enabled = is_neovim,
 	dependencies = {
-		-- LSP Support
-		{ "neovim/nvim-lspconfig" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
-
-		-- Autocompletion
-		{
-			"hrsh7th/nvim-cmp",
-			dependencies = {
-				"hrsh7th/cmp-cmdline",
-				"hrsh7th/cmp-buffer",
-				"saadparwaiz1/cmp_luasnip",
-			},
-		},
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{
-			"L3MON4D3/LuaSnip",
-			dependencies = { "rafamadriz/friendly-snippets" },
-		},
-
-		-- Other
 		{ "folke/neodev.nvim" },
 		{ "folke/neoconf.nvim" },
 	},
@@ -47,145 +27,43 @@ return {
 		-- Neoconf
 		require("neoconf").setup({})
 
-		local lsp_zero = require("lsp-zero")
 		local mason_registry = require("mason-registry")
 
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls" },
-			handlers = {
-				lsp_zero.default_setup,
-			},
 		})
-
-		-- LuaSnip
-		local luasnip = require("luasnip")
-		require("luasnip.loaders.from_vscode").lazy_load()
 
 		-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 		require("neodev").setup()
 
-		-- cmp
-		local cmp = require("cmp")
-		local cmp_format = require("lsp-zero").cmp_format()
-
-		cmp.setup({
-			enabled = function()
-				-- disable completion in comments
-				local context = require("cmp.config.context")
-				-- keep command mode completion enabled when cursor is in a comment
-				if vim.api.nvim_get_mode().mode == "c" then
-					return true
-				else
-					return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
-				end
-			end,
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
-			},
-			formatting = cmp_format,
-			mapping = cmp.mapping.preset.insert({
-				["<C-n>"] = cmp.mapping.select_next_item(),
-				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-u>"] = cmp.mapping.scroll_docs(-4),
-				["<C-d>"] = cmp.mapping.scroll_docs(4),
-				["<C-y>"] = cmp.mapping.confirm({
-					behaviour = cmp.ConfirmBehavior.Replace,
-					select = true,
-				}),
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					elseif require("copilot.suggestion").is_visible() then
-						require("copilot.suggestion").accept()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-			}),
-			sources = {
-				{
-					name = "nvim_lsp",
-					option = {
-						markdown_oxide = {
-							keywords = [[\(\k\| \|\/\|#\)\+]],
-						},
-					},
-				},
-				{ name = "luasnip" },
-			},
-		})
-
-		-- Auto completion for / search
-		cmp.setup.cmdline("/", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		})
-
-		-- Auto completion of ex-commands
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = cmp.config.sources({
-				{
-					name = "cmdline",
-					option = {
-						ignore_cmds = { "Man", "!" },
-					},
-				},
-			}, {
-				{ name = "path" },
-			}),
-		})
-
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-		-- Lsp Zero
-		lsp_zero.setup_servers({
-			"cssls",
-			"lua_ls",
-			"html",
-			"jsonls",
-		})
-
-		lsp_zero.on_attach(function(client, bufnr)
-			lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
-			local opts = { buffer = bufnr }
-
-			-- Lspsaga keymap overrides
-			vim.keymap.set({ "n" }, "<F2>", [[:Lspsaga rename<CR>]], { desc = "Rename", silent = true, buffer = bufnr })
-			vim.keymap.set(
-				{ "n" },
-				"<F4>",
-				[[:Lspsaga code_action<CR>]],
-				{ desc = "Code action", silent = true, buffer = bufnr }
-			)
-
-			-- vim.keymap.set({ 'n', 'x' }, '<leader>jl', function()
-			--     vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-			-- end, opts)
-		end)
-
-		lsp_zero.setup()
+		-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 		local lsp_config = require("lspconfig")
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		capabilities = vim.tbl_deep_extend("force", capabilities, {
+			textDocument = {
+				foldingRange = {
+					dynamicRegistration = false,
+					lineFoldingOnly = true,
+				},
+			},
+		})
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(event)
+				local map = function(keys, func, desc, mode)
+					mode = mode or "n"
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+				end
+				map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+				map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+			end,
+		})
 
 		lsp_config.lua_ls.setup({
+			capabilities = capabilities,
 			settings = {
 				Lua = {
 					completion = {
@@ -198,9 +76,12 @@ return {
 			},
 		})
 
-		lsp_config.volar.setup({})
+		lsp_config.volar.setup({
+			-- capabilities = capabilities,
+		})
 
 		lsp_config.gopls.setup({
+			capabilities = capabilities,
 			settings = {
 				gopls = {
 					hints = {
@@ -221,6 +102,7 @@ return {
 			.. "/node_modules/@vue/typescript-plugin"
 
 		lsp_config.ts_ls.setup({
+			capabilities = capabilities,
 			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
 			init_options = {
 				plugins = {
@@ -269,6 +151,7 @@ return {
 		})
 
 		lsp_config.rust_analyzer.setup({
+			capabilities = capabilities,
 			root_dir = require("lspconfig/util").root_pattern("cargo.toml", ".git"),
 			settings = {
 				["rust-analyzer"] = {
@@ -315,6 +198,7 @@ return {
 		})
 
 		lsp_config.clangd.setup({
+			capabilities = capabilities,
 			cmd = {
 				"clangd",
 				"--offset-encoding=utf-16",
@@ -333,10 +217,12 @@ return {
 		})
 
 		lsp_config.powershell_es.setup({
+			capabilities = capabilities,
 			bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path(),
 		})
 
 		lsp_config.pylsp.setup({
+			capabilities = capabilities,
 			settings = {
 				pylsp = {
 					plugins = {
@@ -352,16 +238,14 @@ return {
 			},
 		})
 
-		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-		-- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
-		-- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
-		capabilities.workspace = {
-			didChangeWatchedFiles = {
-				dynamicRegistration = true,
-			},
-		}
 		lsp_config.markdown_oxide.setup({
-			capabilities = capabilities,
+			capabilities = vim.tbl_deep_extend("force", capabilities, {
+				workspace = {
+					didChangeWatchedFiles = {
+						dynamicRegistration = true,
+					},
+				},
+			}),
 			on_attach = function(client, buffer)
 				-- setup Markdown Oxide daily note commands
 				if client.name == "markdown_oxide" then
@@ -382,6 +266,7 @@ return {
 		local pipe = vim.fn.has("linux") == 1 and "/tmp/godot.pipe" or [[\\.\pipe\godot.pipe]]
 
 		lsp_config.gdscript.setup({
+			capabilities = capabilities,
 			cmd = cmd,
 			filetypes = { "gd", "gdscript", "gdignore" },
 			root_dir = require("lspconfig/util").root_pattern("project.godot", ".git"),

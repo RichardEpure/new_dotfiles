@@ -6,6 +6,24 @@ return {
 	event = "LspAttach",
 	keys = {
 		{
+			"gd",
+			[[:Lspsaga goto_definition<CR>]],
+			desc = "Go to definition",
+			silent = true,
+		},
+		{
+			"gt",
+			[[:Lspsaga goto_type_definition<CR>]],
+			desc = "Goto type definition",
+			silent = true,
+		},
+		{
+			"gr",
+			[[:Lspsaga finder<CR>]],
+			desc = "Goto references",
+			silent = true,
+		},
+		{
 			"<leader>ad",
 			[[:Lspsaga peek_definition<CR>]],
 			desc = "Peek definition",
@@ -36,7 +54,7 @@ return {
 			silent = true,
 		},
 		{
-			"<leader>al",
+			"gl",
 			[[:Lspsaga show_line_diagnostics<CR>]],
 			desc = "Line diagnostics",
 			silent = true,
@@ -65,7 +83,7 @@ return {
 		},
 		rename = {
 			keys = {
-				quit = "q",
+				quit = "<C-q>",
 			},
 		},
 		lightbulb = {
