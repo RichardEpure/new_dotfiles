@@ -77,7 +77,8 @@ return {
 		})
 
 		lsp_config.volar.setup({
-			-- capabilities = capabilities,
+			capabilities = capabilities,
+		})
 		})
 
 		lsp_config.gopls.setup({
