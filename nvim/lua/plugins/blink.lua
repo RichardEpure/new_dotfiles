@@ -14,8 +14,8 @@ return {
 		-- See the full "keymap" documentation for information on defining your own keymap.
 		keymap = {
 			preset = "default",
-			["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-			["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
+			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
 		},
 
 		appearance = {
