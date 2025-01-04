@@ -40,9 +40,10 @@ return {
 			},
 		},
 
-		signature = {
-			enabled = true,
-		},
+		-- Too laggy sometimes
+		-- signature = {
+		-- 	enabled = true,
+		-- },
 
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
