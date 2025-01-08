@@ -8,6 +8,11 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
+		enabled = function()
+			local disabled_filetypes = { "TelescopePrompt", "gitcommit" }
+			return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype) and vim.b.completion ~= false
+		end,
+
 		-- 'default' for mappings similar to built-in completion
 		-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
