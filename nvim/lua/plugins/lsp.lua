@@ -270,7 +270,7 @@ return {
 			capabilities = capabilities,
 		})
 
-		lsp_config.typst_lsp.setup({
+		lsp_config.tinymist.setup({
 			capabilities = capabilities,
 		})
 
