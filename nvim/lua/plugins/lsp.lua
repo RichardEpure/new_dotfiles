@@ -76,7 +76,27 @@ return {
 			},
 		})
 
+		lsp_config.intelephense.setup({
+			capabilities = capabilities,
+		})
+
 		lsp_config.volar.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.cssls.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.html.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.jsonls.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.taplo.setup({
 			capabilities = capabilities,
 		})
 
@@ -99,6 +119,10 @@ return {
 					},
 				},
 			},
+		})
+
+		lsp_config.templ.setup({
+			capabilities = capabilities,
 		})
 
 		local vue_typescript_plugin = require("mason-registry").get_package("vue-language-server"):get_install_path()
@@ -240,6 +264,14 @@ return {
 					},
 				},
 			},
+		})
+
+		lsp_config.ruff.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.typst_lsp.setup({
+			capabilities = capabilities,
 		})
 
 		lsp_config.markdown_oxide.setup({
