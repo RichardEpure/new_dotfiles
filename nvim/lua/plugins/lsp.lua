@@ -55,7 +55,7 @@ return {
 			callback = function(event)
 				local map = function(keys, func, desc, mode)
 					mode = mode or "n"
-					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
 				end
 				map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
 				map("gD", vim.lsp.buf.declaration, "Goto Declaration")
