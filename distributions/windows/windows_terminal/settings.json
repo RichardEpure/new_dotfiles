@@ -83,9 +83,13 @@
             "keys": "ctrl+alt+shift+numpad_minus"
         }
     ],
+    "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "initialCols": 160,
+    "initialPosition": ",",
+    "initialRows": 100,
     "newTabMenu": 
     [
         {
