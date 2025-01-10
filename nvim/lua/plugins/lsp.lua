@@ -225,6 +225,17 @@ return {
 			},
 		})
 
+		lsp_config.glsl_analyzer.setup({
+			capabilities = capabilities,
+			on_attach = function(client, bufnr)
+				-- https://github.com/nolanderc/glsl_analyzer/issues/68
+				local function custom_cancel_request(client, request_id)
+					-- Do nothing, effectively ignoring cancel requests
+				end
+				client.cancel_request = custom_cancel_request
+			end,
+		})
+
 		lsp_config.clangd.setup({
 			capabilities = capabilities,
 			cmd = {
