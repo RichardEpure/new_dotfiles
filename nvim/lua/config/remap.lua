@@ -204,6 +204,30 @@ else
 	vim.keymap.set("n", "<C-w>t", [[:tabe %<CR>]], { silent = true, desc = "Open current buffer in a new tab" })
 	vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
 
+	local swap_buffers = function(direction)
+		local prev_window = vim.api.nvim_get_current_win()
+		local prev_buffer = vim.api.nvim_get_current_buf()
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>" .. direction, true, false, true), "n", true)
+		vim.schedule(function()
+			local next_buffer = vim.api.nvim_get_current_buf()
+			vim.api.nvim_set_current_buf(prev_buffer)
+			vim.api.nvim_win_set_buf(prev_window, next_buffer)
+		end)
+	end
+
+	vim.keymap.set("n", "<M-h>", function()
+		swap_buffers("h")
+	end)
+	vim.keymap.set("n", "<M-j>", function()
+		swap_buffers("j")
+	end)
+	vim.keymap.set("n", "<M-k>", function()
+		swap_buffers("k")
+	end)
+	vim.keymap.set("n", "<M-l>", function()
+		swap_buffers("l")
+	end)
+
 	vim.api.nvim_create_user_command("Redir", [[:redir @" | silent <args> | redir END | enew | put"]], { nargs = 1 })
 
 	if vim.g.neovide then
