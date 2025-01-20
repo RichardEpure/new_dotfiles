@@ -207,11 +207,13 @@ else
 	local swap_buffers = function(direction)
 		local prev_window = vim.api.nvim_get_current_win()
 		local prev_buffer = vim.api.nvim_get_current_buf()
+		local pos = vim.api.nvim_win_get_cursor(0)
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>" .. direction, true, false, true), "n", true)
 		vim.schedule(function()
 			local next_buffer = vim.api.nvim_get_current_buf()
 			vim.api.nvim_set_current_buf(prev_buffer)
 			vim.api.nvim_win_set_buf(prev_window, next_buffer)
+			vim.api.nvim_win_set_cursor(0, pos)
 		end)
 	end
 
