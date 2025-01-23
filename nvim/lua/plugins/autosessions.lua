@@ -13,10 +13,10 @@ return {
 			auto_session_enable_last_session = false,
 
 			-- ⚠️ This will only work if Telescope.nvim is installed
-			session_lens = {
-				theme_conf = { border = true },
-				previewer = false,
-			},
+			-- session_lens = {
+			-- 	theme_conf = { border = true },
+			-- 	previewer = false,
+			-- },
 
 			post_restore_cmds = {
 				read_exrc_file,
@@ -31,11 +31,6 @@ return {
 
 		-- Set mapping for searching a session.
 		-- ⚠️ This will only work if Telescope.nvim is installed
-		vim.keymap.set(
-			"n",
-			"<Leader>fs",
-			require("auto-session.session-lens").search_session,
-			{ noremap = true, desc = "Find session" }
-		)
+		vim.keymap.set("n", "<Leader>fs", [[:SessionSearch<CR>]], { noremap = true, desc = "Find session" })
 	end,
 }

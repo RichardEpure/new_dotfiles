@@ -102,22 +102,22 @@ return {
 			end,
 			desc = "Refactor cleanup",
 		},
-		{
-			"<leader>rr",
-			function()
-				if vim.g.vscode == nil then
-					require("telescope").extensions.refactoring.refactors()
-				end
-			end,
-			desc = "Refactor",
-			mode = { "n", "x" },
-		},
+		-- {
+		-- 	"<leader>rr",
+		-- 	function()
+		-- 		if vim.g.vscode == nil then
+		-- 			require("telescope").extensions.refactoring.refactors()
+		-- 		end
+		-- 	end,
+		-- 	desc = "Refactor",
+		-- 	mode = { "n", "x" },
+		-- },
 	},
 	config = function()
 		require("refactoring").setup()
 
-		if vim.g.vscode == nil then
-			require("telescope").load_extension("refactoring")
-		end
+		-- if vim.g.vscode == nil then
+		-- 	require("telescope").load_extension("refactoring")
+		-- end
 	end,
 }

@@ -7,7 +7,6 @@ return {
 	dependencies = {
 		"nvim-neotest/nvim-nio",
 		"rcarriga/nvim-dap-ui",
-		"nvim-telescope/telescope-dap.nvim",
 		"theHamsta/nvim-dap-virtual-text",
 		"leoluz/nvim-dap-go",
 		"mxsdev/nvim-dap-vscode-js",
@@ -118,7 +117,6 @@ return {
 		},
 	},
 	config = function()
-		require("telescope").load_extension("dap")
 		require("nvim-dap-virtual-text").setup({})
 
 		local dap = require("dap")

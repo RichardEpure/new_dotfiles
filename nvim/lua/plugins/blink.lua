@@ -9,7 +9,7 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		enabled = function()
-			local disabled_filetypes = { "TelescopePrompt", "gitcommit" }
+			local disabled_filetypes = { "snacks_picker_input", "gitcommit" }
 			return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype) and vim.b.completion ~= false
 		end,
 

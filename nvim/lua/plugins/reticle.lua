@@ -9,7 +9,7 @@ return {
 				"FTerm",
 				"NvimSeparator",
 				"NvimTree",
-				"TelescopePrompt",
+				"snacks_picker_input",
 				"Trouble",
 				"toggleterm",
 			},

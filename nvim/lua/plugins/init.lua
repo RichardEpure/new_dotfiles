@@ -55,13 +55,6 @@ return {
 	},
 	{ "kevinhwang91/nvim-bqf", ft = "qf", enabled = is_neovim },
 	{
-		"junegunn/fzf",
-		build = function()
-			vim.fn["fzf#install"]()
-		end,
-		enabled = is_neovim,
-	},
-	{
 		"kazhala/close-buffers.nvim",
 		config = function()
 			require("close_buffers").setup()

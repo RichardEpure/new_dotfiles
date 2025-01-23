@@ -53,7 +53,7 @@ return {
 				miniclue.gen_clues.windows(),
 				miniclue.gen_clues.z(),
 
-				-- Telescope
+				-- Picker
 				{ mode = "n", keys = "<Leader>f", desc = "+Find" },
 				{ mode = "x", keys = "<Leader>f", desc = "+Find" },
 				{ mode = "n", keys = "<Leader>fq", desc = "+QuickFix" },

@@ -44,24 +44,6 @@ local set_colour = function(color)
 	end
 end
 
-local set_colour_telescope = function(prompt_bufnr)
-	local actions = require("telescope.actions")
-	local actions_state = require("telescope.actions.state")
-	local selected = actions_state.get_selected_entry()
-	set_colour(selected.value)
-	actions.close(prompt_bufnr)
-end
-
 if is_neovim() then
-	vim.api.nvim_create_user_command("Colour", function()
-		require("telescope.builtin").colorscheme({
-			attach_mappings = function(_, map)
-				map("i", "<CR>", set_colour_telescope)
-				map("n", "<CR>", set_colour_telescope)
-				return true
-			end,
-		})
-	end, { nargs = 0 })
-
 	set_colour("rose-pine")
 end
