@@ -243,5 +243,6 @@ return {
 		},
 		bigfile = {},
 		picker = {},
+		quickfile = {},
 	},
 }
