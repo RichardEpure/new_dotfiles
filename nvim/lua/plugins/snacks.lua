@@ -225,6 +225,12 @@ return {
 			end,
 			desc = "LSP Symbols",
 		},
+		{
+			"<leader><leader>e",
+			function()
+				require("snacks").picker.explorer()
+			end,
+		},
 	},
 	opts = {
 		indent = {
