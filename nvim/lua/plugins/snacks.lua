@@ -4,6 +4,7 @@ return {
 	"folke/snacks.nvim",
 	enabled = is_neovim,
 	lazy = false,
+	cmd = { "SnacksNotifierHistory" },
 	keys = {
 		{
 			"<leader>fe",
@@ -244,5 +245,6 @@ return {
 		bigfile = {},
 		picker = {},
 		quickfile = {},
+		notifier = {},
 	},
 }

@@ -246,4 +246,7 @@ else
 			vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = event.buf })
 		end,
 	})
+
+	-- Plugins
+	vim.api.nvim_create_user_command("SnacksNotifierHistory", require("snacks").notifier.show_history, { nargs = 0 })
 end
