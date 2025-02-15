@@ -114,7 +114,7 @@ return {
 			desc = "Registers",
 		},
 		{
-			"<leader>fa",
+			"<leader>ft",
 			function()
 				require("snacks").picker.autocmds()
 			end,
@@ -228,7 +228,7 @@ return {
 		-- 	desc = "Goto T[y]pe Definition",
 		-- },
 		{
-			"<leader>ft",
+			"<leader>fA",
 			function()
 				require("snacks").picker.lsp_symbols()
 			end,
