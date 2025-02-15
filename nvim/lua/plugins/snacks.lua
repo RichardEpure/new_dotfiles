@@ -95,8 +95,16 @@ return {
 			function()
 				require("snacks").picker.grep_word({ live = true })
 			end,
-			desc = "Visual selection or word",
-			mode = { "n", "x" },
+			desc = "Search word under cursor",
+			mode = { "n" },
+		},
+		{
+			"<leader>fw",
+			function()
+				require("snacks").picker.grep_word({ live = true })
+			end,
+			desc = "Search selection",
+			mode = { "x" },
 		},
 		{
 			"<leader>fr",
