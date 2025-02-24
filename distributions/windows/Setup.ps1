@@ -36,9 +36,7 @@ $symlinks = @{
 
 # Winget dependencies
 $wingetDependencies = @(
-    "Chocolatey.Chocolatey"
     "Microsoft.PowerShell"
-    "Git.Git"
     "Starship.Starship"
     "ajeetdsouza.zoxide"
     "Typst.Typst"
