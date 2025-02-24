@@ -1,24 +1,41 @@
 #Requires -RunAsAdministrator
 
+$yes = @("yes","y")
+$no = @("no", "n")
+
 $logPath = "$env:USERPROFILE/Setup.log"
 "Old path: $([Environment]::GetEnvironmentVariable("Path", "Machine"))`n" | Out-File -FilePath $logPath -Append
 
 # Utility Functions
-function Add-Path($Path) {
+function Add-Path($Path)
+{
     $PathConent = [Environment]::GetEnvironmentVariable("Path", "Machine")
 
     # Add to PATH if it doesn't exist
-    if ($null -ne $Path) {
-        if (!($PathConent -split [IO.Path]::PathSeparator -contains $Path)) {
-            $NewPathContent = $PathConent + $Path + [IO.Path]::PathSeparator
+    if ($null -ne $Path)
+    {
+        if (!($PathConent -split [IO.Path]::PathSeparator -contains $Path))
+        {
+            $NewPathContent = $PathConent + [IO.Path]::PathSeparator + $Path
             [Environment]::SetEnvironmentVariable( "Path", $NewPathContent, "Machine" )
         }
     }
 }
 
-function Sync-Path() {
+function Sync-Path()
+{
     # Refreshes Path
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + [IO.Path]::PathSeparator + [System.Environment]::GetEnvironmentVariable("Path","User")
+}
+
+function Get-Response($prompt)
+{
+    do
+    {
+        $answer = Read-Host $prompt, " (Y/N)"
+    }
+    until($no -contains $answer -or $yes -contains $answer)
+    return $answer
 }
 
 # Linked Files (Destination => Source)
@@ -34,15 +51,15 @@ $symlinks = @{
     "$HOME\AppData\Roaming\yazi\config" = ".\yazi"
 }
 
-# Winget dependencies
+# Dependencies
 $wingetDependencies = @(
     "Microsoft.PowerShell"
+    "Chocolatey.Chocolatey"
     "Starship.Starship"
     "ajeetdsouza.zoxide"
     "Typst.Typst"
+    "Docker.DockerDesktop"
 )
-
-# Choco dependencies
 $chocoDependencies = @(
     "altsnap"
     "zig"
@@ -57,17 +74,25 @@ $chocoDependencies = @(
     "lazydocker"
     "jq"
 )
-
-# Scoop dependencies
 $scoopDependencies = @(
     "yazi"
     "ninja"
     "7zip"
 )
-
-# Required PowerShell Modules
 $requiredModules = @(
     "PSFzf"
+)
+
+# Extras
+$wingetExtras = @(
+    "AgileBits.1Password"
+    "Microsoft.PowerToys"
+    "voidtools.Everything"
+    "lin-ycv.EverythingPowerToys"
+    "MartiCliment.UniGetUI"
+    "Discord.Discord"
+    "Mozilla.Firefox"
+    "Google.Chrome"
 )
 
 # Set working directory
@@ -83,45 +108,79 @@ Add-Path "C:\Program Files\Git\usr\bin" # So yazi has access to 'file'
 Sync-Path
 
 # Install dependencies
-Write-Host "Installing dependencies..."
+$answer = Get-Response "Install dependencies?"
+if ($yes -contains $answer)
+{
 
-# Winget
-$installedWingetDeps = winget list | Out-String
-foreach ($dependency in $wingetDependencies) {
-    if ($installedWingetDeps -notmatch $dependency) {
-        winget install -e --id $dependency
+    Write-Host "Installing dependencies..."
+
+    # Winget
+    $installedWingetDeps = winget list | Out-String
+    foreach ($dependency in $wingetDependencies)
+    {
+        if ($installedWingetDeps -notmatch $dependency)
+        {
+            winget install --id $dependency --exact --source winget --accept-source-agreements --accept-package-agreements
+        }
+    }
+
+    Sync-Path
+
+    # Choco
+    $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
+    foreach ($dependency in $chocoDependencies)
+    {
+        if ($installedChocoDeps -notcontains $dependency)
+        {
+            choco install -y $dependency
+        }
+    }
+
+    # Scoop
+    $installedScoopDeps = (scoop list) | Select-Object -ExpandProperty Name
+    foreach ($dependency in $scoopDependencies)
+    {
+        if ($installedScoopDeps -notcontains $dependency)
+        {
+            scoop install $dependency
+        }
     }
 }
 
-Sync-Path
+# Install extras
+$answer = Get-Response "Install extras?"
+if ($yes -contains $answer)
+{
+    Write-Host "Installing extras..."
 
-# Choco
-$installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
-foreach ($dependency in $chocoDependencies) {
-    if ($installedChocoDeps -notcontains $dependency) {
-        choco install -y $dependency
-    }
-}
-
-# Scoop
-$installedScoopDeps = (scoop list) | Select-Object -ExpandProperty Name
-foreach ($dependency in $scoopDependencies) {
-    if ($installedScoopDeps -notcontains $dependency) {
-        scoop install $dependency
+    $installedWingetDeps = winget list | Out-String
+    foreach ($extra in $wingetExtras)
+    {
+        if ($installedWingetDeps -notmatch $extra)
+        {
+            winget install --id $extra --exact --source winget --accept-source-agreements --accept-package-agreements
+        }
     }
 }
 
 # Create Symbolic Links
 Write-Host "Creating Symbolic Links..."
-foreach ($symlink in $symlinks.GetEnumerator()) {
+foreach ($symlink in $symlinks.GetEnumerator())
+{
     Get-Item -Path $symlink.Key -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $symlink.Key -Target (Resolve-Path $symlink.Value) -Force | Out-Null
 }
 
-# Install Required PowerShell Modules
-Write-Host "Installing missing PowerShell Modules..."
-foreach ($module in $requiredModules){
-    if (!(Get-Module -ListAvailable -Name $module -ErrorAction SilentlyContinue)) {
-        Install-Module $module -Scope CurrentUser -Force
+$answer = Get-Response "Install PowerShell Modules?"
+if ($yes -contains $answer)
+{
+    # Install Required PowerShell Modules
+    Write-Host "Installing missing PowerShell Modules..."
+    foreach ($module in $requiredModules)
+    {
+        if (!(Get-Module -ListAvailable -Name $module -ErrorAction SilentlyContinue))
+        {
+            Install-Module $module -Scope CurrentUser -Force
+        }
     }
 }

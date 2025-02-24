@@ -7,11 +7,13 @@ Set-Alias -Name sa -Value Start-AdminSession
 Set-Alias -Name cdf -Value Set-DirectoryFuzzy
 Set-Alias -Name ya -Value Open-Yazi
 Set-Alias -Name minvim -Value Open-NeovimMinimal
+Set-Alias -Name touch -Value New-Item
 
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
-function Open-NeovimMinimal {
+function Open-NeovimMinimal
+{
     <#
     .SYNOPSIS
         Opens neovim with a minimal configuration.
@@ -21,7 +23,8 @@ function Open-NeovimMinimal {
     $Env:NVIM_APPNAME = "nvim"
 }
 
-function Set-DirectoryFuzzy {
+function Set-DirectoryFuzzy
+{
     <#
     .SYNOPSIS
         Navigates to a file in the current directory and all subdirectories.
@@ -31,14 +34,16 @@ function Set-DirectoryFuzzy {
         [string]$DriveLetter
     )
 
-    if ($DriveLetter) {
+    if ($DriveLetter)
+    {
         Set-Location $DriveLetter":/"
     } 
 
     Get-ChildItem . -Recurse | Where-Object { $_.PSIsContainer } | Invoke-Fzf | Set-Location
 }
 
-function Start-AdminSession {
+function Start-AdminSession
+{
     <#
     .SYNOPSIS
         Starts a new PowerShell session with elevated rights.
@@ -46,7 +51,8 @@ function Start-AdminSession {
     Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command &{Set-Location $PWD}"
 }
 
-function Open-Yazi {
+function Open-Yazi
+{
     <#
     .SYNOPSIS
         Opens yazi at your current directory. cd into the last directory in yazi when you exit.
@@ -54,7 +60,8 @@ function Open-Yazi {
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"
     $cwd = Get-Content -Path $tmp
-    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path)
+    {
         Set-Location -Path $cwd
     }
     Remove-Item -Path $tmp
