@@ -8,6 +8,22 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
+		cmdline = {
+			enabled = true,
+
+			completion = {
+				list = {
+					selection = {
+						preselect = false,
+						auto_insert = true,
+					},
+				},
+				menu = {
+					auto_show = true,
+				},
+			},
+		},
+
 		enabled = function()
 			local disabled_filetypes = { "snacks_picker_input", "gitcommit" }
 			return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype) and vim.b.completion ~= false
@@ -40,13 +56,12 @@ return {
 			},
 			list = {
 				selection = {
-					preselect = function(ctx)
-						return ctx.mode ~= "cmdline"
-					end,
-					auto_insert = function(ctx)
-						return ctx.mode == "cmdline"
-					end,
+					preselect = false,
+					auto_insert = true,
 				},
+			},
+			menu = {
+				auto_show = true,
 			},
 		},
 
