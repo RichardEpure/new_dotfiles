@@ -8,5 +8,9 @@ return {
 			vim.cmd.UndotreeToggle()
 			vim.cmd.UndotreeFocus()
 		end, { desc = "Toggle undotree" })
+
+		if vim.fn.has("windows") == 1 then
+			vim.g.undotree_DiffCommand = "FC"
+		end
 	end,
 }
