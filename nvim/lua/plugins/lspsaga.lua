@@ -53,12 +53,12 @@ return {
 			desc = "Workspace diagnostics",
 			silent = true,
 		},
-		{
-			"gl",
-			[[:Lspsaga show_line_diagnostics<CR>]],
-			desc = "Line diagnostics",
-			silent = true,
-		},
+		-- {
+		-- 	"gl",
+		-- 	[[:Lspsaga show_line_diagnostics<CR>]],
+		-- 	desc = "Line diagnostics",
+		-- 	silent = true,
+		-- },
 		{
 			"<F2>",
 			[[:Lspsaga rename<CR>]],

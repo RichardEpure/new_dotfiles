@@ -53,7 +53,9 @@ return {
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(event)
-				-- stuff
+				vim.keymap.set("n", "gl", function()
+					vim.diagnostic.open_float()
+				end)
 			end,
 		})
 
