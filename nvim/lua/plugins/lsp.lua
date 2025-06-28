@@ -101,6 +101,22 @@ return {
 			capabilities = capabilities,
 		})
 
+		lsp_config.dockerls.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.terraformls.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.ansiblels.setup({
+			capabilities = capabilities,
+		})
+
+		lsp_config.yamlls.setup({
+			capabilities = capabilities,
+		})
+
 		lsp_config.gopls.setup({
 			capabilities = capabilities,
 			settings = {
@@ -180,7 +196,8 @@ return {
 			root_dir = require("lspconfig/util").root_pattern("cargo.toml", ".git"),
 			settings = {
 				["rust-analyzer"] = {
-					checkOnSave = {
+					checkOnSave = true,
+					check = {
 						command = "clippy",
 					},
 					diagnostics = {
