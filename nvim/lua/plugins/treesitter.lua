@@ -195,3 +195,98 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 	end,
 }
+-- NOTE: Parsers bugged for now
+-- return {
+-- 	"nvim-treesitter/nvim-treesitter",
+-- 	lazy = false,
+-- 	branch = "main",
+-- 	build = ":TSUpdate",
+-- 	dependencies = {
+-- 		{
+-- 			"nvim-treesitter/nvim-treesitter-textobjects",
+-- 			branch = "main",
+-- 			config = function()
+-- 				require("nvim-treesitter-textobjects").setup({
+-- 					select = {
+-- 						-- Automatically jump forward to textobj, similar to targets.vim
+-- 						lookahead = true,
+-- 						-- You can choose the select mode (default is charwise 'v')
+-- 						--
+-- 						-- Can also be a function which gets passed a table with the keys
+-- 						-- * query_string: eg '@function.inner'
+-- 						-- * method: eg 'v' or 'o'
+-- 						-- and should return the mode ('v', 'V', or '<c-v>') or a table
+-- 						-- mapping query_strings to modes.
+-- 						selection_modes = {
+-- 							["@parameter.outer"] = "v", -- charwise
+-- 							["@function.outer"] = "V", -- linewise
+-- 							["@class.outer"] = "<c-v>", -- blockwise
+-- 						},
+-- 						-- If you set this to `true` (default is `false`) then any textobject is
+-- 						-- extended to include preceding or succeeding whitespace. Succeeding
+-- 						-- whitespace has priority in order to act similarly to eg the built-in
+-- 						-- `ap`.
+-- 						--
+-- 						-- Can also be a function which gets passed a table with the keys
+-- 						-- * query_string: eg '@function.inner'
+-- 						-- * selection_mode: eg 'v'
+-- 						-- and should return true of false
+-- 						include_surrounding_whitespace = false,
+-- 					},
+-- 					move = {
+-- 						-- whether to set jumps in the jumplist
+-- 						set_jumps = true,
+-- 					},
+-- 				})
+-- 				-- Select
+-- 				vim.keymap.set({ "x", "o" }, "af", function()
+-- 					require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+-- 				end)
+-- 				vim.keymap.set({ "x", "o" }, "if", function()
+-- 					require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+-- 				end)
+-- 				vim.keymap.set({ "x", "o" }, "ac", function()
+-- 					require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+-- 				end)
+-- 				vim.keymap.set({ "x", "o" }, "ic", function()
+-- 					require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+-- 				end)
+-- 				vim.keymap.set({ "x", "o" }, "as", function()
+-- 					require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
+-- 				end)
+--
+-- 				local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
+-- 				vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+-- 				vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+-- 				vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+-- 				vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+-- 				vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+-- 				vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+-- 			end,
+-- 		},
+-- 		{
+--
+-- 			"daliusd/incr.nvim",
+-- 			opts = {
+-- 				incr_key = "<C-s>",
+-- 				decr_key = "<S-s>",
+-- 			},
+-- 		},
+-- 	},
+-- 	opts = true,
+-- 	config = function()
+-- 		vim.api.nvim_create_autocmd("FileType", {
+-- 			desc = "Enable treesitter highlighting",
+-- 			callback = function(ctx)
+-- 				-- highlights
+-- 				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
+-- 				print("hasStarted: " .. tostring(hasStarted))
+-- 				-- indent
+-- 				-- local noIndent = {}
+-- 				-- if hasStarted and not vim.list_contains(noIndent, ctx.match) then
+-- 				-- 	vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- 				-- end
+-- 			end,
+-- 		})
+-- 	end,
+-- }

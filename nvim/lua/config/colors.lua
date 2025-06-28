@@ -7,13 +7,6 @@ local set_colour = function(color)
 	local orange = vim.api.nvim_get_hl(0, { name = "Orange" })
 	vim.api.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" })
 	vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#585858" })
-	vim.api.nvim_set_hl(0, "lualine_c_normal", { link = "Normal" })
-	vim.api.nvim_set_hl(0, "lualine_c_insert", { link = "Normal" })
-	vim.api.nvim_set_hl(0, "lualine_c_visual", { link = "Normal" })
-	vim.api.nvim_set_hl(0, "lualine_c_inactive", { link = "Normal" })
-	vim.api.nvim_set_hl(0, "lualine_c_command", { link = "Normal" })
-	vim.api.nvim_set_hl(0, "lualine_c_termial", { link = "Normal" })
-
 	vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#353535" })
 	if vim.g.colors_name == "alabaster" then
 		vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#1b2628" })

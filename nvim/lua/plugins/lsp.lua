@@ -10,9 +10,9 @@ return {
 		{ "folke/neoconf.nvim" },
 	},
 	config = function()
-		if vim.lsp.inlay_hint then
-			vim.lsp.inlay_hint.enable(true, { 0 })
-		end
+		-- if vim.lsp.inlay_hint then
+		-- 	vim.lsp.inlay_hint.enable(true, { 0 })
+		-- end
 
 		if vim.lsp.inlay_hint then
 			vim.keymap.set("n", "<leader>jl", function()
@@ -138,7 +138,7 @@ return {
 			capabilities = capabilities,
 		})
 
-		local vue_typescript_plugin = require("mason-registry").get_package("vue-language-server"):get_install_path()
+		local vue_typescript_plugin = vim.fn.expand("$MASON/packages/vue-language-server")
 			.. "/node_modules/@vue/language-server"
 			.. "/node_modules/@vue/typescript-plugin"
 
@@ -271,7 +271,7 @@ return {
 
 		lsp_config.powershell_es.setup({
 			capabilities = capabilities,
-			bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path(),
+			bundle_path = vim.fn.expand("$MASON/packages/powershell-editor-services"),
 		})
 
 		lsp_config.pylsp.setup({
