@@ -135,7 +135,6 @@ return {
 
 		vim.lsp.config("ts_ls", {
 			capabilities = capabilities,
-			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
 			init_options = {
 				plugins = {
 					{
@@ -143,7 +142,6 @@ return {
 						location = vim.fn.expand(
 							"$MASON/packages/vue-language-server/node_modules/@vue/language-server"
 						),
-						-- languages = { "javascript", "typescript", "vue" },
 						languages = { "vue" },
 					},
 				},
@@ -192,8 +190,6 @@ return {
 					hybridMode = true,
 				},
 			},
-			-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-			-- filetypes = { "vue" },
 			settings = {
 				typescript = {
 					inlayHints = {
