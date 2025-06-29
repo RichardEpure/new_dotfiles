@@ -39,7 +39,6 @@ return {
 		-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-		local lsp_config = require("lspconfig")
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, {
 			textDocument = {
@@ -216,7 +215,6 @@ return {
 
 		vim.lsp.config("rust_analyzer", {
 			capabilities = capabilities,
-			root_dir = require("lspconfig/util").root_pattern("cargo.toml", ".git"),
 			settings = {
 				["rust-analyzer"] = {
 					checkOnSave = true,
@@ -352,7 +350,6 @@ return {
 			capabilities = capabilities,
 			cmd = cmd,
 			filetypes = { "gd", "gdscript", "gdignore" },
-			root_dir = require("lspconfig/util").root_pattern("project.godot", ".git"),
 			on_attach = function(client, buffer)
 				-- Godot external editor settings:
 				-- Exec Path: nvim
