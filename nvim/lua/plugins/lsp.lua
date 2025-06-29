@@ -4,8 +4,8 @@ return {
 	"neovim/nvim-lspconfig",
 	enabled = is_neovim,
 	dependencies = {
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
+		{ "mason-org/mason.nvim" },
+		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neodev.nvim" },
 		{ "folke/neoconf.nvim" },
 	},
@@ -27,11 +27,10 @@ return {
 		-- Neoconf
 		require("neoconf").setup({})
 
-		local mason_registry = require("mason-registry")
-
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls" },
+			automatic_enable = true,
 		})
 
 		-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
@@ -59,7 +58,7 @@ return {
 			end,
 		})
 
-		lsp_config.lua_ls.setup({
+		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
 			settings = {
 				Lua = {
@@ -73,51 +72,47 @@ return {
 			},
 		})
 
-		lsp_config.intelephense.setup({
+		vim.lsp.config("intelephense", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.volar.setup({
+		vim.lsp.config("cssls", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.cssls.setup({
+		vim.lsp.config("html", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.html.setup({
+		vim.lsp.config("jsonls", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.jsonls.setup({
+		vim.lsp.config("taplo", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.taplo.setup({
+		vim.lsp.config("mesonlsp", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.mesonlsp.setup({
+		vim.lsp.config("dockerls", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.dockerls.setup({
+		vim.lsp.config("terraformls", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.terraformls.setup({
+		vim.lsp.config("ansiblels", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.ansiblels.setup({
+		vim.lsp.config("yamlls", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.yamlls.setup({
-			capabilities = capabilities,
-		})
-
-		lsp_config.gopls.setup({
+		vim.lsp.config("gopls", {
 			capabilities = capabilities,
 			settings = {
 				gopls = {
@@ -134,23 +129,22 @@ return {
 			},
 		})
 
-		lsp_config.templ.setup({
+		vim.lsp.config("templ", {
 			capabilities = capabilities,
 		})
 
-		local vue_typescript_plugin = vim.fn.expand("$MASON/packages/vue-language-server")
-			.. "/node_modules/@vue/language-server"
-			.. "/node_modules/@vue/typescript-plugin"
-
-		lsp_config.ts_ls.setup({
+		vim.lsp.config("ts_ls", {
 			capabilities = capabilities,
 			root_dir = require("lspconfig/util").root_pattern("package.json", ".git"),
 			init_options = {
 				plugins = {
 					{
 						name = "@vue/typescript-plugin",
-						location = vue_typescript_plugin,
-						languages = { "javascript", "typescript", "vue" },
+						location = vim.fn.expand(
+							"$MASON/packages/vue-language-server/node_modules/@vue/language-server"
+						),
+						-- languages = { "javascript", "typescript", "vue" },
+						languages = { "vue" },
 					},
 				},
 			},
@@ -191,7 +185,40 @@ return {
 			},
 		})
 
-		lsp_config.rust_analyzer.setup({
+		vim.lsp.config("vue_ls", {
+			capabilities = capabilities,
+			init_options = {
+				vue = {
+					hybridMode = true,
+				},
+			},
+			-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			-- filetypes = { "vue" },
+			settings = {
+				typescript = {
+					inlayHints = {
+						enumMemberValues = {
+							enabled = true,
+						},
+						functionLikeReturnTypes = {
+							enabled = true,
+						},
+						propertyDeclarationTypes = {
+							enabled = true,
+						},
+						parameterTypes = {
+							enabled = true,
+							suppressWhenArgumentMatchesName = true,
+						},
+						variableTypes = {
+							enabled = true,
+						},
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("rust_analyzer", {
 			capabilities = capabilities,
 			root_dir = require("lspconfig/util").root_pattern("cargo.toml", ".git"),
 			settings = {
@@ -239,7 +266,7 @@ return {
 			},
 		})
 
-		lsp_config.glsl_analyzer.setup({
+		vim.lsp.config("glsl_analyzer", {
 			capabilities = capabilities,
 			on_attach = function(client, bufnr)
 				-- https://github.com/nolanderc/glsl_analyzer/issues/68
@@ -250,7 +277,7 @@ return {
 			end,
 		})
 
-		lsp_config.clangd.setup({
+		vim.lsp.config("clangd", {
 			capabilities = capabilities,
 			cmd = {
 				"clangd",
@@ -269,12 +296,12 @@ return {
 			},
 		})
 
-		lsp_config.powershell_es.setup({
+		vim.lsp.config("powershell_es", {
 			capabilities = capabilities,
 			bundle_path = vim.fn.expand("$MASON/packages/powershell-editor-services"),
 		})
 
-		lsp_config.pylsp.setup({
+		vim.lsp.config("pylsp", {
 			capabilities = capabilities,
 			settings = {
 				pylsp = {
@@ -291,15 +318,15 @@ return {
 			},
 		})
 
-		lsp_config.ruff.setup({
+		vim.lsp.config("ruff", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.tinymist.setup({
+		vim.lsp.config("tinymist", {
 			capabilities = capabilities,
 		})
 
-		lsp_config.markdown_oxide.setup({
+		vim.lsp.config("markdown_oxide", {
 			capabilities = vim.tbl_deep_extend("force", capabilities, {
 				workspace = {
 					didChangeWatchedFiles = {
@@ -312,7 +339,6 @@ return {
 				if client.name == "markdown_oxide" then
 					vim.api.nvim_create_user_command("Daily", function(args)
 						local input = args.args
-
 						vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
 					end, { desc = "Open daily note", nargs = "*" })
 				end
@@ -326,7 +352,7 @@ return {
 
 		local pipe = vim.fn.has("linux") == 1 and "/tmp/godot.pipe" or [[\\.\pipe\godot.pipe]]
 
-		lsp_config.gdscript.setup({
+		vim.lsp.config("gdscript", {
 			capabilities = capabilities,
 			cmd = cmd,
 			filetypes = { "gd", "gdscript", "gdignore" },
