@@ -95,6 +95,10 @@ return {
 			capabilities = capabilities,
 		})
 
+		vim.lsp.config("nginx_language_server", {
+			capabilities = capabilities,
+		})
+
 		vim.lsp.config("dockerls", {
 			capabilities = capabilities,
 		})
