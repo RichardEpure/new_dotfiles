@@ -30,7 +30,6 @@
   "namu.nvim": { "branch": "main", "commit": "50adf8e746dbc6608064d58aac6ad7dafdbebaf2" },
   "neoconf.nvim": { "branch": "main", "commit": "e6285272cbda137ff7ebfacb35f2717a9fb32221" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
-  "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "no-neck-pain.nvim": { "branch": "main", "commit": "ecdfe60f23134089fac92659e688b65fdd8b5cc0" },
   "nvim-autopairs": { "branch": "master", "commit": "2647cce4cb64fb35c212146663384e05ae126bdf" },
   "nvim-bqf": { "branch": "main", "commit": "9cbec7cf8ad2a902a0a41241ad16c3489620321b" },
