@@ -12,7 +12,7 @@ return {
 			silent = true,
 		},
 		{
-			"gt",
+			"g<C-t>",
 			[[:Lspsaga goto_type_definition<CR>]],
 			desc = "Goto type definition",
 			silent = true,
