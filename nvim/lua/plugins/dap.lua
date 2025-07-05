@@ -6,7 +6,12 @@ return {
 	enabled = is_neovim,
 	dependencies = {
 		"nvim-neotest/nvim-nio",
-		"rcarriga/nvim-dap-ui",
+		{
+			"igorlfs/nvim-dap-view",
+			---@module 'dap-view'
+			---@type dapview.Config
+			opts = {},
+		},
 		"theHamsta/nvim-dap-virtual-text",
 		"leoluz/nvim-dap-go",
 		"mxsdev/nvim-dap-vscode-js",
@@ -18,28 +23,32 @@ return {
 	},
 	keys = {
 		{
-			"<F5>",
+			"<leader>lc",
 			function()
 				require("dap").continue()
 			end,
+			desc = "Continue",
 		},
 		{
-			"<F10>",
+			"<leader>lo",
 			function()
 				require("dap").step_over()
 			end,
+			desc = "Step over",
 		},
 		{
-			"<F11>",
+			"<leader>li",
 			function()
 				require("dap").step_into()
 			end,
+			desc = "Step into",
 		},
 		{
-			"<F12>",
+			"<leader>lt",
 			function()
 				require("dap").step_out()
 			end,
+			desc = "Step out",
 		},
 		{
 			"<leader>lb",
@@ -77,42 +86,8 @@ return {
 			desc = "Run last",
 		},
 		{
-			"<Leader>lh",
-			function()
-				require("dap.ui.widgets").hover()
-			end,
-			mode = { "n", "v" },
-			desc = "Dap ui hover",
-		},
-		{
-			"<Leader>lp",
-			function()
-				require("dap.ui.widgets").preview()
-			end,
-			mode = { "n", "v" },
-			desc = "Dap ui preview",
-		},
-		{
-			"<Leader>lf",
-			function()
-				local widgets = require("dap.ui.widgets")
-				widgets.centered_float(widgets.frames)
-			end,
-			desc = "Dap ui float",
-		},
-		{
-			"<Leader>ls",
-			function()
-				local widgets = require("dap.ui.widgets")
-				widgets.centered_float(widgets.scopes)
-			end,
-			desc = "Dap ui scopes",
-		},
-		{
 			"<Leader>lu",
-			function()
-				require("dapui").toggle()
-			end,
+			[[:DapViewToggle<CR>]],
 			desc = "Dap ui toggle",
 		},
 	},
@@ -120,7 +95,6 @@ return {
 		require("nvim-dap-virtual-text").setup({})
 
 		local dap = require("dap")
-		local dapui = require("dapui")
 
 		-- JS & TS
 		require("dap-vscode-js").setup({
@@ -399,17 +373,5 @@ return {
 				end,
 			},
 		}
-
-		-- dapui
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open({ reset = true })
-		end
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
-		end
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
-		end
-		dapui.setup()
 	end,
 }
