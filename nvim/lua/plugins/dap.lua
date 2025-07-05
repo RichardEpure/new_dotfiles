@@ -10,7 +10,14 @@ return {
 			"igorlfs/nvim-dap-view",
 			---@module 'dap-view'
 			---@type dapview.Config
-			opts = {},
+			opts = {
+				windows = {
+					terminal = {
+						-- Use the actual names for the adapters you want to hide
+						hide = { "go" }, -- `go` is known to not use the terminal.
+					},
+				},
+			},
 		},
 		"theHamsta/nvim-dap-virtual-text",
 		"leoluz/nvim-dap-go",
