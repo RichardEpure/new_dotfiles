@@ -27,10 +27,14 @@ return {
 		-- Neoconf
 		require("neoconf").setup({})
 
+		local disabled_servers = {}
+
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls" },
-			automatic_enable = true,
+			automatic_enable = {
+				exclude = disabled_servers,
+			},
 		})
 
 		-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
