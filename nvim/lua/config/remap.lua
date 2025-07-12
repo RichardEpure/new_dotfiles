@@ -230,6 +230,9 @@ else
 		swap_buffers("l")
 	end)
 
+	vim.keymap.set("n", "<leader>jeu", [[:e ++ff=unix<CR>]], { desc = "Set unix line endings" })
+	vim.keymap.set("n", "<leader>jed", [[:e ++ff=dos<CR>]], { desc = "Set dos line endings" })
+
 	vim.api.nvim_create_user_command("Redir", [[:redir @" | silent <args> | redir END | enew | put"]], { nargs = 1 })
 
 	if vim.g.neovide then
