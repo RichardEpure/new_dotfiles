@@ -16,10 +16,11 @@ return {
 		})
 
 		-- Disable for certain filetypes
-		vim.api.nvim_create_autocmd({ "FileType" }, {
+		vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 			desc = "Disable indentscope for certain filetypes",
 			callback = function()
 				local ignore_filetypes = {
+					"",
 					"aerial",
 					"dashboard",
 					"help",
