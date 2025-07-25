@@ -16,8 +16,8 @@ return {
 			local py_cmd = venv_dir
 			local mypy_cmd = venv_dir
 			if vim.fn.has("win32") == 1 and mypy_cmd then
-				py_cmd = py_cmd .. "/Scripts/python"
-				mypy_cmd = mypy_cmd .. "/Scripts/mypy"
+				py_cmd = py_cmd .. "\\Scripts\\python"
+				mypy_cmd = mypy_cmd .. "\\Scripts\\mypy"
 			elseif vim.fn.has("linux") and mypy_cmd then
 				py_cmd = py_cmd .. "/bin/python"
 				mypy_cmd = mypy_cmd .. "/bin/mypy"
@@ -41,7 +41,7 @@ return {
 				py_cmd,
 			}
 			lint.linters.local_mypy = local_mypy
-			lint.linters_by_ft.python = { "local_mypy" }
+			-- lint.linters_by_ft.python = { "local_mypy" }
 		end
 
 		local linting_enabled = true
