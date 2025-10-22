@@ -8,6 +8,7 @@ Set-Alias -Name cdf -Value Set-DirectoryFuzzy
 Set-Alias -Name ya -Value Open-Yazi
 Set-Alias -Name minvim -Value Open-NeovimMinimal
 Set-Alias -Name touch -Value New-Item
+Set-Alias -Name tsa -Value Grant-AllTailnetLockRequests 
 
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
@@ -65,6 +66,15 @@ function Open-Yazi
         Set-Location -Path $cwd
     }
     Remove-Item -Path $tmp
+}
+
+function Grant-AllTailnetLockRequests
+{
+    <#
+    .SYNOPSIS
+        Signs all pending Tailnet Lock requests.
+    #>
+    (tailscale lock status --json | ConvertFrom-Json).FilteredPeers.NodeKey | Sort-Object -Unique | ForEach-Object { tailscale lock sign $_ }
 }
 
 "$($stopwatch.ElapsedMilliseconds)ms`tFunctions loaded" | Out-File -FilePath $logPath -Append
