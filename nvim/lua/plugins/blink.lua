@@ -36,7 +36,14 @@ return {
 		keymap = {
 			preset = "default",
 			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
-			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+			["<Tab>"] = {
+				"snippet_forward",
+				function()
+					return require("sidekick").nes_jump_or_apply()
+				end,
+				"select_next",
+				"fallback",
+			},
 		},
 
 		appearance = {

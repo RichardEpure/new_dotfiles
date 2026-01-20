@@ -2,6 +2,9 @@ local is_neovim = require("config.utils").is_neovim
 
 return {
 	"zbirenbaum/copilot.lua",
+	dependencies = {
+		"copilotlsp-nvim/copilot-lsp",
+	},
 	cmd = "Copilot",
 	event = "InsertEnter",
 	enabled = is_neovim,
@@ -35,10 +38,14 @@ return {
 					dismiss = "<C-e>",
 				},
 			},
+			nes = {
+				enabled = false,
+			},
 			filetypes = {
 				["*"] = true,
 			},
-			copilot_node_command = "node", -- Node.js version must be > 16.x
+			copilot_node_command = "node",
+			copilot_model = "gpt-5-mini",
 			server_opts_overrides = {},
 		})
 	end,
