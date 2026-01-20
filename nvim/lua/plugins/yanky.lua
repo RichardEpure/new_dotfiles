@@ -1,5 +1,6 @@
 return {
 	"gbprod/yanky.nvim",
+	lazy = false,
 	cmd = { "YankyRingHistory", "YankyClearHistory" },
 	dependencies = { { "kkharji/sqlite.lua", enabled = not jit.os:find("Windows") } },
 	keys = {
