@@ -45,7 +45,7 @@ return {
 				["*"] = true,
 			},
 			copilot_node_command = "node",
-			copilot_model = "gpt-5-mini",
+			-- copilot_model = "gpt-5-mini",
 			server_opts_overrides = {},
 		})
 	end,
