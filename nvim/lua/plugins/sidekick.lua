@@ -99,5 +99,12 @@ return {
 			end,
 			desc = "Sidekick Toggle Gemini",
 		},
+		{
+			"<leader>vz",
+			function()
+				require("sidekick.nes").update()
+			end,
+			desc = "Sidekick NES Update Suggestions",
+		},
 	},
 }
