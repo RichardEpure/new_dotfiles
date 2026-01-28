@@ -92,6 +92,10 @@ return {
 				-- Gitsigns
 				{ mode = "n", keys = "<Leader>h", desc = "+Gitsigns" },
 
+				-- Sidekick
+				{ mode = "n", keys = "<Leader>v", desc = "+Sidekick" },
+				{ mode = "x", keys = "<Leader>v", desc = "+Sidekick" },
+
 				-- Other
 				{ mode = "n", keys = "<Leader>o", desc = "+Open" },
 				{ mode = "n", keys = "<Leader>op", desc = "+Open at cwd" },
