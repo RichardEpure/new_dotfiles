@@ -146,6 +146,10 @@ return {
 			capabilities = capabilities,
 		})
 
+		vim.lsp.config("eslint-lsp", {
+			capabilities = capabilities,
+		})
+
 		vim.lsp.config("ts_ls", {
 			capabilities = capabilities,
 			init_options = {
