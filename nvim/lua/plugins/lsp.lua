@@ -326,6 +326,10 @@ return {
 			},
 		})
 
+		vim.lsp.config("ty", {
+			capabilities = capabilities,
+		})
+
 		vim.lsp.config("ruff", {
 			capabilities = capabilities,
 		})
