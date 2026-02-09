@@ -22,6 +22,8 @@ return {
 				angular = { "prettierd" },
 				typescript = { "prettierd" },
 				javascript = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				javascriptreact = { "prettierd" },
 				scss = { "prettierd" },
 				css = { "prettierd" },
 				less = { "prettierd" },
