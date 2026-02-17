@@ -146,6 +146,10 @@ return {
 			capabilities = capabilities,
 		})
 
+		vim.lsp.config("tailwindcss", {
+			capabilities = capabilities,
+		})
+
 		vim.lsp.config("eslint-lsp", {
 			capabilities = capabilities,
 		})
