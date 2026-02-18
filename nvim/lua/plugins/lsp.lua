@@ -7,7 +7,7 @@ return {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neodev.nvim" },
-		{ "folke/neoconf.nvim" },
+		{ "folke/neoconf.nvim", enabled = false },
 	},
 	config = function()
 		-- if vim.lsp.inlay_hint then
@@ -25,7 +25,7 @@ return {
 		end
 
 		-- Neoconf
-		require("neoconf").setup({})
+		-- require("neoconf").setup({})
 
 		local disabled_servers = {}
 
