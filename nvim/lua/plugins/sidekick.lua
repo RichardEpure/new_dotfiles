@@ -7,6 +7,9 @@ return {
 	opts = {
 		nes = {
 			enabled = true,
+			diff = {
+				inline = "chars",
+			},
 		},
 		cli = {
 			enabled = true,

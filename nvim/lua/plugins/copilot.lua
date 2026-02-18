@@ -2,9 +2,6 @@ local is_neovim = require("config.utils").is_neovim
 
 return {
 	"zbirenbaum/copilot.lua",
-	dependencies = {
-		"copilotlsp-nvim/copilot-lsp",
-	},
 	cmd = "Copilot",
 	event = "InsertEnter",
 	enabled = is_neovim,
