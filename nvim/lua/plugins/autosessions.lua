@@ -31,6 +31,6 @@ return {
 
 		-- Set mapping for searching a session.
 		-- ⚠️ This will only work if Telescope.nvim is installed
-		vim.keymap.set("n", "<Leader>fs", [[:SessionSearch<CR>]], { noremap = true, desc = "Find session" })
+		vim.keymap.set("n", "<Leader>fs", [[:AutoSession search<CR>]], { noremap = true, desc = "Find session" })
 	end,
 }
