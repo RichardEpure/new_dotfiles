@@ -210,6 +210,9 @@ return {
 				vue = {
 					hybridMode = true,
 				},
+				typescript = {
+					tsdk = vim.fn.expand("$MASON/packages/typescript-language-server/node_modules/typescript/lib"),
+				},
 			},
 			settings = {
 				typescript = {
