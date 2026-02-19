@@ -3,6 +3,7 @@
 [user]
     email = 43828146+RichardEpure@users.noreply.github.com
     name = Richard
+	signingkey = ~/.ssh/github_signing.pub
 [core]
     editor = nvim
     excludesFile = ~/.gitignore
@@ -15,3 +16,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
