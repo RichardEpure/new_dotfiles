@@ -93,14 +93,16 @@ return {
 				return
 			end
 
-			local success, resp = pcall(client.request_sync, "workspace/willRenameFiles", {
-				files = {
-					{
-						oldUri = vim.uri_from_fname(args.data.from),
-						newUri = vim.uri_from_fname(args.data.to),
+			local success, resp = pcall(function()
+				return client:request_sync("workspace/willRenameFiles", {
+					files = {
+						{
+							oldUri = vim.uri_from_fname(args.data.from),
+							newUri = vim.uri_from_fname(args.data.to),
+						},
 					},
-				},
-			}, 10000)
+				}, 10000)
+			end)
 
 			if success and resp and resp.result ~= nil then
 				vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
@@ -111,7 +113,7 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
 			callback = function(args)
-				for _, client in ipairs(vim.lsp.get_active_clients()) do
+				for _, client in ipairs(vim.lsp.get_clients({ method = "workspace/willRenameFiles" })) do
 					handle_lsp_rename(client, args)
 				end
 			end,
