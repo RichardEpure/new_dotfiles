@@ -70,8 +70,8 @@ return {
 
 			"daliusd/incr.nvim",
 			opts = {
-				incr_key = "<Tab>",
-				decr_key = "<S-Tab>",
+				incr_key = "g>",
+				decr_key = "g<",
 			},
 		},
 	},
