@@ -25,7 +25,7 @@ return {
 		{
 			"microsoft/vscode-js-debug",
 			version = "1.x",
-			build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+			build = "npm install --ignore-scripts && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
 		},
 	},
 	keys = {
