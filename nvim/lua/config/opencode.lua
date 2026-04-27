@@ -301,8 +301,8 @@ function M.generate(prompt, opts)
 	end
 
 	local replace_insert = replace_until_comment_insert(opts.insert)
-	local replace_opts = replace_insert and replace_until_comment_opts(replace_insert)
-	local had_content_before_comment = replace_insert and has_content_before_comment(bufnr)
+	local replace_opts = replace_insert and replace_until_comment_opts(replace_insert) or {}
+	local had_content_before_comment = replace_insert ~= nil and has_content_before_comment(bufnr)
 	if had_content_before_comment and replace_opts.confirm_replace ~= false then
 		local message = replace_opts.confirm_replace or "Replace existing content?"
 		if not confirm_replace(message) then
