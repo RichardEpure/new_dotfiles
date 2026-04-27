@@ -13,4 +13,12 @@ M.read_exrc_file = function()
 	end
 end
 
+---@param result vim.SystemCompleted
+---@param fallback string
+---@return string
+M.error_with_fallback = function(result, fallback)
+	local stderr = result.stderr or ""
+	return stderr ~= "" and stderr or fallback
+end
+
 return M
