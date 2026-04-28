@@ -1,5 +1,3 @@
-local is_neovim = require("config.utils").is_neovim
-
 return {
 	"echasnovski/mini.files",
 	version = false,
@@ -121,5 +119,5 @@ return {
 
 		vim.g.loaded_netrwPlugin = 1
 	end,
-	enabled = is_neovim,
+	enabled = false,
 }

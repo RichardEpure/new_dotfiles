@@ -39,6 +39,7 @@ return {
 					"log",
 					"txt",
 					"md",
+					"fyler",
 				}
 				if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) or vim.bo.buftype == "terminal" then
 					vim.b.miniindentscope_disable = true
