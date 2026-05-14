@@ -40,6 +40,13 @@ return {
 		views = {
 			finder = {
 				follow_current_file = false,
+				win = {
+					kinds = {
+						split_left_most = {
+							width = 70,
+						},
+					},
+				},
 				mappings = {
 					["q"] = "CloseView",
 					["<CR>"] = "Select",
