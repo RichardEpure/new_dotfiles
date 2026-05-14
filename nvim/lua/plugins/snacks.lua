@@ -1,5 +1,30 @@
 local is_neovim = require("config.utils").is_neovim
 
+local function unique_file_transform(item, ctx)
+	if ctx.picker.opts.unique then
+		return require("snacks.picker.transform").unique_file(item, ctx)
+	end
+end
+
+local unique_file_picker = {
+	toggles = {
+		unique = { icon = "U", value = true },
+	},
+	transform = unique_file_transform,
+	win = {
+		input = {
+			keys = {
+				["<a-u>"] = { "toggle_unique", mode = { "i", "n" }, desc = "Toggle Unique Files" },
+			},
+		},
+		list = {
+			keys = {
+				["<a-u>"] = { "toggle_unique", desc = "Toggle Unique Files" },
+			},
+		},
+	},
+}
+
 return {
 	"folke/snacks.nvim",
 	enabled = is_neovim,
@@ -251,7 +276,14 @@ return {
 			},
 		},
 		bigfile = {},
-		picker = {},
+		picker = {
+			sources = {
+				grep = unique_file_picker,
+				grep_buffers = unique_file_picker,
+				grep_word = unique_file_picker,
+				git_grep = unique_file_picker,
+			},
+		},
 		quickfile = {},
 		notifier = {},
 	},
