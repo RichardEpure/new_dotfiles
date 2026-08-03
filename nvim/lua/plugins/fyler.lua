@@ -13,53 +13,64 @@ return {
 			"<leader>e",
 			function()
 				local fyler = require("fyler")
-				local cwd = vim.fn.getcwd()
 				local current_file = vim.api.nvim_buf_get_name(0)
-				local target_file = current_file ~= "" and vim.fs.relpath(cwd, current_file) or nil
 
 				fyler.open({ kind = "split_left_most" })
 
-				if target_file then
-					vim.defer_fn(function()
-						fyler.navigate(target_file)
-					end, 0)
+				if current_file ~= "" then
+					vim.schedule(function()
+						local finder = require("fyler.finder").instance_get_or_nil()
+						if finder then
+							finder:follow({ target_path = current_file })
+						end
+					end)
 				end
 			end,
 			desc = "Open Fyler View",
 		},
 	},
 	opts = {
+		follow_current_file = false,
+		follow_root_dir = false,
 		hooks = {
 			on_highlight = function(hl_groups)
-				hl_groups.FylerIndentMarker = { link = "SnacksIndent" }
+				hl_groups.FylerIndentGuide = { link = "SnacksIndent" }
 			end,
 		},
 		integrations = {
 			icon = "nvim_web_devicons",
 		},
-		views = {
-			finder = {
-				follow_current_file = false,
-				win = {
-					kinds = {
-						split_left_most = {
-							width = 70,
-						},
-					},
-				},
-				mappings = {
-					["q"] = "CloseView",
-					["<CR>"] = "Select",
-					["<C-t>"] = "SelectTab",
-					["|"] = "SelectVSplit",
-					["-"] = "SelectSplit",
-					["^"] = "GotoParent",
-					["="] = "GotoCwd",
-					["."] = "GotoNode",
-					["#"] = "CollapseAll",
-					["<BS>"] = "CollapseNode",
+		extensions = {
+			git = { enabled = true },
+		},
+		kind_presets = {
+			split_left_most = {
+				width = 70,
+			},
+		},
+		mappings = {
+			n = {
+				["|"] = { action = "select", args = { vsplit = true } },
+				["-"] = { action = "select", args = { split = true } },
+				["^"] = { action = "visit", args = { parent = true } },
+				["#"] = {
+					action = function(finder)
+						local state = require("fyler.state")
+
+						finder.state:walk(function(node, depth)
+							local entry = state.store[node.value]
+							if depth > 0 and entry.type == "directory" then
+								finder.state:toggle(entry.path, false)
+							end
+						end)
+						finder:refresh()
+					end,
 				},
 			},
 		},
+		ui = {
+			indent_guides = true,
+		},
+		use_as_default_explorer = false,
 	},
 }
