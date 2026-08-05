@@ -368,28 +368,33 @@ return {
 			end,
 		})
 
-		-- For Windows: use Nmap
-		-- For WSL: doesn't work
-		local cmd = vim.fn.has("linux") == 1 and vim.lsp.rpc.connect(vim.fn.hostname() .. ".local", 6005)
-			or { "ncat", "localhost", "6005" }
-
 		local pipe = vim.fn.has("linux") == 1 and "/tmp/godot.pipe" or [[\\.\pipe\godot.pipe]]
+		local pipe_error_reported = false
+		local pipe_autocmd
+		pipe_autocmd = vim.api.nvim_create_autocmd("FileType", {
+			pattern = { "gd", "gdscript", "gdscript3" },
+			desc = "Start the Godot external editor RPC server",
+			callback = function()
+				if vim.tbl_contains(vim.fn.serverlist(), pipe) then
+					vim.api.nvim_del_autocmd(pipe_autocmd)
+					return
+				end
+
+				local ok, err = pcall(vim.fn.serverstart, pipe)
+				if ok then
+					vim.api.nvim_del_autocmd(pipe_autocmd)
+				elseif not pipe_error_reported then
+					pipe_error_reported = true
+					vim.notify(
+						("Failed to start the Godot RPC server at %s: %s"):format(pipe, err),
+						vim.log.levels.WARN
+					)
+				end
+			end,
+		})
 
 		vim.lsp.config("gdscript", {
 			capabilities = capabilities,
-			cmd = cmd,
-			filetypes = { "gd", "gdscript", "gdignore" },
-			on_attach = function(client, buffer)
-				-- Godot external editor settings:
-				-- Exec Path: nvim
-				-- Linux - Exec Flags: --server /tmp/godot.pipe --remote-send "<esc>:n {file}<CR>:call cursor({line},{col})<CR>"
-				-- Windows - Exec Flags: --server "\\\\.\\pipe\\godot.pipe" --remote-send "<C-\><C-N>:n {file}<CR>:call cursor({line},{col})<CR>"
-				if vim.fn.has("linux") == 1 then
-					vim.api.nvim_command('echo serverstart("' .. pipe .. '")')
-				else
-					vim.api.nvim_command([[echo serverstart(']] .. pipe .. [[')]])
-				end
-			end,
 		})
 		vim.lsp.enable("gdscript")
 	end,

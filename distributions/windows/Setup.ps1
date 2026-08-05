@@ -67,7 +67,6 @@ $chocoDependencies = @(
     "fd"
     "neovim"
     "fzf"
-    "nmap"
     "nvm"
     "nerd-fonts-jetbrainsmono"
     "lazygit"
