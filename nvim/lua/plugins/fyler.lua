@@ -53,6 +53,14 @@ return {
 				["|"] = { action = "select", args = { vsplit = true } },
 				["-"] = { action = "select", args = { split = true } },
 				["^"] = { action = "visit", args = { parent = true } },
+				["g."] = {
+					action = function(finder)
+						local switches = finder.cache.ui.hidden_items.switches
+						switches.dotfiles = not switches.dotfiles
+						finder:refresh()
+					end,
+					desc = "Toggle hidden files",
+				},
 				["#"] = {
 					action = function(finder)
 						local state = require("fyler.state")
@@ -69,6 +77,9 @@ return {
 			},
 		},
 		ui = {
+			hidden_items = {
+				switches = {},
+			},
 			indent_guides = true,
 		},
 		use_as_default_explorer = false,
