@@ -1,5 +1,13 @@
 #Requires -RunAsAdministrator
 
+[CmdletBinding()]
+param(
+    [ValidateSet("All", "OpenCode", "Dotfiles")]
+    [string]$Mode
+)
+
+$ErrorActionPreference = "Stop"
+
 $yes = @("yes","y")
 $no = @("no", "n")
 
@@ -36,6 +44,86 @@ function Get-Response($prompt)
     }
     until($no -contains $answer -or $yes -contains $answer)
     return $answer
+}
+
+function Select-InstallMode
+{
+    if ($Mode)
+    {
+        return $Mode
+    }
+
+    Write-Host "Select what to install:"
+    Write-Host "1. All"
+    Write-Host "2. Only OpenCode"
+    Write-Host "3. Dotfiles only"
+    while ($true)
+    {
+        switch (Read-Host "Choice")
+        {
+            "1" { return "All" }
+            "2" { return "OpenCode" }
+            "3" { return "Dotfiles" }
+            default { Write-Warning "Enter 1, 2, or 3." }
+        }
+    }
+}
+
+function Install-OpenCodeConfig([string]$DotfilesRoot)
+{
+    $privateRoot = Join-Path (Split-Path -Parent $DotfilesRoot) "opencode-config"
+
+    if (Test-Path -LiteralPath $privateRoot)
+    {
+        $repositoryRoot = & git -C $privateRoot rev-parse --show-toplevel 2>$null
+        $expectedRoot = [IO.Path]::GetFullPath($privateRoot).TrimEnd([IO.Path]::DirectorySeparatorChar)
+        if ($LASTEXITCODE -ne 0 -or
+            -not [IO.Path]::GetFullPath($repositoryRoot).TrimEnd([IO.Path]::DirectorySeparatorChar).Equals(
+                $expectedRoot,
+                [StringComparison]::OrdinalIgnoreCase
+            ))
+        {
+            throw "$privateRoot exists but is not a Git repository."
+        }
+        & git -C $privateRoot pull --ff-only
+        if ($LASTEXITCODE -ne 0)
+        {
+            throw "Failed to update $privateRoot. Commit or stash local changes and retry."
+        }
+    }
+    elseif (Get-Command gh -ErrorAction SilentlyContinue)
+    {
+        & gh repo clone RichardEpure/opencode-config $privateRoot
+        if ($LASTEXITCODE -ne 0)
+        {
+            throw "Failed to clone the private OpenCode repository. Check GitHub authentication."
+        }
+    }
+    else
+    {
+        & git clone git@github.com:RichardEpure/opencode-config.git $privateRoot
+        if ($LASTEXITCODE -ne 0)
+        {
+            throw "Failed to clone the private OpenCode repository. Check SSH authentication."
+        }
+    }
+
+    & (Join-Path $privateRoot "setup.ps1")
+    if ($LASTEXITCODE -ne 0)
+    {
+        throw "OpenCode setup failed."
+    }
+}
+
+$Root = $PSScriptRoot | Split-Path | Split-Path
+$InstallMode = Select-InstallMode
+if ($InstallMode -in @("All", "OpenCode"))
+{
+    Install-OpenCodeConfig $Root
+}
+if ($InstallMode -eq "OpenCode")
+{
+    return
 }
 
 # Linked Files (Destination => Source)
@@ -95,7 +183,6 @@ $wingetExtras = @(
 )
 
 # Set working directory
-$Root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $Root
 [Environment]::CurrentDirectory = $Root
 
