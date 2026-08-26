@@ -151,6 +151,7 @@ $wingetDependencies = @(
 $chocoDependencies = @(
     "altsnap"
     "zig"
+    "tree-sitter"
     "ripgrep"
     "fd"
     "neovim"

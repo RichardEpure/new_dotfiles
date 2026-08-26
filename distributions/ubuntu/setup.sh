@@ -100,6 +100,19 @@ ln -sfn "$root/distributions/ubuntu/.gitconfig" ~/.gitconfig
 ln -sfn "$root/.globalignore" ~/.gitignore
 ln -sfn "$root/distributions/ubuntu/.bashrc" ~/.bashrc
 
+# Install tree-sitter CLI
+tree_sitter_min_version="0.26.1"
+if ! command -v tree-sitter >/dev/null 2>&1 \
+	|| ! dpkg --compare-versions "$(tree-sitter --version | awk '{print $2}')" ge "$tree_sitter_min_version"; then
+	if ! command -v cargo >/dev/null 2>&1; then
+		printf 'cargo is required to install tree-sitter-cli %s or newer.\n' "$tree_sitter_min_version" >&2
+		exit 1
+	fi
+
+	echo "Installing tree-sitter CLI..."
+	cargo install --locked tree-sitter-cli
+fi
+
 # Install starship
 if ! command -v starship &>/dev/null; then
 	echo "Installing starship..."
