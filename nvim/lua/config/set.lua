@@ -15,6 +15,7 @@ if vim.g.vscode == nil then
 	vim.o.foldenable = true
 
 	vim.opt.termguicolors = true
+	vim.opt.fileformats = { "unix", "dos" }
 	vim.opt.nu = true
 	vim.opt.relativenumber = true
 	vim.opt.cursorline = false
