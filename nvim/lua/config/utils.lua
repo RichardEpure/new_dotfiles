@@ -1,6 +1,6 @@
 local M = {}
 
-M.home = vim.fn.has("linux") == 1 and os.getenv("HOME") or os.getenv("USERPROFILE")
+M.home = vim.fn.expand("~")
 
 M.is_neovim = function()
 	return vim.g.vscode == nil

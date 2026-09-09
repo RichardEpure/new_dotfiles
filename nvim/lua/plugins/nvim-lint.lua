@@ -16,10 +16,10 @@ return {
 		if venv_dir then
 			local py_cmd = venv_dir
 			local mypy_cmd = venv_dir
-			if vim.fn.has("win32") == 1 and mypy_cmd then
+			if vim.fn.has("win32") == 1 then
 				py_cmd = py_cmd .. "\\Scripts\\python"
 				mypy_cmd = mypy_cmd .. "\\Scripts\\mypy"
-			elseif vim.fn.has("linux") and mypy_cmd then
+			else
 				py_cmd = py_cmd .. "/bin/python"
 				mypy_cmd = mypy_cmd .. "/bin/mypy"
 			end

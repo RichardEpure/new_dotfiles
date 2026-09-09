@@ -328,11 +328,14 @@ return {
 		local python_venv_path = os.getenv("VIRTUAL_ENV")
 		if vim.fn.has("win32") == 1 and python_venv_path then
 			python_venv_path = python_venv_path .. "/Scripts/python"
-		elseif vim.fn.has("linux") and python_venv_path then
+		elseif python_venv_path then
 			python_venv_path = python_venv_path .. "/bin/python"
 		end
 
 		local python_absolute_path = vim.fn.exepath("python")
+		if python_absolute_path == "" then
+			python_absolute_path = vim.fn.exepath("python3")
+		end
 
 		dap.adapters.python = function(cb, config)
 			if config.request == "attach" then
@@ -352,7 +355,6 @@ return {
 				cb({
 					type = "executable",
 					command = vim.fn.exepath("debugpy-adapter"),
-					args = { "-m", "debugpy.adapter" },
 					options = {
 						source_filetype = "python",
 					},
@@ -375,6 +377,7 @@ return {
 					if python_venv_path then
 						return python_venv_path
 					else
+						assert(python_absolute_path ~= "", "Python executable not found: tried python and python3")
 						return python_absolute_path
 					end
 				end,
