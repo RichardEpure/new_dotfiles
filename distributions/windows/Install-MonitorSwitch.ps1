@@ -16,7 +16,7 @@ if (-not (Test-Path -LiteralPath $executable -PathType Leaf))
 $shell = New-Object -ComObject WScript.Shell
 foreach ($pc in 1, 2)
 {
-    $shortcut = $shell.CreateShortcut((Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) "Switch to PC $pc.lnk"))
+    $shortcut = $shell.CreateShortcut((Join-Path ([Environment]::GetFolderPath('Programs')) "Switch to PC $pc.lnk"))
     $shortcut.TargetPath = $pwsh
     $shortcut.Arguments = "-NoLogo -NoProfile -File `"$script`" $pc"
     $shortcut.WorkingDirectory = $PSScriptRoot
@@ -25,4 +25,4 @@ foreach ($pc in 1, 2)
     $shortcut.Save()
 }
 Write-Host "ControlMyMonitor: $executable"
-Write-Host 'Desktop shortcuts created. Open a new PowerShell tab to use Switch-Monitors 1 or 2.'
+Write-Host 'Start Menu shortcuts created. Search for "Switch to PC" in Start or PowerToys Run.'
