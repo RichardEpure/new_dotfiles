@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Alienware",
+    "shortMonitorId": "DELA24A",
+    "displayUuid": "3F4C029C-F615-4E9B-BB73-5094E55C599E",
+    "pc1": 17,
+    "pc2": 18
+  },
+  {
+    "name": "Dell",
+    "shortMonitorId": "DELD066",
+    "displayUuid": "DDEC5BC6-4A2E-4BE8-B71E-DD00B9F6526B",
+    "pc1": 16,
+    "pc2": 18
+  },
+  {
+    "name": "LG",
+    "shortMonitorId": "GSM7707",
+    "displayUuid": "5456980B-474C-448A-9536-D2CBC168890B",
+    "pc1": 15,
+    "pc2": 17
+  }
+]

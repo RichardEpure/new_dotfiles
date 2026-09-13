@@ -13,6 +13,17 @@ Set-Alias -Name tsa -Value Grant-AllTailnetLockRequests
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
+function Switch-Monitors
+{
+    # Follow the profile symlink to find Switch-Monitors.ps1 beside its target.
+    $profileFile = Get-Item -LiteralPath $PROFILE
+    if ($profileFile.LinkType -eq 'SymbolicLink')
+    {
+        $profileFile = $profileFile.ResolveLinkTarget($true)
+    }
+    & (Join-Path $profileFile.DirectoryName 'Switch-Monitors.ps1') @args
+}
+
 function Open-NeovimMinimal
 {
     <#
