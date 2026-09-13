@@ -27,8 +27,10 @@ on run
     set launcher to (POSIX path of (path to home folder)) & ".local/bin/switch-monitors"
     try
         do shell script "/bin/bash " & quoted form of launcher & " $pc"
-    on error messageText
-        display alert "Switch to PC $pc failed" message messageText as critical
+    on error messageText number errorNumber
+        if errorNumber is not 3 then
+            display alert "Switch to PC $pc failed" message messageText as critical
+        end if
     end try
 end run
 EOF

@@ -24,21 +24,30 @@ commands=$(jq -ber --arg key "pc$pc" '
     | if ([.[].displayUuid | ascii_downcase] | unique | length) == length
       then . else error("Each monitor must have a unique displayUuid") end
     | .[] | [.name, .displayUuid, .[$key]] | @tsv
-' "$config")
+' "$config") || exit 1
 
 if [[ -z $dry_run ]]; then
     command -v m1ddc >/dev/null || { echo 'Install m1ddc: brew install m1ddc' >&2; exit 1; }
 fi
 
+# Exit 3 means a write was unconfirmed; other failures take priority.
 status=0
 while IFS=$'\t' read -r name identifier input; do
     if [[ -n $dry_run ]]; then
         printf '%s -> PC %s: m1ddc display %s set input %s\n' "$name" "$pc" "$identifier" "$input"
     else
         printf '%s -> PC %s (input %s)\n' "$name" "$pc" "$input"
-        if ! m1ddc display "$identifier" set input "$input"; then
-            printf 'Failed to send input for %s; continuing with remaining monitors.\n' "$name" >&2
-            status=1
+        if output=$(m1ddc display "$identifier" set input "$input" 2>&1); then
+            printf '%s\n' "$output"
+        else
+            printf '%s\n' "$output" >&2
+            if [[ $output == 'DDC communication failure:'* || $output == *$'\nDDC communication failure:'* ]]; then
+                printf '%s: input command returned a communication error; switching may have succeeded.\n' "$name" >&2
+                if [[ $status == 0 ]]; then status=3; fi
+            else
+                printf 'Failed to send input for %s; continuing with remaining monitors.\n' "$name" >&2
+                status=1
+            fi
         fi
     fi
 done <<< "$commands"

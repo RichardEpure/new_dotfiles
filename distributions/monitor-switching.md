@@ -41,7 +41,7 @@ bash distributions/macos/install-monitor-switch.sh
 
 Installs `~/.local/bin/switch-monitors`, adds its directory to PATH in your `.zshrc`
 (respecting `ZDOTDIR`), and creates **Switch to PC 1 / PC 2** apps in `~/Applications`.
-Find them in Spotlight or drag them to the Dock. Rerun the installer if you move the checkout.
+Find them in Spotlight or drag them to the Dock. Rerun the installer after app-launcher updates or moving the checkout.
 
 In a new terminal:
 
@@ -49,3 +49,6 @@ In a new terminal:
 switch-monitors 1 --dry-run
 switch-monitors 1          # Switch to PC 1; use 2 for PC 2
 ```
+
+DDC communication errors return exit code 3 (switch unconfirmed): visible in the
+terminal, without an app popup. Other errors still alert; check the displays manually.
