@@ -10,6 +10,14 @@ Set-Alias -Name minvim -Value Open-NeovimMinimal
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name tsa -Value Grant-AllTailnetLockRequests 
 
+# Resolve the profile link so the mux helpers can live alongside the dotfiles.
+$profileSource = Get-Item -LiteralPath $PSCommandPath
+if ($profileSource.LinkType -eq 'SymbolicLink')
+{
+    $profileSource = $profileSource.ResolveLinkTarget($true)
+}
+. (Join-Path $profileSource.DirectoryName '../../mux/Mux.ps1')
+
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions

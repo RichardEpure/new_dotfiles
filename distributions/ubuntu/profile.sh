@@ -4,6 +4,8 @@ export EDITOR=nvim
 alias minvim="NVIM_APPNAME=nvim_minimal nvim"
 alias fd="fdfind"
 
+source "$(dirname -- "${BASH_SOURCE[0]}")/../../mux/mux.sh"
+
 # Navigates to a file in the current directory and all subdirectories.
 function cdf {
 	# define variable dir to store the directory

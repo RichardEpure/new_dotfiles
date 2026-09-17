@@ -20,6 +20,7 @@ return {
 			open_mapping = [[<C-\>]],
 			highlights = require("rose-pine.plugins.toggleterm"),
 		})
+		require("config.mux").setup()
 
 		function _G.set_terminal_keymaps()
 			local opts = { buffer = 0 }

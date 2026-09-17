@@ -138,6 +138,8 @@ $symlinks = @{
     "$HOME\.gitattributes" = ".\distributions\windows\.gitattributes"
     "$HOME\AppData\Roaming\AltSnap\AltSnap.ini" = ".\distributions\windows\AltSnap.ini"
     "$HOME\AppData\Roaming\yazi\config" = ".\yazi"
+    "$HOME\.tmux.conf" = ".\mux\tmux.conf"
+    "$HOME\.psmux.conf" = ".\mux\psmux.conf"
 }
 
 # Dependencies
@@ -148,6 +150,7 @@ $wingetDependencies = @(
     "ajeetdsouza.zoxide"
     "Typst.Typst"
     "Docker.DockerDesktop"
+    "marlocarlo.psmux"
 )
 $chocoDependencies = @(
     "altsnap"

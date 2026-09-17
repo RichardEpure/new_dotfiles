@@ -99,6 +99,12 @@ ln -sfn "$root/yazi" ~/.config/yazi
 ln -sfn "$root/distributions/ubuntu/.gitconfig" ~/.gitconfig
 ln -sfn "$root/.globalignore" ~/.gitignore
 ln -sfn "$root/distributions/ubuntu/.bashrc" ~/.bashrc
+ln -sfn "$root/mux/tmux.conf" ~/.tmux.conf
+
+if ! command -v tmux >/dev/null || ! command -v fzf >/dev/null; then
+	sudo apt-get update
+	sudo apt-get install -y tmux fzf
+fi
 
 # Install tree-sitter CLI
 tree_sitter_min_version="0.26.1"
