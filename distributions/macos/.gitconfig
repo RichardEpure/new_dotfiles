@@ -1,0 +1,21 @@
+[init]
+    defaultBranch = main
+[user]
+    email = 43828146+RichardEpure@users.noreply.github.com
+    name = Richard
+    signingkey = ~/.ssh/github_signing.pub
+[core]
+    editor = nvim
+    excludesFile = ~/.gitignore
+[credential]
+    helper = osxkeychain
+[pull]
+    rebase = false
+[merge]
+    tool = vimdiff
+[gpg]
+    format = ssh
+[commit]
+    gpgsign = true
+[tag]
+    gpgSign = true

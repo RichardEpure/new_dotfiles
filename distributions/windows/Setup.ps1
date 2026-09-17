@@ -2,7 +2,7 @@
 
 [CmdletBinding()]
 param(
-    [ValidateSet("All", "OpenCode", "Dotfiles")]
+    [ValidateSet("All", "Agents", "Dotfiles")]
     [string]$Mode
 )
 
@@ -55,21 +55,21 @@ function Select-InstallMode
 
     Write-Host "Select what to install:"
     Write-Host "1. All"
-    Write-Host "2. Only OpenCode"
+    Write-Host "2. Agent harnesses"
     Write-Host "3. Dotfiles only"
     while ($true)
     {
         switch (Read-Host "Choice")
         {
             "1" { return "All" }
-            "2" { return "OpenCode" }
+            "2" { return "Agents" }
             "3" { return "Dotfiles" }
             default { Write-Warning "Enter 1, 2, or 3." }
         }
     }
 }
 
-function Install-OpenCodeConfig([string]$DotfilesRoot)
+function Install-AgentHarnesses([string]$DotfilesRoot)
 {
     $privateRoot = Join-Path (Split-Path -Parent $DotfilesRoot) "opencode-config"
 
@@ -96,7 +96,7 @@ function Install-OpenCodeConfig([string]$DotfilesRoot)
         & gh repo clone RichardEpure/opencode-config $privateRoot
         if ($LASTEXITCODE -ne 0)
         {
-            throw "Failed to clone the private OpenCode repository. Check GitHub authentication."
+            throw "Failed to clone the agent harness repository. Check GitHub authentication."
         }
     }
     else
@@ -104,24 +104,24 @@ function Install-OpenCodeConfig([string]$DotfilesRoot)
         & git clone git@github.com:RichardEpure/opencode-config.git $privateRoot
         if ($LASTEXITCODE -ne 0)
         {
-            throw "Failed to clone the private OpenCode repository. Check SSH authentication."
+            throw "Failed to clone the agent harness repository. Check SSH authentication."
         }
     }
 
     & (Join-Path $privateRoot "setup.ps1")
     if ($LASTEXITCODE -ne 0)
     {
-        throw "OpenCode setup failed."
+        throw "Agent harness setup failed."
     }
 }
 
 $Root = $PSScriptRoot | Split-Path | Split-Path
 $InstallMode = Select-InstallMode
-if ($InstallMode -in @("All", "OpenCode"))
+if ($InstallMode -in @("All", "Agents"))
 {
-    Install-OpenCodeConfig $Root
+    Install-AgentHarnesses $Root
 }
-if ($InstallMode -eq "OpenCode")
+if ($InstallMode -eq "Agents")
 {
     return
 }
