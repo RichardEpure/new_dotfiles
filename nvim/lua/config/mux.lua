@@ -83,7 +83,8 @@ local function repo_session(root, items)
 end
 
 local function current_session()
-	-- ponytail: fixed attachment scope; use our session picker, or track client state if native session switching is needed.
+	-- Remembers the session this viewer attached to, not native session changes via mux.
+	-- Use <leader>ts to switch sessions; native switching needs live client tracking.
 	local id = vim.b.mux_session
 	if id then
 		return id
