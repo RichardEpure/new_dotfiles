@@ -81,6 +81,16 @@ return {
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			providers = {
+				cmdline = {
+					override = {
+						get_completions = function(self, context, callback)
+							if context.line:sub(1, context.cursor[2]):match("^%s*MuxTask%s") then
+								return require("config.mux_completion").get_completions(context, callback)
+							end
+							return self:get_completions(context, callback)
+						end,
+					},
+				},
 				buffer = {
 					override = {
 						enabled = function(self)

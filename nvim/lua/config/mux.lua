@@ -428,7 +428,11 @@ function M.setup()
 		safe(function(opts)
 			tasks.launch(opts.args)
 		end),
-		{ nargs = "+", desc = "Run a task in a repository mux window" }
+		{
+			nargs = "+",
+			complete = require("config.mux_completion").complete,
+			desc = "Run a task in a repository mux window",
+		}
 	)
 	vim.keymap.set("n", "<leader>tr", ":MuxTask ", { desc = "Run mux task" })
 	for key, action in pairs({
