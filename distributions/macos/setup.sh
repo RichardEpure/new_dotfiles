@@ -48,8 +48,9 @@ link_config() {
 }
 
 config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+link_config "$root/mux/conf" "$HOME/.tmux"
+link_config "$root/mux/conf/tmux.conf" "$HOME/.tmux.conf"
 link_config "$root/nvim" "$config_home/nvim"
-link_config "$root/mux/tmux.conf" "$HOME/.tmux.conf"
 link_config "$root/.globalignore" "$HOME/.gitignore"
 link_config "$root/distributions/macos/.gitconfig" "$HOME/.gitconfig"
 
