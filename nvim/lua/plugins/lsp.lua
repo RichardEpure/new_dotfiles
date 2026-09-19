@@ -238,48 +238,21 @@ return {
 			},
 		})
 
+		local rust_analyzer_root_dir = vim.lsp.config.rust_analyzer.root_dir
 		vim.lsp.config("rust_analyzer", {
 			capabilities = capabilities,
+			root_dir = function(bufnr, on_dir)
+				if vim.uri_from_bufnr(bufnr):match("^file://") then
+					rust_analyzer_root_dir(bufnr, on_dir)
+				end
+			end,
 			settings = {
 				["rust-analyzer"] = {
-					checkOnSave = true,
 					check = {
 						command = "clippy",
 					},
 					diagnostics = {
 						disabled = { "inactive-code" },
-					},
-					inlayHints = {
-						bindingModeHints = {
-							enable = false,
-						},
-						chainingHints = {
-							enable = true,
-						},
-						closingBraceHints = {
-							enable = true,
-							minLines = 25,
-						},
-						closureReturnTypeHints = {
-							enable = "never",
-						},
-						lifetimeElisionHints = {
-							enable = "never",
-							useParameterNames = false,
-						},
-						maxLength = 25,
-						parameterHints = {
-							enable = true,
-						},
-						reborrowHints = {
-							enable = "never",
-						},
-						renderColons = true,
-						typeHints = {
-							enable = true,
-							hideClosureInitialization = false,
-							hideNamedConstructor = false,
-						},
 					},
 				},
 			},
