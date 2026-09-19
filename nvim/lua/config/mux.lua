@@ -373,6 +373,34 @@ function M.all_windows()
 	picker("window")
 end
 
+---Keep native file lookup, but replace the output split with the editing window.
+function M.output_keymaps()
+	for _, key in ipairs({ "gf", "gF" }) do
+		vim.keymap.set(
+			"n",
+			key,
+			safe(function()
+				local output = vim.api.nvim_get_current_win()
+				local destination = vim.fn.win_getid(vim.fn.winnr("#"))
+				-- Resolve first: a failed jump must leave the output available.
+				vim.cmd.normal({ vim.v.count1 .. key, bang = true })
+				if destination == output or not vim.api.nvim_win_is_valid(destination) then
+					return
+				end
+				local buffer = vim.api.nvim_get_current_buf()
+				local cursor = vim.api.nvim_win_get_cursor(0)
+				vim.api.nvim_win_call(destination, function()
+					vim.cmd.buffer(tostring(buffer))
+					vim.api.nvim_win_set_cursor(0, cursor)
+				end)
+				vim.api.nvim_win_close(output, false)
+				vim.api.nvim_set_current_win(destination)
+			end),
+			{ buffer = true, desc = "Open file and close output" }
+		)
+	end
+end
+
 function M.history()
 	local session = current_session()
 	local pane = run({ "display-message", "-p", "-t", session .. ":", "#{pane_id}" })
@@ -388,6 +416,7 @@ function M.history()
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, "\n", { plain = true }))
 	vim.bo.modifiable = false
 	vim.bo.filetype = "log"
+	M.output_keymaps()
 	vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, desc = "Close history snapshot" })
 	vim.cmd("normal! G")
 end

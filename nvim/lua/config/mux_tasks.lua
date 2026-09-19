@@ -245,6 +245,7 @@ local function open(task)
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 	vim.bo.modifiable = false
 	vim.bo.filetype = "log"
+	mux.output_keymaps()
 	vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, desc = "Close task output" })
 	vim.cmd("normal! G")
 end
