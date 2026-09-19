@@ -255,6 +255,9 @@ local function open(task)
 	vim.bo.swapfile = false
 	vim.b.mux_task_root = task.root
 	vim.b.mux_task_id = task.id
+	if vim.fn.isdirectory(task.cwd) == 1 then
+		vim.cmd.lcd(vim.fn.fnameescape(task.cwd))
+	end
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 	vim.bo.modifiable = false
 	vim.bo.filetype = "log"
@@ -531,17 +534,86 @@ local function resume()
 	return tasks
 end
 
----@param command string
----@param context? {root: string, cwd: string} Saved execution context when rerunning a task
-function M.launch(command, context)
-	command = vim.trim(command)
-	assert(command ~= "" and not command:find("[%c]"), "Enter a single-line task command.")
+---Parse only the optional directory prefix; leave the shell command untouched.
+---In completion mode, nil command means the cursor is still in the prefix.
+---@param text string
+---@param partial? boolean
+---@return string? command, string? cwd, integer? directory_end Byte offset for completion
+function M.parse(text, partial)
+	local prefix = text:match("^%s*%-%-cwd%s+")
+	if not prefix then
+		if text:match("^%s*%-%-cwd$") then
+			assert(partial, "Usage: MuxTask --cwd <directory> -- <command>")
+			return nil, ""
+		end
+		return text
+	end
+	local parts, quoted, i = {}, nil, #prefix + 1
+	while i <= #text do
+		local char = text:sub(i, i)
+		if char == (windows and "`" or "\\") and quoted ~= "'" then
+			if i == #text then
+				assert(partial, "Incomplete directory escape")
+				break
+			end
+			i = i + 1
+			parts[#parts + 1] = text:sub(i, i)
+		elseif quoted then
+			if char == quoted then
+				if windows and text:sub(i + 1, i + 1) == quoted then
+					parts[#parts + 1] = char
+					i = i + 1
+				else
+					quoted = nil
+				end
+			else
+				parts[#parts + 1] = char
+			end
+		elseif char == "'" or char == '"' then
+			quoted = char
+		elseif char:match("%s") then
+			break
+		else
+			parts[#parts + 1] = char
+		end
+		i = i + 1
+	end
+	local cwd = table.concat(parts)
+	local separator = not quoted and text:sub(i):match("^%s+%-%-%s+")
+	if not separator then
+		assert(partial, "Usage: MuxTask --cwd <directory> -- <command>")
+		return nil, cwd, i - 1
+	end
+	assert(cwd ~= "", "Task directory cannot be empty")
+	local offset = i + #separator - 1
+	return text:sub(offset + 1), cwd, i - 1
+end
+
+---@param context? {root?: string, cwd?: string}
+---@return string root, string cwd Absolute execution directory
+function M.context(context)
 	local root, cwd
-	if context then
-		root, cwd = context.root, context.cwd
+	if context and context.root then
+		root, cwd = context.root, context.root
 	else
 		root, cwd = mux.project()
 	end
+	if context and context.cwd then
+		assert(context.cwd ~= "" and not context.cwd:find("[%c]"), "Invalid task directory")
+		cwd = vim.fs.normalize(context.cwd)
+		if vim.fn.isabsolutepath(cwd) == 0 then
+			cwd = root .. "/" .. cwd
+		end
+	end
+	return root, vim.fs.normalize(vim.fs.abspath(cwd))
+end
+
+---@param command string
+---@param context? {root?: string, cwd?: string} Relative cwd is rooted at the project; reruns use saved absolute paths
+function M.launch(command, context)
+	command = vim.trim(command)
+	assert(command ~= "" and not command:find("[%c]"), "Enter a single-line task command.")
+	local root, cwd = M.context(context)
 	local stat = uv.fs_stat(cwd)
 	assert(stat and stat.type == "directory", "Task directory is unavailable: " .. cwd)
 	resume()
@@ -643,9 +715,16 @@ function M.results()
 	local root = current_root()
 	local function items()
 		return vim.tbl_map(function(task)
+			local cwd = vim.fs.relpath(task.root, mux.canonical(task.cwd)) or task.cwd
 			return {
 				task = task,
-				text = os.date("%Y-%m-%d %H:%M:%S", task.finished) .. "  [" .. label(task) .. "]  " .. task.command,
+				text = os.date("%Y-%m-%d %H:%M:%S", task.finished)
+					.. "  ["
+					.. label(task)
+					.. "]  ["
+					.. cwd
+					.. "]  "
+					.. task.command,
 			}
 		end, completed(root))
 	end

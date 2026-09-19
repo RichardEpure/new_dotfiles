@@ -426,12 +426,13 @@ function M.setup()
 	vim.api.nvim_create_user_command(
 		"MuxTask",
 		safe(function(opts)
-			tasks.launch(opts.args)
+			local command, cwd = tasks.parse(opts.args)
+			tasks.launch(command, { cwd = cwd })
 		end),
 		{
 			nargs = "+",
 			complete = require("config.mux_completion").complete,
-			desc = "Run a task in a repository mux window",
+			desc = "Run a mux task: [--cwd <root-relative directory> --] <command>",
 		}
 	)
 	vim.keymap.set("n", "<leader>tr", ":MuxTask ", { desc = "Run mux task" })
