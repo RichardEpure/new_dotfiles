@@ -220,6 +220,19 @@ local function last_path(root)
 	return directory .. "/last-" .. vim.fn.sha256(root)
 end
 
+---Remove the retained-pane footer and its blank screen rows, when present.
+---@param lines string[]
+---@return string[]
+local function clean_output(lines)
+	if lines[#lines] and lines[#lines]:find("Pane is dead (", 1, true) then
+		lines[#lines] = nil
+		while #lines > 0 and lines[#lines]:match("^%s*$") do
+			lines[#lines] = nil
+		end
+	end
+	return lines
+end
+
 ---@param task MuxTask
 local function open(task)
 	local lines = {
@@ -233,7 +246,7 @@ local function open(task)
 	if task.status == "unavailable" then
 		lines[#lines + 1] = task.detail or "The task pane disappeared before its output could be saved."
 	else
-		vim.list_extend(lines, vim.fn.readfile(path(task.id, ".log")))
+		vim.list_extend(lines, clean_output(vim.fn.readfile(path(task.id, ".log"))))
 	end
 	write(last_path(task.root), task.id)
 	vim.cmd("botright new")
@@ -405,7 +418,7 @@ local function reconcile(task)
 				or "The task pane disappeared before its output could be saved."
 		else
 			local output = assert(request({ "capture-pane", "-p", "-J", "-S", "-50000", "-t", task.pane }))
-			write(path(task.id, ".log"), output)
+			write(path(task.id, ".log"), table.concat(clean_output(vim.split(output, "\n", { plain = true })), "\n"))
 			local ended = row.exited
 			if ended and ended > 0 then
 				task.finished = ended
