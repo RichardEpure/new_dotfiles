@@ -80,6 +80,18 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
+			providers = {
+				buffer = {
+					override = {
+						enabled = function(self)
+							local line = vim.fn.getcmdtype() == ":" and vim.fn.getcmdline()
+								or vim.fn.getcmdwintype() == ":" and vim.api.nvim_get_current_line()
+								or ""
+							return line:match("^%s*MuxTask%s") ~= nil or self:enabled()
+						end,
+					},
+				},
+			},
 			default = function()
 				local success, node = pcall(vim.treesitter.get_node)
 				if
