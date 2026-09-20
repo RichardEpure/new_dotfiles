@@ -4,6 +4,12 @@ set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 
+bashrc="$HOME/.bashrc"
+if [ ! -f "$bashrc" ]; then
+	printf '%s must be an existing file.\n' "$bashrc" >&2
+	exit 1
+fi
+
 echo "Removing existing files/directories..."
 if [ -d ~/.config/nvim ]; then
 	echo "Removing ~/.config/nvim"
@@ -25,11 +31,6 @@ if [ -f ~/.gitignore ]; then
 	rm ~/.gitignore
 fi
 
-if [ -f ~/.bashrc ]; then
-	echo "Removing ~/.bashrc"
-	rm ~/.bashrc
-fi
-
 echo "Creating symbolic links..."
 rm -rf -- "$HOME/.tmux"
 ln -s -- "$root/mux/conf" "$HOME/.tmux"
@@ -40,7 +41,11 @@ ln -sfn "$root/nvim_minimal" ~/.config/nvim_minimal
 ln -sfn "$root/yazi" ~/.config/yazi
 ln -sfn "$root/distributions/ubuntu/.gitconfig" ~/.gitconfig
 ln -sfn "$root/.globalignore" ~/.gitignore
-ln -sfn "$root/distributions/ubuntu/.bashrc" ~/.bashrc
+
+printf -v source_line 'source %q' "$root/distributions/ubuntu/profile.sh"
+if ! grep -Fqx -- "$source_line" "$bashrc"; then
+	printf '\n%s\n' "$source_line" >> "$bashrc"
+fi
 
 if ! command -v tmux >/dev/null || ! command -v fzf >/dev/null; then
 	sudo apt-get update
