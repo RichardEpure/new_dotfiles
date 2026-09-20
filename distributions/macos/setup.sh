@@ -2,13 +2,11 @@
 set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
-source "$root/distributions/setup-common.sh"
 
 if [ "$(uname -s)" != Darwin ]; then
 	printf 'This installer requires macOS.\n' >&2
 	exit 1
 fi
-selected_mode="$(select_install_mode "$@")"
 
 # Homebrew may be installed without being on this shell's PATH yet.
 if ! command -v brew >/dev/null 2>&1; then
@@ -26,16 +24,7 @@ fi
 brew_environment="$(brew shellenv)"
 eval "$brew_environment"
 
-packages=(git gh node)
-if [ "$selected_mode" != agents ]; then
-	packages+=(neovim tmux fzf starship zoxide fd ripgrep jq lazygit tree-sitter-cli)
-fi
-brew install "${packages[@]}"
-
-if [ "$selected_mode" = all ] || [ "$selected_mode" = agents ]; then
-	install_agent_harnesses "$root"
-fi
-if [ "$selected_mode" = agents ]; then exit 0; fi
+brew install git gh node neovim tmux fzf starship zoxide fd ripgrep jq lazygit tree-sitter-cli
 
 link_config() {
 	local source="$1" destination="$2"

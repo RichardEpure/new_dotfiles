@@ -3,15 +3,6 @@
 set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
-source "$root/distributions/setup-common.sh"
-
-selected_mode="$(select_install_mode "$@")"
-if [ "$selected_mode" = "all" ] || [ "$selected_mode" = "agents" ]; then
-	install_agent_harnesses "$root"
-fi
-if [ "$selected_mode" = "agents" ]; then
-	exit 0
-fi
 
 echo "Removing existing files/directories..."
 if [ -d ~/.config/nvim ]; then
