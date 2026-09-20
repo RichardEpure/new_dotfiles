@@ -25,6 +25,10 @@ unsetopt BEEP
 autoload -Uz compinit
 compinit
 
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+
 # %N is this sourced file; :A resolves symlinks and :h takes its directory.
 source "${${(%):-%N}:A:h}/../../mux/mux.sh"
 

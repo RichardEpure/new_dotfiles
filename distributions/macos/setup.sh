@@ -24,7 +24,21 @@ fi
 brew_environment="$(brew shellenv)"
 eval "$brew_environment"
 
-brew install git gh node neovim tmux fzf starship zoxide fd ripgrep jq lazygit tree-sitter-cli
+brew install git gh neovim tmux fzf starship zoxide fd ripgrep jq lazygit tree-sitter-cli
+
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+	mkdir -p -- "$NVM_DIR"
+	curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | PROFILE=/dev/null NODE_VERSION= bash
+fi
+(
+	# nvm expects a non-strict shell; keep that change local and propagate failures.
+	set +eu
+	. "$NVM_DIR/nvm.sh" --no-use || exit $?
+	if ! nvm version node >/dev/null 2>&1; then
+		nvm install --lts || exit $?
+	fi
+)
 
 link_config() {
 	local source="$1" destination="$2"
