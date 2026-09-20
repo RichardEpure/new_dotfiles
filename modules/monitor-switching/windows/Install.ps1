@@ -3,6 +3,11 @@
 param ()
 
 $ErrorActionPreference = 'Stop'
+if (-not $IsWindows)
+{
+    throw 'This installer requires Windows.'
+}
+
 $destination = "$env:LOCALAPPDATA/Programs/ControlMyMonitor"
 $executable = Join-Path $destination 'ControlMyMonitor.exe'
 $pwsh = (Get-Command pwsh.exe -ErrorAction Stop).Source
@@ -12,6 +17,13 @@ if (-not (Test-Path -LiteralPath $executable -PathType Leaf))
 {
     throw "Download ControlMyMonitor and extract ControlMyMonitor.exe to $destination."
 }
+
+$bin = Join-Path $HOME '.local/bin'
+New-Item -ItemType Directory -Path $bin -Force | Out-Null
+Set-Content -LiteralPath (Join-Path $bin 'Switch-Monitors.ps1') -Value @(
+    '$ErrorActionPreference = ''Stop'''
+    "& '$($script.Replace("'", "''"))' @args"
+)
 
 $shell = New-Object -ComObject WScript.Shell
 foreach ($pc in 1, 2)
@@ -26,3 +38,4 @@ foreach ($pc in 1, 2)
 }
 Write-Host "ControlMyMonitor: $executable"
 Write-Host 'Start Menu shortcuts created. Search for "Switch to PC" in Start or PowerToys Run.'
+Write-Host 'With the dotfiles profile installed, open a new terminal to use Switch-Monitors 1 or Switch-Monitors 2.'

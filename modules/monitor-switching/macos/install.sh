@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+if [[ $(uname -s) != Darwin ]]; then
+    echo 'This installer requires macOS.' >&2
+    exit 1
+fi
+
 export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
 for tool in m1ddc jq; do
     command -v "$tool" >/dev/null || { echo 'Install dependencies: brew install m1ddc jq' >&2; exit 1; }
@@ -9,17 +14,11 @@ command -v osacompile >/dev/null || { echo 'This installer requires macOS (osaco
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 launcher="$HOME/.local/bin/switch-monitors"
-zshrc="${ZDOTDIR:-$HOME}/.zshrc"
-mkdir -p -- "$HOME/.local/bin" "$HOME/Applications" "$(dirname -- "$zshrc")"
+mkdir -p -- "$HOME/.local/bin" "$HOME/Applications"
 
 # Keep the repository script's own location intact for its relative JSON path.
 printf '#!/bin/bash\nexec /bin/bash %q "$@"\n' "$script_dir/switch-monitors.sh" > "$launcher"
 chmod +x "$launcher"
-
-path_line='[[ ":$PATH:" == *":$HOME/.local/bin:"* ]] || export PATH="$HOME/.local/bin:$PATH"'
-if [[ ! -f $zshrc ]] || ! grep -Fqx -- "$path_line" "$zshrc"; then
-    printf '\n%s\n' "$path_line" >> "$zshrc"
-fi
 
 for pc in 1 2; do
     osacompile -o "$HOME/Applications/Switch to PC $pc.app" <<EOF
@@ -37,4 +36,4 @@ EOF
 done
 
 echo 'Installed Switch to PC 1 / PC 2 in ~/Applications. Find them in Spotlight or drag them to the Dock.'
-echo 'Open a new terminal to use switch-monitors 1 or switch-monitors 2.'
+echo 'With the dotfiles profile installed, open a new terminal to use switch-monitors 1 or switch-monitors 2.'

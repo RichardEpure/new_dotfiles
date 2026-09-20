@@ -2,6 +2,12 @@ $logPath = "$env:USERPROFILE/Profile.log"
 $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 "`n$($stopwatch.ElapsedMilliseconds)ms`tProfile load started" | Out-File -FilePath $logPath -Append
 
+# User-installed commands
+if (($env:PATH -split [IO.Path]::PathSeparator) -notcontains "$HOME\.local\bin")
+{
+    $env:PATH = "$HOME\.local\bin$([IO.Path]::PathSeparator)$env:PATH"
+}
+
 # Aliases
 Set-Alias -Name sa -Value Start-AdminSession
 Set-Alias -Name cdf -Value Set-DirectoryFuzzy
@@ -21,17 +27,6 @@ if ($profileSource.LinkType -eq 'SymbolicLink')
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
-function Switch-Monitors
-{
-    # Follow the profile symlink to find Switch-Monitors.ps1 beside its target.
-    $profileFile = Get-Item -LiteralPath $PROFILE
-    if ($profileFile.LinkType -eq 'SymbolicLink')
-    {
-        $profileFile = $profileFile.ResolveLinkTarget($true)
-    }
-    & (Join-Path $profileFile.DirectoryName 'Switch-Monitors.ps1') @args
-}
-
 function Open-NeovimMinimal
 {
     <#
