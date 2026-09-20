@@ -12,7 +12,6 @@ if (($env:PATH -split [IO.Path]::PathSeparator) -notcontains "$HOME\.local\bin")
 Set-Alias -Name sa -Value Start-AdminSession
 Set-Alias -Name cdf -Value Set-DirectoryFuzzy
 Set-Alias -Name ya -Value Open-Yazi
-Set-Alias -Name minvim -Value Open-NeovimMinimal
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name tsa -Value Grant-AllTailnetLockRequests 
 
@@ -27,17 +26,6 @@ if ($profileSource.LinkType -eq 'SymbolicLink')
 "$($stopwatch.ElapsedMilliseconds)ms`tAliases set" | Out-File -FilePath $logPath -Append
 
 # Functions
-function Open-NeovimMinimal
-{
-    <#
-    .SYNOPSIS
-        Opens neovim with a minimal configuration.
-    #>
-    $Env:NVIM_APPNAME = "nvim_minimal"
-    nvim
-    $Env:NVIM_APPNAME = "nvim"
-}
-
 function Set-DirectoryFuzzy
 {
     <#

@@ -37,7 +37,6 @@ ln -s -- "$root/mux/conf" "$HOME/.tmux"
 ln -sfn "$root/mux/conf/tmux.conf" ~/.tmux.conf
 mkdir -p ~/.config
 ln -sfn "$root/nvim" ~/.config/nvim
-ln -sfn "$root/nvim_minimal" ~/.config/nvim_minimal
 ln -sfn "$root/yazi" ~/.config/yazi
 ln -sfn "$root/distributions/ubuntu/.gitconfig" ~/.gitconfig
 ln -sfn "$root/.globalignore" ~/.gitignore

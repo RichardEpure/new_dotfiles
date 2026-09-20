@@ -19,7 +19,6 @@ fi
 export EDITOR=nvim
 
 # Aliases
-alias minvim="NVIM_APPNAME=nvim_minimal nvim"
 alias fd="fdfind"
 
 source "$(dirname -- "${BASH_SOURCE[0]}")/../../mux/mux.sh"
