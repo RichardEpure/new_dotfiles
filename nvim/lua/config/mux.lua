@@ -3,6 +3,7 @@ local windows = vim.fn.has("win32") == 1
 local executable = windows and "psmux" or "tmux"
 ---@type table<string, Terminal>
 local viewers = {}
+local last_history
 
 local function notify(message)
 	vim.notify(message, vim.log.levels.WARN, { title = "Mux" })
@@ -314,7 +315,13 @@ function M.toggle()
 	end
 end
 
-local function picker(kind, session)
+local function picker(kind, session, on_confirm)
+	local initial_session = session
+	local label = on_confirm and "History" or "Windows"
+	local function title()
+		return kind == "session" and "Sessions"
+			or (label .. (session and " — current session" or " — all sessions"))
+	end
 	local function items()
 		return kind == "session" and sessions() or window_items(session)
 	end
@@ -324,8 +331,7 @@ local function picker(kind, session)
 		return
 	end
 	local opts = {
-		title = kind == "session" and "Sessions"
-			or (session and "Windows — current session" or "Windows — all sessions"),
+		title = title(),
 		finder = items,
 		format = "text",
 		layout = { preset = "select" },
@@ -335,7 +341,11 @@ local function picker(kind, session)
 			end
 			p:close()
 			vim.schedule(safe(function()
-				attach(item.session, item.target)
+				if on_confirm then
+					on_confirm(item)
+				else
+					attach(item.session, item.target)
+				end
 			end))
 		end),
 		actions = {
@@ -360,6 +370,15 @@ local function picker(kind, session)
 			list = { keys = { ["<C-x>"] = "kill_mux" } },
 		},
 	}
+	if kind == "window" then
+		opts.actions.toggle_sessions = safe(function(p)
+			session = session == nil and initial_session or nil
+			p.title = title()
+			p:refresh()
+		end)
+		opts.win.input.keys["<A-a>"] = { "toggle_sessions", mode = { "i", "n" }, desc = "Toggle all sessions" }
+		opts.win.list.keys["<A-a>"] = { "toggle_sessions", desc = "Toggle all sessions" }
+	end
 	require("snacks").picker.pick(opts)
 end
 
@@ -368,9 +387,6 @@ function M.sessions()
 end
 function M.windows()
 	picker("window", current_session())
-end
-function M.all_windows()
-	picker("window")
 end
 
 ---Keep native file lookup, but replace the output split with the editing window.
@@ -401,15 +417,15 @@ function M.output_keymaps()
 	end
 end
 
-function M.history()
-	local session = current_session()
-	local pane = run({ "display-message", "-p", "-t", session .. ":", "#{pane_id}" })
-	local output = run({ "capture-pane", "-p", "-J", "-S", "-50000", "-t", session .. ":." .. pane })
-	local term = viewers[session]
+local function capture_history(item)
+	local pane = run({ "display-message", "-p", "-t", item.target, "#{pane_id}" })
+	local output = run({ "capture-pane", "-p", "-J", "-S", "-50000", "-t", item.target .. "." .. pane })
+	local term = viewers[item.session]
 	if term and term:is_open() then
 		term:close()
 	end
 	vim.cmd("botright new")
+	vim.b.mux_session = item.session
 	vim.bo.buftype = "nofile"
 	vim.bo.bufhidden = "wipe"
 	vim.bo.swapfile = false
@@ -419,6 +435,19 @@ function M.history()
 	M.output_keymaps()
 	vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, desc = "Close history snapshot" })
 	vim.cmd("normal! G")
+	last_history = item
+end
+
+function M.history()
+	picker("window", current_session(), capture_history)
+end
+
+function M.last_history()
+	if not last_history then
+		notify("No window selected for history. Use <leader>th to pick one.")
+		return
+	end
+	capture_history(last_history)
 end
 
 function M.setup()
@@ -441,8 +470,8 @@ function M.setup()
 		tv = { M.toggle, "Toggle mux viewer" },
 		ts = { M.sessions, "Mux sessions" },
 		tw = { M.windows, "Mux windows" },
-		tW = { M.all_windows, "All mux windows" },
-		th = { M.history, "Capture pane history" },
+		th = { M.history, "Pick mux window history" },
+		tH = { M.last_history, "Capture last selected window history" },
 		to = { tasks.results, "Mux task results (newest first)" },
 		tO = { tasks.last, "Last viewed mux task result" },
 	}) do
