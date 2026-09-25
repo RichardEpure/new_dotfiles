@@ -42,6 +42,7 @@ return {
 		},
 		extensions = {
 			git = { enabled = true },
+			watcher = { enabled = true },
 		},
 		kind_presets = {
 			split_left_most = {
