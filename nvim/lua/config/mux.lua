@@ -177,7 +177,7 @@ local function attach(session, target)
 					viewers[session] = nil
 				end
 				if code ~= 0 then
-					notify("Mux client exited (" .. code .. "). Reopen with <leader>tv or <leader>ts.")
+					notify("Mux client exited (" .. code .. "). Reopen with <leader>ta or <leader>ts.")
 				end
 			end,
 		})
@@ -467,7 +467,7 @@ function M.setup()
 	vim.keymap.set("n", "<leader>tr", ":MuxTask ", { desc = "Run mux task" })
 	for key, action in pairs({
 		tn = { M.new_window, "New repository window" },
-		tv = { M.toggle, "Toggle mux viewer" },
+		ta = { M.toggle, "Toggle mux viewer" },
 		ts = { M.sessions, "Mux sessions" },
 		tw = { M.windows, "Mux windows" },
 		th = { M.history, "Pick mux window history" },
