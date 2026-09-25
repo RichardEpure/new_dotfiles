@@ -150,7 +150,7 @@ return {
 			capabilities = capabilities,
 		})
 
-		vim.lsp.config("eslint-lsp", {
+		vim.lsp.config("eslint", {
 			capabilities = capabilities,
 		})
 

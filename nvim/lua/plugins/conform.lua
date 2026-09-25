@@ -30,6 +30,7 @@ return {
 				html = { "prettierd" },
 				yaml = { "prettierd" },
 				json = { "prettierd" },
+				jsonc = { "prettierd" },
 				markdown = { "prettierd" },
 				python = { "ruff_format", "ruff_organize_imports" },
 			},
