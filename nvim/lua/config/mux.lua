@@ -315,6 +315,40 @@ function M.toggle()
 	end
 end
 
+local function send_selected(p, keys)
+	local seen = {}
+	for _, item in ipairs(p:selected({ fallback = true })) do
+		local args = {
+			"list-panes",
+			"-t",
+			item.target or item.session,
+			"-F",
+			"#{session_id}:#{window_id}.#{pane_id}\t#{pane_id}",
+		}
+		if not item.target then
+			args[#args + 1] = "-s"
+		end
+		local ok, output = pcall(run, args)
+		if not ok then
+			notify(item.text .. ": " .. tostring(output))
+		else
+			for _, row in ipairs(records(output)) do
+				local target = row[1]
+				-- tmux pane IDs are global; psmux uses a separate server per session.
+				local id = windows and (item.session .. "." .. row[2]) or row[2]
+				if not seen[id] then
+					seen[id] = true
+					local sent, err = pcall(run, vim.list_extend({ "send-keys", "-t", target }, keys))
+					if not sent then
+						notify(item.text .. " (" .. target .. "): " .. tostring(err))
+					end
+				end
+			end
+		end
+	end
+	p:close()
+end
+
 local function picker(kind, session, on_confirm)
 	local initial_session = session
 	local label = on_confirm and "History" or "Windows"
@@ -370,6 +404,19 @@ local function picker(kind, session, on_confirm)
 			list = { keys = { ["<C-x>"] = "kill_mux" } },
 		},
 	}
+	opts.actions.interrupt_mux = safe(function(p)
+		send_selected(p, { "C-c" })
+	end)
+	opts.actions.rerun_mux = safe(function(p)
+		-- Assumes each pane is at a fresh interactive shell prompt.
+		send_selected(p, { "Up", "Enter" })
+	end)
+	local interrupt_desc = "Interrupt all panes in selected " .. kind .. "s"
+	local rerun_desc = "Rerun last command in all panes of selected " .. kind .. "s"
+	opts.win.input.keys["<C-s>"] = { "interrupt_mux", mode = { "i", "n" }, desc = interrupt_desc }
+	opts.win.list.keys["<C-s>"] = { "interrupt_mux", desc = interrupt_desc }
+	opts.win.input.keys["<C-e>"] = { "rerun_mux", mode = { "i", "n" }, desc = rerun_desc }
+	opts.win.list.keys["<C-e>"] = { "rerun_mux", desc = rerun_desc }
 	if kind == "window" then
 		opts.actions.toggle_sessions = safe(function(p)
 			session = session == nil and initial_session or nil
