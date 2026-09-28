@@ -33,8 +33,10 @@ _mux_pick() {
 		row=${selection#*$'\n'}
 		target=${row%%$'\t'*}
 		label=${row#*$'\t'}
+        # Keep regex escaping intact in both Bash and Zsh.
+        local target_pattern='^\$[0-9]+(:@[0-9]+)?$'
 		# Validate machine IDs; labels never become shell commands.
-		if ! [[ "$target" =~ ^\$[0-9]+(:@[0-9]+)?$ ]]; then
+		if ! [[ "$target" =~ $target_pattern ]]; then
 			printf 'Invalid mux target.\n' >&2
 			return 1
 		fi
