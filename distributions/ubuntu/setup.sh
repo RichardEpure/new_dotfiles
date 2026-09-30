@@ -51,6 +51,20 @@ if ! command -v tmux >/dev/null || ! command -v fzf >/dev/null; then
 	sudo apt-get install -y tmux fzf
 fi
 
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+	mkdir -p -- "$NVM_DIR"
+	curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | PROFILE=/dev/null NODE_VERSION= bash
+fi
+(
+	# nvm expects a non-strict shell; keep that change local and propagate failures.
+	set +eu
+	. "$NVM_DIR/nvm.sh" --no-use || exit $?
+	if ! nvm version node >/dev/null 2>&1; then
+		nvm install --lts || exit $?
+	fi
+)
+
 # Install tree-sitter CLI
 tree_sitter_min_version="0.26.1"
 if ! command -v tree-sitter >/dev/null 2>&1 \
